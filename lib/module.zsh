@@ -129,6 +129,22 @@ p6df::core::module::brew() {
 ######################################################################
 #<
 #
+# Function: p6df::core::module::clones(module)
+#
+#  Args:
+#	module -
+#
+#>
+######################################################################
+p6df::core::module::clones() {
+  local module="$1"
+
+  p6df::core::modules::recurse::internal "$module" "clones"
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::module::fetch(module, dep, org, repo, ..., prefix)
 #
 #  Args:
