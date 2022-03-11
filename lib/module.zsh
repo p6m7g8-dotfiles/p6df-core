@@ -155,6 +155,7 @@ p6df::core::module::clones() {
 #	... - 
 #	prefix -
 #
+#  Depends:	 p6_git
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
@@ -348,6 +349,7 @@ _diff() {
 #	relpath -
 #	relaux -
 #
+#  Depends:	 p6_file
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################

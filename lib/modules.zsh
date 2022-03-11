@@ -7,6 +7,7 @@
 #	module -
 #	callback -
 #
+#  Depends:	 p6_time
 #  Environment:	 XXX _P6_DFZ_LOADED
 #>
 ######################################################################
@@ -46,7 +47,7 @@ p6df::core::modules::recurse::_bootstrap() {
 #	module -
 #	callback -
 #
-#  Depends:	 p6_time
+#  Depends:	 p6_h3 p6_time
 #  Environment:	 CALLBACK CIRCUIT EPOCHREALTIME FULL XXX _P6_DFZ_LOADED_INIT
 #>
 ######################################################################

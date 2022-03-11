@@ -3,6 +3,7 @@
 #
 # Function: p6df::core::user::init()
 #
+#  Depends:	 p6_run
 #  Environment:	 HOME
 #>
 ######################################################################

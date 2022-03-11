@@ -40,22 +40,22 @@
 
 ## Usage
 
-### ../p6df-core/lib:
+### p6df-core/lib:
 
-#### ../p6df-core/lib/aliases.zsh:
+#### p6df-core/lib/aliases.zsh:
 
 - p6df::core::aliases::init()
 
-#### ../p6df-core/lib/dev.zsh:
+#### p6df-core/lib/dev.zsh:
 
 - p6df::core::dev::graph()
 - p6df::core::dev::graph::dot(module, module, dep)
 
-#### ../p6df-core/lib/main.zsh:
+#### p6df-core/lib/main.zsh:
 
 - p6df::core::main::init()
 
-#### ../p6df-core/lib/mgmt.zsh:
+#### p6df-core/lib/mgmt.zsh:
 
 - p6df::core::mgmt::modules::diff()
 - p6df::core::mgmt::modules::pull()
@@ -65,9 +65,10 @@
 - p6df::core::mgmt::modules::update()
 - p6df::core::mgmt::update()
 
-#### ../p6df-core/lib/module.zsh:
+#### p6df-core/lib/module.zsh:
 
 - p6df::core::module::brew(module)
+- p6df::core::module::clones(module)
 - p6df::core::module::diff(module, dep, org, repo, ..., prefix)
 - p6df::core::module::fetch(module, dep, org, repo, ..., prefix)
 - p6df::core::module::home::symlink(module)
@@ -82,9 +83,10 @@
 - p6df::core::module::version(module)
 - p6df::core::module::vscodes(module)
 
-#### ../p6df-core/lib/modules.zsh:
+#### p6df-core/lib/modules.zsh:
 
 - p6df::core::modules::brew()
+- p6df::core::modules::clones()
 - p6df::core::modules::collect()
 - p6df::core::modules::diff()
 - p6df::core::modules::fetch()
@@ -103,26 +105,27 @@
 - p6df::core::modules::sync()
 - p6df::core::modules::vscodes()
 
-#### ../p6df-core/lib/path.zsh:
+#### p6df-core/lib/path.zsh:
 
 - p6df::core::path::cd::init()
 - p6df::core::path::init()
 
-#### ../p6df-core/lib/prompt.zsh:
+#### p6df-core/lib/prompt.zsh:
 
 - p6df::core::prompt::init()
 - p6df::core::prompt::process()
 - p6df::prompt::runtime(...)
 
-#### ../p6df-core/lib/theme.zsh:
+#### p6df-core/lib/theme.zsh:
 
 - p6df::core::theme::init()
 
-#### ../p6df-core/lib/user.zsh:
+#### p6df-core/lib/user.zsh:
 
+- p6df::core::user::apps()
 - p6df::core::user::init()
 
-#### ../p6df-core/lib/util.zsh:
+#### p6df-core/lib/util.zsh:
 
 - p6df::util::cdpath::if(dir)
 - p6df::util::exists(thing)

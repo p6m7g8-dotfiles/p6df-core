@@ -16,6 +16,7 @@ p6df::core::prompt::init() {
 #
 # Function: p6df::core::prompt::process()
 #
+#  Depends:	 p6_echo
 #  Environment:	 PROMPT
 #>
 ######################################################################
