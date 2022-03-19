@@ -16,8 +16,8 @@ p6df::user::prompt() {
 p6df::user::modules() {
 
   Modules=(
-    p6m7g8/p6df-shell 
-    p6m7g8/p6df-zsh
+    p6m7g8-dotfiles/p6df-shell 
+    p6m7g8-dotfiles/p6df-zsh
   )
 }
 
