@@ -41,17 +41,18 @@ export P6_DFZ_RUNTIME_DIR=$XDG_RUNTIME_DIR
 
 export P6_DFZ_SRC_GH_DIR=$P6_DFZ_DATA_DIR/src/github.com
 export P6_DFZ_SRC_DIR=$P6_DFZ_SRC_GH_DIR/p6
+
 export P6_DFZ_SRC_P6M7G8_DIR=$P6_DFZ_SRC_DIR/p6m7g8
+export P6_DFZ_SRC_P6M7G8_DOTFILES_DIR=$P6_DFZ_SRC_DIR/p6m7g8-dotfiles
+export P6_DFZ_SRC_P6M7G8_ARCHIVES_DIR=$P6_DFZ_SRC_DIR/p6m7g8-archive
+export P6_DFZ_SRC_P6M7G8_AUTOMATION_DIR=$P6_DFZ_SRC_DIR/p6m7g8-automation
+export P6_DFZ_SRC_FOCUSED_DIR=$P6_DFZ_SRC_GH_DIR/focused
 
-export P6_DFZ_SRC_WORK_DIR=$P6_DFZ_DATA_DIR/src/github.com/work
-export P6_DFZ_SRC_FOCUSED_DIR=$P6_DFZ_DATA_DIR/src/github.com/focused
-export P6_DFZ_SRC_APPS_DIR=$P6_DFZ_DATA_DIR/src/github.com/apps
+export P6_DFZ_ZSHENV_XDG_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zshenv-xdg # myself
+export P6_DFZ_ZSHENV_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zshenv
+export P6_DFZ_ZSHRC_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zshrc
 
-export P6_DFZ_ZSHENV_XDG_FILE=$P6_DFZ_SRC_P6M7G8_DIR/p6df-core/conf/zshenv-xdg # myself
-export P6_DFZ_ZSHENV_FILE=$P6_DFZ_SRC_P6M7G8_DIR/p6df-core/conf/zshenv
-export P6_DFZ_ZSHRC_FILE=$P6_DFZ_SRC_P6M7G8_DIR/p6df-core/conf/zshrc
-
-export P6_DEBUG=all
+#export P6_DEBUG=all
 export P6_VERBOSE=1
 # export P6_DRY_RUN=1
 
