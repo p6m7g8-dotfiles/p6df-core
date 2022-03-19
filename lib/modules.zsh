@@ -82,9 +82,9 @@ p6df::core::modules::recurse::internal() {
     # Original Module (tail-recursive, after dep chain)
     p6df::core::module::parse "$module" # XXX: how to not reparse
 
-    local t2=$EPOCHREALTIME; 
-    p6df::util::run::if "p6df::modules::$repo[module]::$callback"
-    local t3=$EPOCHREALTIME; 
+    local t2=$EPOCHREALTIME;
+    __p6_dir=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/$repo[repo] p6df::util::run::if "p6df::modules::$repo[module]::$callback"
+    local t3=$EPOCHREALTIME;
     p6_time "$t2" "$t3" "CALLBACK: p6df::modules::$repo[module]::$callback()"
 
     _P6_DFZ_LOADED_INIT[$module]=$(($_P6_DFZ_LOADED_INIT[$module]+1))

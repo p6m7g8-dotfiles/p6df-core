@@ -2,4 +2,4 @@
 unsetopt GLOBAL_RCS
 
 # bootstrap
-export P6_DFZ_LIB_DIR=$P6_DFZ_SRC_P6M7G8_DIR/p6df-core/lib
+export P6_DFZ_LIB_DIR=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/lib

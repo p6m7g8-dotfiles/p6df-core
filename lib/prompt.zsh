@@ -35,7 +35,7 @@ $PROMPT
 # Function: p6df::prompt::runtime(...)
 #
 #  Args:
-#	... - 
+#	... -
 #
 #  Depends:	 p6_echo p6_log p6_string
 #>
@@ -43,7 +43,10 @@ $PROMPT
 p6df::prompt::runtime() {
   shift 0
 
+  p6_env_export P6_DFZ_LOG_DISABLED 1
+
   local lf
+  local t2=$EPOCHREALTIME
   for lf in "$@"; do
     local func="$lf"
     p6_log "$func"
@@ -52,4 +55,8 @@ p6df::prompt::runtime() {
       p6_echo "$cnt"
     fi
   done
+  local t3=$EPOCHREALTIME
+  p6_time "$t2" "$t3" "CALLBACK: p6df::modules::$repo[module]::$callback()"
+
+  p6_env_export_un P6_DFZ_LOG_DISABLED
 }
