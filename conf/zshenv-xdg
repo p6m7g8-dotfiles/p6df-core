@@ -52,7 +52,7 @@ export P6_DFZ_ZSHENV_XDG_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zsh
 export P6_DFZ_ZSHENV_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zshenv
 export P6_DFZ_ZSHRC_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zshrc
 
-#export P6_DEBUG=all
+export P6_DEBUG=all
 export P6_VERBOSE=1
 # export P6_DRY_RUN=1
 
