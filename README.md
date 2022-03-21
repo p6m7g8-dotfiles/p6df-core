@@ -122,7 +122,6 @@
 
 #### p6df-core/lib/user.zsh:
 
-- p6df::core::user::apps()
 - p6df::core::user::init()
 
 #### p6df-core/lib/util.zsh:

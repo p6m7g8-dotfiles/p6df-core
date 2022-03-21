@@ -205,7 +205,7 @@ _pull() {
   shift 3
   local prefix="$1"
 
-  (cd $prefix/$org/$repo ; p6_git_p6_pull)
+  (p6_dir_cd $prefix/$org/$repo ; p6_git_p6_pull)
 }
 
 ######################################################################
@@ -238,7 +238,7 @@ _push() {
   shift 3
   local prefix="$1"
 
-  (cd $prefix/$org/$repo ; p6_git_p6_push)
+  (p6_dir_cd $prefix/$org/$repo ; p6_git_p6_push)
 }
 
 ######################################################################
@@ -271,7 +271,7 @@ _sync() {
   shift 3
   local prefix="$1"
 
-  (cd $prefix/$org/$repo ; p6_git_p6_sync)
+  (p6_dir_cd $prefix/$org/$repo ; p6_git_p6_sync)
 }
 
 ######################################################################
@@ -304,7 +304,7 @@ _status() {
   shift 3
   local prefix="$1"
 
-  (cd $prefix/$org/$repo ; p6_git_p6_status)
+  (p6_dir_cd $prefix/$org/$repo ; p6_git_p6_status)
 }
 
 ######################################################################
@@ -337,7 +337,7 @@ _diff() {
   shift 3
   local prefix="$1"
 
-  (cd $prefix/$org/$repo ; p6_git_p6_diff)
+  (p6_dir_cd $prefix/$org/$repo ; p6_git_p6_diff)
 }
 
 ######################################################################

@@ -33,6 +33,6 @@ p6df::core::path::cd::init() {
   p6df::util::cdpath::if $P6_DFZ_SRC_DIR
   p6df::util::cdpath::if $P6_DFZ_SRC_P6M7G8_DIR
   p6df::util::cdpath::if $P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
-  p6df::util::cdpath::if $P6_DFZ_SRC_P6M7G8_FOCUSED_DIR
   p6df::util::cdpath::if $P6_DFZ_SRC_P6M7G8_AUTOMATION_DIR
+  p6df::util::cdpath::if $P6_DFZ_SRC_FOCUSED_DIR
 }
