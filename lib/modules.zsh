@@ -210,7 +210,6 @@ p6df::core::modules::collect() {
   declare -gaU Modules
 
   p6df::util::run::if "p6df::user::modules"
-  p6df::util::run::if "p6df::user::apps"
 }
 
 ######################################################################
@@ -259,8 +258,6 @@ p6df::core::modules::fetch() {
   p6df::core::modules::collect
 
   p6df::core::modules::foreach "p6df::core::module::fetch"
-
-  p6df::core::user::apps
 }
 
 ######################################################################
@@ -276,8 +273,6 @@ p6df::core::modules::pull() {
   p6df::core::modules::collect
 
   p6df::core::modules::foreach "p6df::core::module::pull"
-
-  p6df::core::user::apps
 }
 
 ######################################################################
