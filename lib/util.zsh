@@ -42,7 +42,7 @@ p6df::util::file::load() {
 p6df::util::exists() {
   local thing="$1"
 
-  type -f "$thing" > /dev/null 2>&1
+  type -f "$thing" >/dev/null 2>&1
 }
 
 ######################################################################
@@ -72,6 +72,7 @@ p6df::util::run::if() {
 #	thing -
 #	... - 
 #
+#  Depends:	 p6_log
 #>
 ######################################################################
 p6df::util::run::code() {
@@ -79,6 +80,9 @@ p6df::util::run::code() {
   shift 1
 
   eval "$thing $@"
+  if p6df::util::exists "p6_log"; then
+    p6_log "p6df::util::run::code: $thing $@"
+  fi
 }
 
 # XXX: rename path::if

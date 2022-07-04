@@ -15,7 +15,7 @@ p6df::core::module::parse() {
   declare -gA repo
 
   repo[repo]=${${module%%:*}##*/}            # org/(repo)
-  repo[proto]=https
+  repo[proto]=https                          # protocol
   repo[host]=github.com                      # XXX:
   repo[org]=${module%%/*}                    # (org)/repo
   repo[path]=$repo[org]/$repo[repo]          # (org/repo)
@@ -42,6 +42,30 @@ p6df::core::module::parse() {
   else
       repo[load_path]=$repo[path]/$repo[plugin].plugin.zsh
   fi
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::add(short_module)
+#
+#  Args:
+#	short_module -
+#
+#  Depends:	 p6_env
+#  Environment:	 P6_DFZ_MODULES
+#>
+######################################################################
+p6df::core::module::add() {
+  local short_module="$1"
+
+  local module="p6m7g8-dotfiles/p6df-$short_module"
+  p6df::core::module::init::start "$module"
+
+  local things=$(p6_word_unique "$P6_DFZ_MODULES $module" | xargs)
+  p6_env_export P6_DFZ_MODULES "$P6_DFZ_MODULES $module"
+
+  p6_return_void
 }
 
 ######################################################################
@@ -118,6 +142,7 @@ p6df::core::module::home::symlink() {
 #  Args:
 #	module -
 #
+#  Depends:	 p6_git
 #>
 ######################################################################
 p6df::core::module::brew() {
@@ -126,6 +151,13 @@ p6df::core::module::brew() {
   p6df::core::modules::recurse::internal "$module" "external::brew"
 }
 
+#
+# Function: p6df::core::module::clones(module)
+#
+#  Args:
+#	module -
+#
+#  Depends:	 p6_git
 ######################################################################
 #<
 #
@@ -134,6 +166,7 @@ p6df::core::module::brew() {
 #  Args:
 #	module -
 #
+#  Depends:	 p6_git
 #>
 ######################################################################
 p6df::core::module::clones() {
@@ -287,7 +320,7 @@ _sync() {
 #	... - 
 #	prefix -
 #
-#  Depends:	 p6_git
+#  Depends:	 p6_dir p6_git
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
@@ -320,7 +353,7 @@ _status() {
 #	... - 
 #	prefix -
 #
-#  Depends:	 p6_git
+#  Depends:	 p6_dir p6_file p6_git
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
@@ -337,7 +370,10 @@ _diff() {
   shift 3
   local prefix="$1"
 
-  (p6_dir_cd $prefix/$org/$repo ; p6_git_p6_diff)
+  (
+	p6_dir_cd $prefix/$org/$repo 
+	p6_git_p6_diff
+  )
 }
 
 ######################################################################
@@ -349,7 +385,6 @@ _diff() {
 #	relpath -
 #	relaux -
 #
-#  Depends:	 p6_file
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
@@ -359,25 +394,4 @@ p6df::core::module::source() {
 
     [[ -n "$relaux" ]] && p6df::util::file::load "$P6_DFZ_SRC_DIR/$relaux"
     p6df::util::file::load "$P6_DFZ_SRC_DIR/$relpath"
-}
-
-######################################################################
-#<
-#
-# Function: p6df::core::module::version(module)
-#
-#  Args:
-#	module -
-#
-#  Depends:	 p6_file
-#  Environment:	 P6_DFZ_SRC_DIR
-#>
-######################################################################
-p6df::core::module::version() {
-  local module="$1"
-
-  # %repo
-  p6df::core::module::parse "$module"
-
-  p6_file_display $P6_DFZ_SRC_DIR/$repo[org]/$repo[repo]/conf/version
 }

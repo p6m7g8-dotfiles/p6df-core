@@ -1,24 +1,14 @@
 p6df::_int::bootstrap::msg() {
-  
+
   echo "P6DFZ initialized."
   echo "Please configure $HOME/.zsh-me"
-  echo "Delete this enitre function when done. (p6df::_int::bootstrap::msg)"
+  echo "Delete this entire function when done. (p6df::_int::bootstrap::msg)"
 }
 
 p6df::user::prompt() {
-
-  PromptLines=(
-    std 
-    dir
-  )
 }
 
 p6df::user::modules() {
-
-  Modules=(
-    p6m7g8-dotfiles/p6df-shell 
-    p6m7g8-dotfiles/p6df-zsh
-  )
 }
 
 p6df::user::theme() {

@@ -11,8 +11,10 @@
 ######################################################################
 p6df::core::dev::graph() {
 
-  cat <<EOF 
-digraph p6m7g8 {
+  p6df::core::modules::collect
+
+  cat <<EOF
+digraph p6m7g8_dotfiles {
  rankdir=LR;
 # size="11,8.5";
 # layout=neato;
@@ -24,9 +26,6 @@ digraph p6m7g8 {
 # edge [len=2];
 # node[shape=oval,style=filled,fillcolor="#FFFFFF"];
 EOF
-
-  # @Modules
-  p6df::core::modules::collect
 
   p6df::core::modules::foreach "p6df::core::dev::graph::dot" | sort -u
 
@@ -59,5 +58,5 @@ _dot() {
   module=$(echo $module | sed -e 's,[:\./-],_,g')
   dep=$(echo $dep | sed -e 's,[:\./-],_,g')
 
-	p6_echo "$module -> $dep;"
+  p6_echo "$module -> $dep;"
 }

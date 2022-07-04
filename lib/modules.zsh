@@ -7,7 +7,7 @@
 #	module -
 #	callback -
 #
-#  Depends:	 p6_time
+#  Depends:	 p6_h3
 #  Environment:	 XXX _P6_DFZ_LOADED
 #>
 ######################################################################
@@ -48,7 +48,7 @@ p6df::core::modules::recurse::_bootstrap() {
 #	callback -
 #
 #  Depends:	 p6_h3 p6_time
-#  Environment:	 CALLBACK CIRCUIT EPOCHREALTIME FULL XXX _P6_DFZ_LOADED_INIT
+#  Environment:	 CALLBACK CIRCUIT EPOCHREALTIME FULL P6_DFZ_SRC_P6M7G8_DOTFILES_DIR XXX _P6_DFZ_LOADED_INIT
 #>
 ######################################################################
 p6df::core::modules::recurse::internal() {
@@ -180,7 +180,7 @@ p6df::core::modules::recurse::callback::dep() {
 #	callback -
 #	... - 
 #
-#  Environment:	 _P6_DFZ_LOADED_CB
+#  Environment:	 P6_DFZ_MODULES _P6_DFZ_LOADED_CB
 #>
 ######################################################################
 p6df::core::modules::foreach() {
@@ -191,7 +191,7 @@ p6df::core::modules::foreach() {
   declare -gA _P6_DFZ_LOADED_CB
 
   local module
-  for module in $Modules[@]; do
+  for module in $(p6_echo "$P6_DFZ_MODULES"); do
     p6df::util::run::code "$callback $module $@"
   done
 }
@@ -202,12 +202,8 @@ p6df::core::modules::foreach() {
 # Function: p6df::core::modules::collect()
 #
 #>
-#/ Creates the global Modules array
-#/ Allows hook p6df::user::modules::collect to modify Modules
 ######################################################################
 p6df::core::modules::collect() {
-
-  declare -gaU Modules
 
   p6df::util::run::if "p6df::user::modules"
 }
@@ -225,6 +221,7 @@ p6df::core::modules::init() {
   declare -gA _P6_DFZ_LOADED
   declare -gA _P6_DFZ_LOADED_INIT
 
+  p6df::core::modules::collect
   p6df::util::run::if "p6df::user::modules::init::pre"
   p6df::core::modules::init::start
   p6df::util::run::if "p6df::user::modules::init::post"
@@ -239,9 +236,6 @@ p6df::core::modules::init() {
 ######################################################################
 p6df::core::modules::init::start() {
 
-  # @Modules
-  p6df::core::modules::collect
-
   p6df::core::modules::foreach "p6df::core::module::init::start"
 }
 
@@ -253,9 +247,6 @@ p6df::core::modules::init::start() {
 #>
 ######################################################################
 p6df::core::modules::fetch() {
-
-  # @Modules
-  p6df::core::modules::collect
 
   p6df::core::modules::foreach "p6df::core::module::fetch"
 }
@@ -269,9 +260,6 @@ p6df::core::modules::fetch() {
 ######################################################################
 p6df::core::modules::pull() {
 
-  # @Modules
-  p6df::core::modules::collect
-
   p6df::core::modules::foreach "p6df::core::module::pull"
 }
 
@@ -283,9 +271,6 @@ p6df::core::modules::pull() {
 #>
 ######################################################################
 p6df::core::modules::push() {
-
-  # @Modules
-  p6df::core::modules::collect
 
   p6df::core::modules::foreach "p6df::core::module::push"
 }
@@ -299,9 +284,6 @@ p6df::core::modules::push() {
 ######################################################################
 p6df::core::modules::sync() {
 
-  # @Modules
-  p6df::core::modules::collect
-
   p6df::core::modules::foreach "p6df::core::module::sync"
 }
 
@@ -313,9 +295,6 @@ p6df::core::modules::sync() {
 #>
 ######################################################################
 p6df::core::modules::status() {
-
-  # @Modules
-  p6df::core::modules::collect
 
   p6df::core::modules::foreach "p6df::core::module::status"
 }
@@ -329,9 +308,6 @@ p6df::core::modules::status() {
 ######################################################################
 p6df::core::modules::diff() {
 
-  # @Modules
-  p6df::core::modules::collect
-
   p6df::core::modules::foreach "p6df::core::module::diff"
 }
 
@@ -343,9 +319,6 @@ p6df::core::modules::diff() {
 #>
 ######################################################################
 p6df::core::modules::home::symlink() {
-
-  # @Modules
-  p6df::core::modules::collect
 
   p6df::core::modules::foreach "p6df::core::module::home::symlink"
 }
@@ -359,9 +332,6 @@ p6df::core::modules::home::symlink() {
 #>
 ######################################################################
 p6df::core::modules::langs() {
-
-  # @Modules
-  p6df::core::modules::collect
 
   local -A _P6_DFZ_LOADED_INIT
   p6df::core::modules::foreach "p6df::core::module::langs"
@@ -377,9 +347,6 @@ p6df::core::modules::langs() {
 ######################################################################
 p6df::core::modules::vscodes() {
 
-  # @Modules
-  p6df::core::modules::collect
-
   local -A _P6_DFZ_LOADED_INIT
   p6df::core::modules::foreach "p6df::core::module::vscodes"
 }
@@ -394,9 +361,6 @@ p6df::core::modules::vscodes() {
 ######################################################################
 p6df::core::modules::brew() {
 
-  # @Modules
-  p6df::core::modules::collect
-
   local -A _P6_DFZ_LOADED_INIT
   p6df::core::modules::foreach "p6df::core::module::brew"
 }
@@ -410,9 +374,6 @@ p6df::core::modules::brew() {
 #>
 ######################################################################
 p6df::core::modules::clones() {
-
-  # @Modules
-  p6df::core::modules::collect
 
   local -A _P6_DFZ_LOADED_INIT
   p6df::core::modules::foreach "p6df::core::module::clones"

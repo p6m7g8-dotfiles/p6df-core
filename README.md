@@ -67,7 +67,9 @@
 
 #### p6df-core/lib/module.zsh:
 
+- p6df::core::module::add(short_module)
 - p6df::core::module::brew(module)
+- p6df::core::module::clones(module)
 - p6df::core::module::clones(module)
 - p6df::core::module::diff(module, dep, org, repo, ..., prefix)
 - p6df::core::module::fetch(module, dep, org, repo, ..., prefix)
@@ -80,7 +82,6 @@
 - p6df::core::module::source(relpath, relaux)
 - p6df::core::module::status(module, dep, org, repo, ..., prefix)
 - p6df::core::module::sync(module, dep, org, repo, ..., prefix)
-- p6df::core::module::version(module)
 - p6df::core::module::vscodes(module)
 
 #### p6df-core/lib/modules.zsh:
@@ -112,9 +113,15 @@
 
 #### p6df-core/lib/prompt.zsh:
 
+- p6_lang_envs_prompt_info()
+- p6_lang_prompt_info()
 - p6df::core::prompt::init()
+- p6df::core::prompt::lang::line::add(thing)
+- p6df::core::prompt::lang::line::remove(thing)
+- p6df::core::prompt::line::add(thing)
+- p6df::core::prompt::line::remove(thing)
 - p6df::core::prompt::process()
-- p6df::prompt::runtime(...)
+- p6df::core::prompt::runtime()
 
 #### p6df-core/lib/theme.zsh:
 
