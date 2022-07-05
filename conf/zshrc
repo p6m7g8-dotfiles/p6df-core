@@ -12,6 +12,9 @@ p6df::init::files_load() {
     # chicken-in-egg - intentionally not p6df::util::file::load
     . $file
   done
+
+  # cleanup: commands get run before HISTFILE is set in p6df-zsh 
+  rm -f $HOME/.zsh_history
 }
 
 p6df::init
