@@ -6,6 +6,7 @@
 #  Args:
 #	module -
 #
+#  Depends:	 p6_env
 #  Environment:	 XXX
 #>
 ######################################################################
@@ -126,6 +127,7 @@ p6df::core::module::vscodes() {
 #  Args:
 #	module -
 #
+#  Depends:	 p6_git
 #>
 ######################################################################
 p6df::core::module::home::symlink() {
@@ -287,7 +289,7 @@ _push() {
 #	... - 
 #	prefix -
 #
-#  Depends:	 p6_git
+#  Depends:	 p6_dir p6_git
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
@@ -353,7 +355,7 @@ _status() {
 #	... - 
 #	prefix -
 #
-#  Depends:	 p6_dir p6_file p6_git
+#  Depends:	 p6_dir p6_git
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
