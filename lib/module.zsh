@@ -8,6 +8,22 @@
 #
 #  Depends:	 p6_env
 #  Environment:	 XXX
+#
+#/ Synopsis:
+#/   Given a module as (organization/repository) return a hash/dict
+#/   module="p6m7g8-dotfiles/p6df-js[:/path/to/dir]"
+#/   dict = {
+#/     repo:    p6df-js
+#/     module:  js
+#/     org:     p6m7g8-dotfiles
+#/     path:    p6m7g8-dotfiles/p6df-js
+#/     prefix:  p6df::modules::js
+#/     [sub:     /path/to/dir]
+#/     [plugin:  dir]
+#/     version: master
+#/     proto:   https
+#/     host:    github.com
+#/   }
 #>
 ######################################################################
 p6df::core::module::parse() {
@@ -16,7 +32,7 @@ p6df::core::module::parse() {
   declare -gA repo
 
   repo[repo]=${${module%%:*}##*/}            # org/(repo)
-  repo[proto]=https                          # protocol
+  repo[proto]=https                         # protocol
   repo[host]=github.com                      # XXX:
   repo[org]=${module%%/*}                    # (org)/repo
   repo[path]=$repo[org]/$repo[repo]          # (org/repo)
@@ -24,9 +40,8 @@ p6df::core::module::parse() {
 
   repo[module]=${repo[repo]##p6df-}          # p6df-(repo)
   repo[prefix]=p6df::modules::$repo[module]  # p6df::modules::(repo) without p6df-
-  repo[sub]=${module##*:}                    # subdir file path : sep
 
-  repo[ns]=$repo[repo]                       # shell namespace
+  repo[sub]=${module##*:}                    # subdir file path : sep
   repo[plugin]=${repo[sub]##*/}              # subdir plugin up to first /
 
   if [[ $repo[repo] =~ ^p6 ]]; then
