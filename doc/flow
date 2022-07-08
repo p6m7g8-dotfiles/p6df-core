@@ -1,0 +1,17 @@
+.zshrc
+  p6df::init
+    p6df::core::main::init
+      p6df::core::user::init
+
+      p6df::core::modules::init
+          p6df::core::modules::collect
+            p6df::util::run::if "p6df::user::modules"
+	      p6df::core::module::add 
+
+          p6df::core::modules::init::start
+            foreach p6df::core::module::init::start $mod
+                p6df::core::modules::recurse::_bootstrap
+		  p6df::core::module::source
+
+      p6df::core::prompt::init
+
