@@ -82,9 +82,6 @@ p6df::core::util::run::code() {
   shift 1
 
   eval "$thing $@"
-  if p6df::core::util::exists "p6_log"; then
-    p6_log "p6df::core::util::run::code: $thing $@"
-  fi
 }
 
 # XXX: rename path::if
@@ -134,4 +131,9 @@ p6df::core::util::cdpath::if() {
   if [[ -d "$dir" ]]; then
     cdpath+=($dir)
   fi
+}
+
+p6df::core::util::timing::init() {
+
+  zmodload zsh/datetime
 }
