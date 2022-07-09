@@ -7,5 +7,5 @@
 ######################################################################
 p6df::core::theme::init() {
 
-  p6df::util::run::if "p6df::user::theme"
+  p6df::core::util::run::if "p6df::user::theme"
 }

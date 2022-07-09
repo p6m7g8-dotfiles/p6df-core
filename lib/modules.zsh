@@ -25,7 +25,7 @@ p6df::core::modules::recurse::_bootstrap() {
 
     # @ModuleDeps
     unset ModuleDeps
-    p6df::util::run::if "$repo[prefix]::deps"
+    p6df::core::util::run::if "$repo[prefix]::deps"
     local dep
     for dep in $ModuleDeps[@]; do
       p6df::core::modules::recurse::_bootstrap "$dep" "$callback"
@@ -34,7 +34,7 @@ p6df::core::modules::recurse::_bootstrap() {
     # Original Module (tail-recursive, after dep chain)
     # XXX: how to not reparse
     p6df::core::module::parse "$module"
-    p6df::util::run::if "p6df::modules::$repo[module]::$callback"
+    p6df::core::util::run::if "p6df::modules::$repo[module]::$callback"
     _P6_DFZ_LOADED[$module]=$(($_P6_DFZ_LOADED[$module]+1))
 }
 
@@ -73,7 +73,7 @@ p6df::core::modules::recurse::internal() {
 
     # @ModuleDeps
     unset ModuleDeps
-    p6df::util::run::if "$repo[prefix]::deps"
+    p6df::core::util::run::if "$repo[prefix]::deps"
     local dep
     for dep in $ModuleDeps[@]; do
       p6df::core::modules::recurse::internal "$dep" "$callback"
@@ -83,7 +83,7 @@ p6df::core::modules::recurse::internal() {
     p6df::core::module::parse "$module" # XXX: how to not reparse
 
     local t2=$EPOCHREALTIME;
-    __p6_dir=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/$repo[repo] p6df::util::run::if "p6df::modules::$repo[module]::$callback"
+    __p6_dir=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/$repo[repo] p6df::core::util::run::if "p6df::modules::$repo[module]::$callback"
     local t3=$EPOCHREALTIME;
     p6_time "$t2" "$t3" "CALLBACK: p6df::modules::$repo[module]::$callback()"
 
@@ -120,7 +120,7 @@ p6df::core::modules::recurse::callback() {
 
     # @ModuleDeps
     unset ModuleDeps
-    p6df::util::run::if "$repo[prefix]::deps"
+    p6df::core::util::run::if "$repo[prefix]::deps"
     local dep
     for dep in $ModuleDeps[@]; do
       p6df::core::modules::recurse::callback "$dep" "$@"
@@ -130,7 +130,7 @@ p6df::core::modules::recurse::callback() {
     p6df::core::module::parse "$module"
     shift 1 # callback
     p6_h3 "$callback($module, org, repo, rest)"
-    p6df::util::run::if "$callback" "$module" "$repo[org]" "$repo[repo]" "$@"
+    p6df::core::util::run::if "$callback" "$module" "$repo[org]" "$repo[repo]" "$@"
 
     # TODO: XXX: zsh : makes ohmyzsh not unique
     _P6_DFZ_LOADED_CB[$module]=$(($_P6_DFZ_LOADED_CB[$module]+1))
@@ -163,10 +163,10 @@ p6df::core::modules::recurse::callback::dep() {
 
     # @ModuleDeps
     unset ModuleDeps
-    p6df::util::run::if "$repo[prefix]::deps"
+    p6df::core::util::run::if "$repo[prefix]::deps"
     local dep
     for dep in $ModuleDeps[@]; do
-      p6df::util::run::if "$callback" "$module" "$dep"
+      p6df::core::util::run::if "$callback" "$module" "$dep"
       p6df::core::modules::recurse::callback::dep "$dep" "$@"
     done
 }
@@ -192,7 +192,7 @@ p6df::core::modules::foreach() {
 
   local module
   for module in $(p6_echo "$P6_DFZ_MODULES"); do
-    p6df::util::run::code "$callback $module $@"
+    p6df::core::util::run::code "$callback $module $@"
   done
 }
 
@@ -205,7 +205,7 @@ p6df::core::modules::foreach() {
 ######################################################################
 p6df::core::modules::collect() {
 
-  p6df::util::run::if "p6df::user::modules"
+  p6df::core::util::run::if "p6df::user::modules"
 }
 
 ######################################################################
@@ -222,9 +222,9 @@ p6df::core::modules::init() {
   declare -gA _P6_DFZ_LOADED_INIT
 
   p6df::core::modules::collect
-  p6df::util::run::if "p6df::user::modules::init::pre"
+  p6df::core::util::run::if "p6df::user::modules::init::pre"
   p6df::core::modules::init::start
-  p6df::util::run::if "p6df::user::modules::init::post"
+  p6df::core::util::run::if "p6df::user::modules::init::post"
 }
 
 ######################################################################

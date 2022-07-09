@@ -5,7 +5,7 @@
 
       p6df::core::modules::init
           p6df::core::modules::collect
-            p6df::util::run::if "p6df::user::modules"
+            p6df::core::util::run::if "p6df::user::modules"
 	      p6df::core::module::add 
 
           p6df::core::modules::init::start

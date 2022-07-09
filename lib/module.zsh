@@ -8,7 +8,7 @@
 #
 #  Depends:	 p6_env
 #  Environment:	 XXX
-#
+#>
 #/ Synopsis:
 #/   Given a module as (organization/repository) return a hash/dict
 #/   module="p6m7g8-dotfiles/p6df-js[:/path/to/dir]"
@@ -24,7 +24,6 @@
 #/     proto:   https
 #/     host:    github.com
 #/   }
-#>
 ######################################################################
 p6df::core::module::parse() {
   local module="$1"
@@ -126,6 +125,7 @@ p6df::core::module::langs() {
 #  Args:
 #	module -
 #
+#  Depends:	 p6_git
 #>
 ######################################################################
 p6df::core::module::vscodes() {
@@ -271,7 +271,7 @@ _pull() {
 #	... - 
 #	prefix -
 #
-#  Depends:	 p6_git
+#  Depends:	 p6_dir p6_git
 #  Environment:	 P6_DFZ_SRC_DIR
 #>
 ######################################################################
@@ -409,6 +409,6 @@ p6df::core::module::source() {
     local relpath="$1"
     local relaux="$2"
 
-    [[ -n "$relaux" ]] && p6df::util::file::load "$P6_DFZ_SRC_DIR/$relaux"
-    p6df::util::file::load "$P6_DFZ_SRC_DIR/$relpath"
+    [[ -n "$relaux" ]] && p6df::core::util::file::load "$P6_DFZ_SRC_DIR/$relaux"
+    p6df::core::util::file::load "$P6_DFZ_SRC_DIR/$relpath"
 }

@@ -116,6 +116,7 @@
 - p6_lang_envs_prompt_info()
 - p6_lang_prompt_info()
 - p6df::core::prompt::init()
+- p6df::core::prompt::lang::env::off(lang)
 - p6df::core::prompt::lang::line::add(thing)
 - p6df::core::prompt::lang::line::remove(thing)
 - p6df::core::prompt::line::add(thing)
@@ -133,14 +134,14 @@
 
 #### p6df-core/lib/util.zsh:
 
-- p6df::util::cdpath::if(dir)
-- p6df::util::exists(thing)
-- p6df::util::file::load(file)
-- p6df::util::path::if(dir)
-- p6df::util::path_if()
-- p6df::util::run::code(thing, ...)
-- p6df::util::run::if(thing, ...)
-- p6df::util::user::init()
+- p6df::core::util::cdpath::if(dir)
+- p6df::core::util::exists(thing)
+- p6df::core::util::file::load(file)
+- p6df::core::util::path::if(dir)
+- p6df::core::util::path_if()
+- p6df::core::util::run::code(thing, ...)
+- p6df::core::util::run::if(thing, ...)
+- p6df::core::util::user::init()
 
 
 
