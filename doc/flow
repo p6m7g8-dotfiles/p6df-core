@@ -1,17 +1,19 @@
-.zshrc
-  p6df::init
-    p6df::core::main::init
-      p6df::core::user::init
-
-      p6df::core::modules::init
-          p6df::core::modules::collect
-            p6df::core::util::run::if "p6df::user::modules"
-	      p6df::core::module::add 
-
-          p6df::core::modules::init::start
-            foreach p6df::core::module::init::start $mod
-                p6df::core::modules::recurse::_bootstrap
-		  p6df::core::module::source
-
-      p6df::core::prompt::init
-
+# .zshrc
+#   p6df::core::init
+#     p6df::core::main::init
+#      	p6df::core::user::init --> "$HOME/.zsh-me
+#
+#       p6df::core::modules::init
+#         p6df::user::modules
+#       	p6df::user::modules::init::pre $P6_AWS_ORG
+#
+#         p6df::core::modules::load
+#         	p6df::core::modules::foreach "p6df::core::module::load" $P6_DFZ_MODULES
+#             p6df::core::module::load "$module"<---+
+#               return if loaded                    |
+#             	p6_run_if "$func_deps"              |
+#                 foreach dep                       |
+#                   >-------------------------------+
+#   	          p6_run_if "$func_init" (tail recursive)
+#
+#         p6df::user::modules::init::post

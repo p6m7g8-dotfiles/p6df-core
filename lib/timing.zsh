@@ -1,11 +1,11 @@
 ######################################################################
 #<
 #
-# Function: p6df::core::theme::init()
+# Function: p6df::core::timing::init()
 #
 #>
 ######################################################################
-p6df::core::theme::init() {
+p6df::core::timing::init() {
 
-  p6_run_yield "p6df::user::theme"
+  zmodload zsh/datetime
 }

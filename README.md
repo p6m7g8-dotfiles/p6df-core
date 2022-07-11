@@ -46,69 +46,47 @@
 
 - p6df::core::aliases::init()
 
-#### p6df-core/lib/dev.zsh:
+#### p6df-core/lib/file.zsh:
 
-- p6df::core::dev::graph()
-- p6df::core::dev::graph::dot(module, module, dep)
+- p6df::core::file::load(file)
 
 #### p6df-core/lib/main.zsh:
 
 - p6df::core::main::init()
+- p6df::core::main::self::init()
 
 #### p6df-core/lib/mgmt.zsh:
 
-- p6df::core::mgmt::modules::diff()
-- p6df::core::mgmt::modules::pull()
-- p6df::core::mgmt::modules::send()
-- p6df::core::mgmt::modules::status()
-- p6df::core::mgmt::modules::sync()
-- p6df::core::mgmt::modules::update()
-- p6df::core::mgmt::update()
+- p6df::core::mgmt::module::do(dir, callback)
+- p6df::core::mgmt::modules::foreach()
+- p6df::core::mgmt::modules::git::diff()
+- p6df::core::mgmt::modules::git::pull()
+- p6df::core::mgmt::modules::git::push()
+- p6df::core::mgmt::modules::git::status()
+- p6df::core::mgmt::modules::git::sync()
 
 #### p6df-core/lib/module.zsh:
 
 - p6df::core::module::add(short_module)
-- p6df::core::module::brew(module)
-- p6df::core::module::clones(module)
-- p6df::core::module::clones(module)
-- p6df::core::module::diff(module, dep, org, repo, ..., prefix)
-- p6df::core::module::fetch(module, dep, org, repo, ..., prefix)
-- p6df::core::module::home::symlink(module)
-- p6df::core::module::init::start(module)
-- p6df::core::module::langs(module)
+- p6df::core::module::load(module)
 - p6df::core::module::parse(module)
-- p6df::core::module::pull(module, dep, org, repo, ..., prefix)
-- p6df::core::module::push(module, dep, org, repo, ..., prefix)
 - p6df::core::module::source(relpath, relaux)
-- p6df::core::module::status(module, dep, org, repo, ..., prefix)
-- p6df::core::module::sync(module, dep, org, repo, ..., prefix)
-- p6df::core::module::vscodes(module)
+- p6df::core::module::use(short_module)
+- str P6_env_${str} = p6df::core::module::env::name(module)
+- str module = p6df::core::module::expand(short_module)
 
 #### p6df-core/lib/modules.zsh:
 
-- p6df::core::modules::brew()
-- p6df::core::modules::clones()
-- p6df::core::modules::collect()
-- p6df::core::modules::diff()
-- p6df::core::modules::fetch()
-- p6df::core::modules::foreach(callback, ...)
-- p6df::core::modules::home::symlink()
+- p6df::core::modules::bootstrap::p6common()
+- p6df::core::modules::foreach(callback)
 - p6df::core::modules::init()
-- p6df::core::modules::init::start()
-- p6df::core::modules::langs()
-- p6df::core::modules::pull()
-- p6df::core::modules::push()
-- p6df::core::modules::recurse::_bootstrap(module, callback)
-- p6df::core::modules::recurse::callback(module, ..., callback)
-- p6df::core::modules::recurse::callback::dep(module, ..., callback)
-- p6df::core::modules::recurse::internal(module, callback)
-- p6df::core::modules::status()
-- p6df::core::modules::sync()
-- p6df::core::modules::vscodes()
+- p6df::core::modules::load()
 
 #### p6df-core/lib/path.zsh:
 
+- p6df::core::path::cd::if(dir)
 - p6df::core::path::cd::init()
+- p6df::core::path::if(dir)
 - p6df::core::path::init()
 
 #### p6df-core/lib/prompt.zsh:
@@ -128,20 +106,13 @@
 
 - p6df::core::theme::init()
 
+#### p6df-core/lib/timing.zsh:
+
+- p6df::core::timing::init()
+
 #### p6df-core/lib/user.zsh:
 
 - p6df::core::user::init()
-
-#### p6df-core/lib/util.zsh:
-
-- p6df::core::util::cdpath::if(dir)
-- p6df::core::util::exists(thing)
-- p6df::core::util::file::load(file)
-- p6df::core::util::path::if(dir)
-- p6df::core::util::path_if()
-- p6df::core::util::run::code(thing, ...)
-- p6df::core::util::run::if(thing, ...)
-- p6df::core::util::user::init()
 
 
 
@@ -149,7 +120,7 @@
 ```text
 .
 ├── aliases.zsh
-├── dev.zsh
+├── file.zsh
 ├── main.zsh
 ├── mgmt.zsh
 ├── module.zsh
@@ -157,8 +128,8 @@
 ├── path.zsh
 ├── prompt.zsh
 ├── theme.zsh
-├── user.zsh
-└── util.zsh
+├── timing.zsh
+└── user.zsh
 
 0 directories, 11 files
 ```

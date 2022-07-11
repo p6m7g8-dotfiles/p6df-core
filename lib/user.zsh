@@ -8,5 +8,5 @@
 ######################################################################
 p6df::core::user::init() {
 
-  p6df::core::util::file::load "$HOME/.zsh-me"
+  p6df::core::file::load "$HOME/.zsh-me"
 }

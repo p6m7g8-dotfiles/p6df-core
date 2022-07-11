@@ -56,8 +56,8 @@ export P6_DFZ_ZSHRC_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zshrc
 
 export P6_DFZ_CACHE_DIR=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/share/.cache
 
-export P6_DEBUG=
-export P6_VERBOSE=0
+export P6_DEBUG=all
+export P6_VERBOSE=9
 # export P6_DRY_RUN=1
 
 # Load p6df's env
@@ -65,4 +65,4 @@ export P6_VERBOSE=0
 
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory_support for ZSH/ZDOTDIR
 export ZDOTDIR=$P6_DFZ_DATA_DIR
-export ZSH_CACHE_DIR=$ZDOTDIR/.zsh
+export ZSH_CACHE_DIR=$P6_DFZ_CACHE_DIR

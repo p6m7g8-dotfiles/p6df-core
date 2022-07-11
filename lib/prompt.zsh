@@ -3,11 +3,10 @@
 #
 # Function: p6df::core::prompt::init()
 #
-#  Depends:	 p6_echo
 #>
 ######################################################################
 p6df::core::prompt::init() {
-  p6df::core::util::run::if "p6df::user::prompt"
+  p6_run_yield "p6df::user::prompt"
 
   p6df::core::prompt::process
 }
@@ -17,7 +16,6 @@ p6df::core::prompt::init() {
 #
 # Function: p6df::core::prompt::process()
 #
-#  Depends:	 p6_echo
 #  Environment:	 PROMPT
 #>
 ######################################################################
@@ -35,26 +33,29 @@ $PROMPT
 #
 # Function: p6df::core::prompt::runtime()
 #
-#  Depends:	 p6_echo p6_env p6_string p6_time
-#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_LINES PROMPT
+#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_LINES TOTAL
 #>
 ######################################################################
 p6df::core::prompt::runtime() {
 
+  p6_log_disable
+
   local lf
   local t1=$EPOCHREALTIME
-  for lf in $(echo "$P6_DFZ_PROMPT_LINES"); do
+  for lf in $(p6_echo "$P6_DFZ_PROMPT_LINES"); do
     local t3=$EPOCHREALTIME
     local func="$lf"
-    local cnt=$(p6df::core::util::run::if "$func")
+    local cnt=$(p6_run_yield "$func")
     if ! p6_string_blank "$cnt"; then
       p6_echo "$cnt"
     fi
     local t4=$EPOCHREALTIME
-    p6_time "$t3" "$t4" "PROMPT CALLBACK: $func"
+    p6_time "$t3" "$t4" "p6df::core::prompt::runtime: $func"
   done
   local t2=$EPOCHREALTIME
-  p6_time "$t1" "$t2" "PROMPT CALLBACK TOTAL"
+  p6_time "$t1" "$t2" "TOTAL: p6df::core::prompt::runtime"
+
+  p6_log_enable
 }
 
 ######################################################################
@@ -65,7 +66,6 @@ p6df::core::prompt::runtime() {
 #  Args:
 #	thing -
 #
-#  Depends:	 p6_env
 #  Environment:	 P6_DFZ_PROMPT_LINES
 #>
 ######################################################################
@@ -88,7 +88,6 @@ p6df::core::prompt::line::add() {
 #  Args:
 #	thing -
 #
-#  Depends:	 p6_echo p6_env
 #  Environment:	 P6_DFZ_PROMPT_LINES
 #>
 ######################################################################
@@ -109,7 +108,6 @@ p6df::core::prompt::line::remove() {
 #  Args:
 #	thing -
 #
-#  Depends:	 p6_env
 #  Environment:	 P6_DFZ_PROMPT_LANG_LINES
 #>
 ######################################################################
@@ -132,7 +130,6 @@ p6df::core::prompt::lang::line::add() {
 #  Args:
 #	thing -
 #
-#  Depends:	 p6_echo p6_env
 #  Environment:	 P6_DFZ_PROMPT_LANG_LINES
 #>
 ######################################################################
@@ -153,7 +150,6 @@ p6df::core::prompt::lang::line::remove() {
 #  Args:
 #	lang -
 #
-#  Depends:	 p6_echo p6_env p6_lang
 #  Environment:	 P6_DFZ_PROMPT_LANG_LINES_OFF
 #>
 ######################################################################
@@ -173,7 +169,6 @@ p6df::core::prompt::lang::env::off() {
 #
 # Function: p6_lang_prompt_info()
 #
-#  Depends:	 p6_echo p6_lang p6_string
 #  Environment:	 P6_DFZ_PROMPT_LANG_LINES
 #>
 ######################################################################
@@ -202,7 +197,6 @@ p6_lang_prompt_info() {
 #
 # Function: p6_lang_envs_prompt_info()
 #
-#  Depends:	 p6_echo p6_string p6_word
 #  Environment:	 P6_DFZ_PROMPT_LANG_LINES P6_DFZ_PROMPT_LANG_LINES_OFF P6_NL
 #>
 ######################################################################
@@ -214,7 +208,7 @@ p6_lang_envs_prompt_info() {
   for lang in $(p6_echo "$P6_DFZ_PROMPT_LANG_LINES"); do
     if ! p6_word_in "$lang" "$P6_DFZ_PROMPT_LANG_LINES_OFF"; then
       local func="p6_${lang}_env_prompt_info"
-      local cnt=$(p6_run_code "$func")
+      local cnt=$(p6_run_yield "$func")
       if ! p6_string_blank "$cnt"; then
         if p6_string_eq "$f" "0"; then
           str="$cnt"
