@@ -1,3 +1,9 @@
+p6df::core::module::load()     { local module="$1"; p6df::core::module::_recurse "$module" "init" }
+p6df::core::module::vscodes()  { local module="$1"; p6df::core::module::_recurse "$module" "vscodes" }
+p6df::core::module::langs()    { local module="$1"; p6df::core::module::_recurse "$module" "langs" }
+p6df::core::module::brews()    { local module="$1"; p6df::core::module::_recurse "$module" "external::brew" }
+p6df::core::module::symlinks() { local module="$1"; p6df::core::module::_recurse "$module" "home::symlinks" }
+
 ######################################################################
 #<
 #
@@ -41,6 +47,8 @@ p6df::core::module::use() {
 	p6_return_void
 }
 
+# ---------------------------------------------------------------------------
+
 ######################################################################
 #<
 #
@@ -62,6 +70,8 @@ p6df::core::module::expand() {
 	p6common) module="p6m7g8-dotfiles/p6common" ;;
 	p6df*) module="p6m7g8-dotfiles/$short_module" ;;
 	esac
+
+	p6_log "p6df::core::module::expand($short_module) -> $module"
 
 	p6_return_str "$module"
 }
@@ -121,9 +131,11 @@ p6df::core::module::parse() {
   elif [[ $repo[repo] = prezto ]]; then
       repo[load_path]=$repo[path]/$repo[sub]/init.zsh
       repo[extra_load_path]=$repo[path]/init.zsh
-  else
-      repo[load_path]=$repo[path]/$repo[plugin].plugin.zsh
-  fi
+  elif [[ $repo[repo] =~ wakatime-zsh-plugin ]]; then
+	  repo[load_path]=$repo[path]/wakatime.plugin.zsh # grumble
+  elif [[ $repo[repo] =~ zsh ]]; then
+	  repo[load_path]=$repo[path]/$repo[plugin].plugin.zsh
+   fi
 }
 
 ######################################################################
@@ -165,7 +177,7 @@ p6df::core::module::env::name() {
 
 	local str=$(p6_echo $module | sed -e 's,[^A-Za-z0-9_],_,g')
 
-	p6_return_str "P6_env_${str}"
+	p6_return_str "$str"
 }
 
 ######################################################################
@@ -179,25 +191,21 @@ p6df::core::module::env::name() {
 #  Environment:	 EPOCHREALTIME P6_DFZ_SRC_DIR TOTAL
 #>
 ######################################################################
-p6df::core::module::load()     { local module="$1"; p6df::core::module::_recurse "$module" "init" }
-p6df::core::module::vscodes()  { local module="$1"; p6df::core::module::_recurse "$module" "vscodes" }
-p6df::core::module::langs()    { local module="$1"; p6df::core::module::_recurse "$module" "langs" }
-p6df::core::module::brews()    { local module="$1"; p6df::core::module::_recurse "$module" "external::brew" }
-p6df::core::module::symlinks() { local module="$1"; p6df::core::module::_recurse "$module" "home::symlinks" }
-
 p6df::core::module::_recurse() {
 	local module="$1"
     local callback="$2"
 
-    local t0=$EPOCHREALTIME
-	local env_name=$(p6df::core::module::env::name "$module")
-    local env_callback=$(p6df::core::module::env::name "$callback")
+    local t0=$EPOCHREALTIME                                                             # Start Timer
+	local breaker_var=$(p6df::core::module::env::name "PL_env_${module}-${callback}")   # Transliterate to a sh variable name
 
-	local val
-	p6_run_code "val=\$${env_name}__${env_callback}"
+	local breaker_val
+	p6_run_code "breaker_val=\$${breaker_var}"                                                   # val is the vaalue of this module's variable
 
-	if ! p6_string_blank "$val"; then
-		return
+	if p6_string_eq "$breaker_val" "1"; then
+	  p6_log "short circuit"
+ 	  return
+	else
+	  p6_log "continue"
 	fi
 
 	# %repo
@@ -205,6 +213,9 @@ p6df::core::module::_recurse() {
 	p6df::core::module::parse "$module"
 	p6df::core::module::source "$repo[load_path]" "$repo[extra_load_path]"
 
+    p6_run_code "${breaker_var}=1"
+
+	# Non p6 modules don't have deps
 	case $module in
 	*/p6*) ;;
 	*) return ;;
@@ -219,21 +230,21 @@ p6df::core::module::_recurse() {
 	local dep
 	for dep in $ModuleDeps[@]; do
 		p6_log "$module -> $dep"
-#	    local t2=$EPOCHREALTIME
+	    local t2=$EPOCHREALTIME
 		p6df::core::module::load "$dep"
-#	    local t3=$EPOCHREALTIME
-#    	p6_time "$t2" "$t3" "===> p6df::core::module::load($dep)"
+	    local t3=$EPOCHREALTIME
+    	p6_time "$t2" "$t3" "===> p6df::core::module::load[dep]($dep)"
 	done
     unset ModuleDeps
 
-	local func_init="$orig_prefix::$callback"
-	__p6_dir=$P6_DFZ_SRC_DIR/$module p6_run_if "$func_init"
+	local func_callback="$orig_prefix::$callback"
+	__p6_dir=$P6_DFZ_SRC_DIR/$module p6_run_if "$func_callback"
 
 	unset repo
-    eval "${env_name}__${env_callback}=1"
 
 	local t1=$EPOCHREALTIME
 	p6_time "$t0" "$t1" "TOTAL: p6df::core::module::load($module)"
 
+	p6_log ""
 	p6_return_void
 }

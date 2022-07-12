@@ -67,5 +67,5 @@ p6df::core::modules::bootstrap::p6common() {
 
 	p6_bootstrap
 
-	p6_env_export "P6_env_p6m7g8_dotfiles_p6common" "loaded"
+	p6_env_export "PL_env_p6m7g8_dotfiles_p6common_init" "1"
 }
