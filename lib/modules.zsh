@@ -35,10 +35,7 @@ p6df::core::modules::symlinks() { p6df::core::modules::foreach "p6df::core::modu
 ######################################################################
 #<
 #
-# Function: p6df::core::modules::foreach(callback)
-#
-#  Args:
-#	callback -
+# Function: p6df::core::modules::foreach()
 #
 #  Environment:	 P6_DFZ_MODULES
 #>
@@ -57,7 +54,7 @@ p6df::core::modules::foreach() {
 #
 # Function: p6df::core::modules::bootstrap::p6common()
 #
-#  Environment:	 P6_ P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR PL_
 #>
 ######################################################################
 p6df::core::modules::bootstrap::p6common() {

@@ -1,7 +1,42 @@
+######################################################################
+#<
+#
+# Function: p6df::core::mgmt::modules::git::status()
+#
+#>
+######################################################################
 p6df::core::mgmt::modules::git::status() { p6df::core::mgmt::modules::foreach "p6_git_p6_status" }
+######################################################################
+#<
+#
+# Function: p6df::core::mgmt::modules::git::diff()
+#
+#>
+######################################################################
 p6df::core::mgmt::modules::git::diff()   { p6df::core::mgmt::modules::foreach "p6_git_p6_diff" }
+######################################################################
+#<
+#
+# Function: p6df::core::mgmt::modules::git::pull()
+#
+#>
+######################################################################
 p6df::core::mgmt::modules::git::pull()   { p6df::core::mgmt::modules::foreach "p6_git_p6_pull" }
+######################################################################
+#<
+#
+# Function: p6df::core::mgmt::modules::git::push()
+#
+#>
+######################################################################
 p6df::core::mgmt::modules::git::push()   { p6df::core::mgmt::modules::foreach "echo p6_git_p6_push" }
+######################################################################
+#<
+#
+# Function: p6df::core::mgmt::modules::git::sync()
+#
+#>
+######################################################################
 p6df::core::mgmt::modules::git::sync()   { p6df::core::mgmt::git::pull; p6df::core::mgmt::git::push }
 
 # ---------------------------------------------------------------------------

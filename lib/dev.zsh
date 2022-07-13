@@ -5,8 +5,7 @@
 #
 # Function: p6df::core::dev::graph()
 #
-#  Depends:	 p6_echo
-#  Environment:	 EOF
+#  Environment:	 EOF P6_DFZ_MODULES
 #>
 ######################################################################
 p6df::core::dev::graph() {
@@ -34,6 +33,20 @@ EOF
   p6_echo "}"
 }
 
+######################################################################
+#<
+#
+# Function: p6df::core::dev::_recurse(module, callback, module, dep)
+#
+#  Args:
+#	module -
+#	callback -
+#	module -
+#	dep -
+#
+#  Environment:	 XXX
+#>
+######################################################################
 p6df::core::dev::_recurse() {
   local module="$1"
   local callback="$2"
@@ -66,19 +79,6 @@ p6df::core::dev::_recurse() {
   p6_return_void
 }
 
-######################################################################
-#<
-#
-# Function: p6df::core::dev::graph::dot(module, module, dep)
-#
-#  Args:
-#	module -
-#	module -
-#	dep -
-#
-#  Depends:	 p6_echo
-#>
-######################################################################
 _dot() {
   local module="$1"
   local dep="$2"

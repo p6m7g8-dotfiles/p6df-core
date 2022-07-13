@@ -7,10 +7,7 @@ p6df::core::module::symlinks() { local module="$1"; p6df::core::module::_recurse
 ######################################################################
 #<
 #
-# Function: p6df::core::module::add(short_module)
-#
-#  Args:
-#	short_module -
+# Function: p6df::core::module::add()
 #
 #  Environment:	 P6_DFZ_MODULES
 #>
@@ -161,15 +158,14 @@ p6df::core::module::source() {
 ######################################################################
 #<
 #
-# Function: str P6_env_${str} = p6df::core::module::env::name(module)
+# Function: str str = p6df::core::module::env::name(module)
 #
 #  Args:
 #	module -
 #
 #  Returns:
-#	str - P6_env_${str}
+#	str - str
 #
-#  Environment:	 P6_
 #>
 ######################################################################
 p6df::core::module::env::name() {
@@ -183,12 +179,13 @@ p6df::core::module::env::name() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::load(module)
+# Function: p6df::core::module::_recurse(module, callback)
 #
 #  Args:
 #	module -
+#	callback -
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_SRC_DIR TOTAL
+#  Environment:	 EPOCHREALTIME P6_DFZ_SRC_DIR PL_ TOTAL
 #>
 ######################################################################
 p6df::core::module::_recurse() {

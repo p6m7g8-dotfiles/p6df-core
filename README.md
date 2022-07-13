@@ -46,6 +46,11 @@
 
 - p6df::core::aliases::init()
 
+#### p6df-core/lib/dev.zsh:
+
+- p6df::core::dev::_recurse(module, callback, module, dep)
+- p6df::core::dev::graph()
+
 #### p6df-core/lib/file.zsh:
 
 - p6df::core::file::load(file)
@@ -67,20 +72,29 @@
 
 #### p6df-core/lib/module.zsh:
 
-- p6df::core::module::add(short_module)
-- p6df::core::module::load(module)
+- p6df::core::module::_recurse(module, callback)
+- p6df::core::module::add()
+- p6df::core::module::brews()
+- p6df::core::module::langs()
+- p6df::core::module::load()
 - p6df::core::module::parse(module)
 - p6df::core::module::source(relpath, relaux)
+- p6df::core::module::symlinks()
 - p6df::core::module::use(short_module)
-- str P6_env_${str} = p6df::core::module::env::name(module)
+- p6df::core::module::vscodes()
 - str module = p6df::core::module::expand(short_module)
+- str str = p6df::core::module::env::name(module)
 
 #### p6df-core/lib/modules.zsh:
 
 - p6df::core::modules::bootstrap::p6common()
-- p6df::core::modules::foreach(callback)
+- p6df::core::modules::brews()
+- p6df::core::modules::foreach()
 - p6df::core::modules::init()
+- p6df::core::modules::langs()
 - p6df::core::modules::load()
+- p6df::core::modules::symlinks()
+- p6df::core::modules::vscodes()
 
 #### p6df-core/lib/path.zsh:
 
@@ -120,6 +134,7 @@
 ```text
 .
 ├── aliases.zsh
+├── dev.zsh
 ├── file.zsh
 ├── main.zsh
 ├── mgmt.zsh
@@ -131,7 +146,7 @@
 ├── timing.zsh
 └── user.zsh
 
-0 directories, 11 files
+0 directories, 12 files
 ```
 ## Author
 
