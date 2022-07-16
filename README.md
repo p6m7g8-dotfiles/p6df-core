@@ -80,7 +80,7 @@
 #### p6df-core/lib/mgmt.zsh:
 
 - p6df::core::mgmt::module::do(dir, callback)
-- p6df::core::mgmt::modules::foreach()
+- p6df::core::mgmt::modules::foreach(callback)
 - p6df::core::mgmt::modules::git::diff()
 - p6df::core::mgmt::modules::git::pull()
 - p6df::core::mgmt::modules::git::push()

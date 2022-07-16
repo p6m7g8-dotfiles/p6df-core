@@ -5,7 +5,11 @@
 #
 #>
 ######################################################################
-p6df::core::mgmt::modules::git::status() { p6df::core::mgmt::modules::foreach "p6_git_p6_status" }
+p6df::core::mgmt::modules::git::status() {
+
+    p6df::core::mgmt::modules::foreach "p6_git_p6_status"
+}
+
 ######################################################################
 #<
 #
@@ -13,7 +17,11 @@ p6df::core::mgmt::modules::git::status() { p6df::core::mgmt::modules::foreach "p
 #
 #>
 ######################################################################
-p6df::core::mgmt::modules::git::diff()   { p6df::core::mgmt::modules::foreach "p6_git_p6_diff" }
+p6df::core::mgmt::modules::git::diff() {
+
+    p6df::core::mgmt::modules::foreach "p6_git_p6_diff"
+}
+
 ######################################################################
 #<
 #
@@ -21,7 +29,11 @@ p6df::core::mgmt::modules::git::diff()   { p6df::core::mgmt::modules::foreach "p
 #
 #>
 ######################################################################
-p6df::core::mgmt::modules::git::pull()   { p6df::core::mgmt::modules::foreach "p6_git_p6_pull" }
+p6df::core::mgmt::modules::git::pull() {
+
+    p6df::core::mgmt::modules::foreach "p6_git_p6_pull"
+}
+
 ######################################################################
 #<
 #
@@ -29,7 +41,11 @@ p6df::core::mgmt::modules::git::pull()   { p6df::core::mgmt::modules::foreach "p
 #
 #>
 ######################################################################
-p6df::core::mgmt::modules::git::push()   { p6df::core::mgmt::modules::foreach "echo p6_git_p6_push" }
+p6df::core::mgmt::modules::git::push() {
+
+    p6df::core::mgmt::modules::foreach "echo p6_git_p6_push"
+}
+
 ######################################################################
 #<
 #
@@ -37,14 +53,19 @@ p6df::core::mgmt::modules::git::push()   { p6df::core::mgmt::modules::foreach "e
 #
 #>
 ######################################################################
-p6df::core::mgmt::modules::git::sync()   { p6df::core::mgmt::git::pull; p6df::core::mgmt::git::push }
+p6df::core::mgmt::modules::git::sync() {
 
-# ---------------------------------------------------------------------------
+    p6df::core::mgmt::git::pull
+    p6df::core::mgmt::git::push
+}
 
 ######################################################################
 #<
 #
-# Function: p6df::core::mgmt::modules::foreach()
+# Function: p6df::core::mgmt::modules::foreach(callback)
+#
+#  Args:
+#	callback -
 #
 #  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
