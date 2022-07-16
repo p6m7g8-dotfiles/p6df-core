@@ -37,7 +37,10 @@ p6df::core::path::cd::if() {
 ######################################################################
 #<
 #
-# Function: p6df::core::path::init()
+# Function: p6df::core::path::init(dir)
+#
+#  Args:
+#	dir -
 #
 #  Environment:	 X11
 #>

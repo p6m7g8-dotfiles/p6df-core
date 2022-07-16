@@ -48,12 +48,29 @@
 
 #### p6df-core/lib/dev.zsh:
 
-- p6df::core::dev::_recurse(module, callback, module, dep)
+- p6df::core::dev::dot(module, dep)
 - p6df::core::dev::graph()
+
+#### p6df-core/lib/df.zsh:
+
+- p6df::core::df::doc()
+- p6df::core::df::module(sub_cmd, module)
+- p6df::core::df::module::fetch(module)
+- p6df::core::df::module::langs(module)
+- p6df::core::df::module::update(module)
+- p6df::core::df::module::use(module)
+- p6df::core::df::module::vscodes(module)
+- p6df::usage([rc=0], [msg=], ..., flag_debug, cmd, ...)
 
 #### p6df-core/lib/file.zsh:
 
 - p6df::core::file::load(file)
+
+#### p6df-core/lib/internal.zsh:
+
+- p6df::core::module::_fetch()
+- p6df::core::module::_recurse(module, callback, ...)
+- p6df::core::module::_update(dir, module)
 
 #### p6df-core/lib/main.zsh:
 
@@ -72,16 +89,17 @@
 
 #### p6df-core/lib/module.zsh:
 
-- p6df::core::module::_recurse(module, callback)
-- p6df::core::module::add()
-- p6df::core::module::brews()
-- p6df::core::module::langs()
-- p6df::core::module::load()
+- p6df::core::module::add(short_module)
+- p6df::core::module::brews(module)
+- p6df::core::module::fetch(module)
+- p6df::core::module::init()
+- p6df::core::module::langs(module)
 - p6df::core::module::parse(module)
 - p6df::core::module::source(relpath, relaux)
-- p6df::core::module::symlinks()
+- p6df::core::module::symlinks(module)
+- p6df::core::module::update(module)
 - p6df::core::module::use(short_module)
-- p6df::core::module::vscodes()
+- p6df::core::module::vscodes(module)
 - str module = p6df::core::module::expand(short_module)
 - str str = p6df::core::module::env::name(module)
 
@@ -89,7 +107,7 @@
 
 - p6df::core::modules::bootstrap::p6common()
 - p6df::core::modules::brews()
-- p6df::core::modules::foreach()
+- p6df::core::modules::foreach(callback)
 - p6df::core::modules::init()
 - p6df::core::modules::langs()
 - p6df::core::modules::load()
@@ -101,7 +119,7 @@
 - p6df::core::path::cd::if(dir)
 - p6df::core::path::cd::init()
 - p6df::core::path::if(dir)
-- p6df::core::path::init()
+- p6df::core::path::init(dir)
 
 #### p6df-core/lib/prompt.zsh:
 
@@ -135,7 +153,9 @@
 .
 ├── aliases.zsh
 ├── dev.zsh
+├── df.zsh
 ├── file.zsh
+├── internal.zsh
 ├── main.zsh
 ├── mgmt.zsh
 ├── module.zsh
@@ -146,7 +166,7 @@
 ├── timing.zsh
 └── user.zsh
 
-0 directories, 12 files
+0 directories, 14 files
 ```
 ## Author
 

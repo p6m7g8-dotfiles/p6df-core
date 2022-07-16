@@ -1,7 +1,42 @@
+######################################################################
+#<
+#
+# Function: p6df::core::modules::load()
+#
+#>
+######################################################################
 p6df::core::modules::load()     { p6df::core::modules::foreach "p6df::core::module::init" }
+######################################################################
+#<
+#
+# Function: p6df::core::modules::brews()
+#
+#>
+######################################################################
 p6df::core::modules::brews()    { p6df::core::modules::foreach "p6df::core::module::brews" }
+######################################################################
+#<
+#
+# Function: p6df::core::modules::langs()
+#
+#>
+######################################################################
 p6df::core::modules::langs()    { p6df::core::modules::foreach "p6df::core::module::langs" }
+######################################################################
+#<
+#
+# Function: p6df::core::modules::vscodes()
+#
+#>
+######################################################################
 p6df::core::modules::vscodes()  { p6df::core::modules::foreach "p6df::core::module::vscodes" }
+######################################################################
+#<
+#
+# Function: p6df::core::modules::symlinks()
+#
+#>
+######################################################################
 p6df::core::modules::symlinks() { p6df::core::modules::foreach "p6df::core::module::symlinks" }
 
 ######################################################################
@@ -24,7 +59,10 @@ p6df::core::modules::init() {
 ######################################################################
 #<
 #
-# Function: p6df::core::modules::foreach()
+# Function: p6df::core::modules::foreach(callback)
+#
+#  Args:
+#	callback -
 #
 #  Environment:	 P6_DFZ_MODULES
 #>
@@ -43,7 +81,7 @@ p6df::core::modules::foreach() {
 #
 # Function: p6df::core::modules::bootstrap::p6common()
 #
-#  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR PL_
+#  Environment:	 P6_DFZ_ P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
 p6df::core::modules::bootstrap::p6common() {

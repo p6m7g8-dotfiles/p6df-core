@@ -3,12 +3,9 @@
 #
 # Function: p6df::core::main::init()
 #
-#  Environment:	 EPOCHREALTIME
+#  Environment:	 EPOCHREALTIME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
-p6_core_main_init() {
-	p6df::core::main::init
-}
 p6df::core::main::init() {
 
 	p6df::core::main::self::init

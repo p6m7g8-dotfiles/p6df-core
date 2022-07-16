@@ -1,19 +1,23 @@
 ######################################################################
 #<
 #
-# Function: p6df_usage([rc=0], [msg=])
+# Function: p6df::usage([rc=0], [msg=], ..., flag_debug, cmd, ...)
 #
 #  Args:
 #	OPTIONAL rc - [0]
 #	OPTIONAL msg - []
+#	... - 
+#	flag_debug -
+#	cmd -
+#	... - 
 #
-#  Environment:	 EOF
+#  Environment:	 EOF LC_ALL OPTIND
 #>
 #/ Synopsis
 #/    bin/p6df [-D|-d] [cmd]
 #/
 ######################################################################
-p6df_usage() {
+p6df::usage() {
   local rc="${1:-0}"
   local msg="${2:-}"
 
@@ -37,24 +41,7 @@ EOF
   exit "$rc"
 }
 
-######################################################################
-#<
-#
-# Function: p6_function_p6df(...)
-#
-#  Args:
-#	... -
-#
-#  Environment:	 LC_ALL OPTIND
-#>
-#/ Synopsis
-#/    bin/p6df [-D|-d] [cmd]
-#/
-#/ Synopsis
-#/    The entry point for bin/p6df
-#/
-######################################################################
-p6_function_p6df() {
+p6::p6df() {
   shift 0
 
   # sanitize env
@@ -69,7 +56,7 @@ p6_function_p6df() {
     case $flag in
     D) flag_debug=0 ;;
     d) flag_debug=1 ;;
-    *) p6df_usage 1 "invalid flag" ;;
+    *) p6df::usage 1 "invalid flag" ;;
     esac
   done
   shift $((OPTIND - 1))
@@ -80,10 +67,10 @@ p6_function_p6df() {
 
   # security 101: only allow valid comamnds
   case $cmd in
-  help) p6df_usage ;;
+  help) p6df::usage ;;
   doc) ;;
   module) ;;
-  *) p6df_usage 1 "invalid cmd" ;;
+  *) p6df::usage 1 "invalid cmd" ;;
   esac
 
   # setup -x based on flag_debug
@@ -91,11 +78,11 @@ p6_function_p6df() {
 
   # exit if any cli errors w/ >0 return code
   # the commands can still disable locally if needed
-  set -e
+  # set -e
   p6_msg "$cmd"
-  p6_cmd_df_"${cmd}" "$@"
+  p6df::core::df::"${cmd}" "$@"
   p6_msg_success "$cmd"
-  set +e
+  # set +e
 
   # stop debugging if it was enabled
   [ ${flag_debug} = 1 ] && set +x
@@ -105,11 +92,17 @@ p6_function_p6df() {
 ######################################################################
 #<
 #
-# Function: p6_cmd_df_doc()
+# Function: p6df::core::df::doc()
 #
 #>
+#/ Synopsis
+#/    bin/p6df [-D|-d] [cmd]
+#/
+#/ Synopsis
+#/    The entry point for bin/p6df
+#/
 ######################################################################
-p6_cmd_df_doc() {
+p6df::core::df::doc() {
 
   p6df::core::module::use "p6m7g8-dotfiles/p6df-perl"
   p6_cicd_doc_gen
@@ -118,7 +111,7 @@ p6_cmd_df_doc() {
 ######################################################################
 #<
 #
-# Function: p6_cmd_df_module(sub_cmd, module)
+# Function: p6df::core::df::module(sub_cmd, module)
 #
 #  Args:
 #	sub_cmd -
@@ -126,29 +119,25 @@ p6_cmd_df_doc() {
 #
 #>
 ######################################################################
-p6_cmd_df_module() {
+p6df::core::df::module() {
   local sub_cmd="$1"
   local module="$2"
 
   p6df::core::module::use "p6m7g8-dotfiles/p6git"
-
-  (
-    set +e
-    p6_cmd_df_module_"${sub_cmd}" "$module"
-  )
+  p6df::core::df::module::"${sub_cmd}" "$module"
 }
 
 ######################################################################
 #<
 #
-# Function: p6_cmd_df_module_use(module)
+# Function: p6df::core::df::module::use(module)
 #
 #  Args:
 #	module -
 #
 #>
 ######################################################################
-p6_cmd_df_module_use() {
+p6df::core::df::module::use() {
   local module="$1"
 
   p6df::core::module::use "$module"
@@ -157,14 +146,14 @@ p6_cmd_df_module_use() {
 ######################################################################
 #<
 #
-# Function: p6_cmd_df_module_fetch(module)
+# Function: p6df::core::df::module::fetch(module)
 #
 #  Args:
 #	module -
 #
 #>
 ######################################################################
-p6_cmd_df_module_fetch() {
+p6df::core::df::module::fetch() {
   local module="$1"
 
   p6df::core::module::fetch "$module"
@@ -173,14 +162,14 @@ p6_cmd_df_module_fetch() {
 ######################################################################
 #<
 #
-# Function: p6_cmd_df_module_update(module)
+# Function: p6df::core::df::module::update(module)
 #
 #  Args:
 #	module -
 #
 #>
 ######################################################################
-p6_cmd_df_module_update() {
+p6df::core::df::module::update() {
   local module="$1"
 
   p6df::core::module::update "$module"
@@ -189,14 +178,14 @@ p6_cmd_df_module_update() {
 ######################################################################
 #<
 #
-# Function: p6_cmd_df_module_vscodes(module)
+# Function: p6df::core::df::module::vscodes(module)
 #
 #  Args:
 #	module -
 #
 #>
 ######################################################################
-p6_cmd_df_module_vscodes() {
+p6df::core::df::module::vscodes() {
   local module="$1"
 
   p6df::core::module::vscodes "$module"
@@ -205,14 +194,14 @@ p6_cmd_df_module_vscodes() {
 ######################################################################
 #<
 #
-# Function: p6_cmd_df_module_langs(module)
+# Function: p6df::core::df::module::langs(module)
 #
 #  Args:
 #	module -
 #
 #>
 ######################################################################
-p6_cmd_df_module_langs() {
+p6df::core::df::module::langs() {
   local module="$1"
 
   p6df::core::module::use "$module"
