@@ -1,8 +1,35 @@
-p6df::core::module::load()     { local module="$1"; p6df::core::module::_recurse "$module" "init" }
+p6df::core::module::init()     { local module="$1"; p6df::core::module::_recurse "$module" "init" }
 p6df::core::module::vscodes()  { local module="$1"; p6df::core::module::_recurse "$module" "vscodes" }
 p6df::core::module::langs()    { local module="$1"; p6df::core::module::_recurse "$module" "langs" }
 p6df::core::module::brews()    { local module="$1"; p6df::core::module::_recurse "$module" "external::brew" }
 p6df::core::module::symlinks() { local module="$1"; p6df::core::module::_recurse "$module" "home::symlinks" }
+
+p6df::core::module::fetch()     { local module="$1"; p6df::core::module::_recurse "$module" "p6df::core::module::_fetch" }
+p6df::core::module::update()    { local module="$1"; p6df::core::module::_recurse "$module" "p6df::core::module::_update" }
+
+p6df::core::module::_fetch() {
+  local dir="$1"
+  local module="$2"
+
+   if ! p6_dir_exists "$dir"; then
+     p6_msg "gh repo clone $module $dir"
+     p6_log "gh repo clone $module $dir"
+
+     gh repo clone $module $dir
+   fi
+}
+
+p6df::core::module::_update() {
+  local dir="$1"
+  local module="$2"
+
+   if ! p6_dir_exists "$dir"; then
+     p6df::core::module::_fetch "$dir" "$module"
+   else
+     p6_msg_no_nl "$dir: "
+     p6_run_dir "$dir" "p6_git_p6_pull"
+   fi
+}
 
 ######################################################################
 #<
@@ -13,14 +40,14 @@ p6df::core::module::symlinks() { local module="$1"; p6df::core::module::_recurse
 #>
 ######################################################################
 p6df::core::module::add() {
-	local short_module="$1"
+  local short_module="$1"
 
-	local module=$(p6df::core::module::expand "$short_module")
-	local things=$(p6_word_unique "$P6_DFZ_MODULES $module" | xargs)
+  local module=$(p6df::core::module::expand "$short_module")
+  local things=$(p6_word_unique "$P6_DFZ_MODULES $module" | xargs)
 
-	p6_env_export P6_DFZ_MODULES "$P6_DFZ_MODULES $module"
+  p6_env_export P6_DFZ_MODULES "$P6_DFZ_MODULES $module"
 
-	p6_return_void
+  p6_return_void
 }
 
 ######################################################################
@@ -34,14 +61,14 @@ p6df::core::module::add() {
 #>
 ######################################################################
 p6df::core::module::use() {
-	local short_module="$1"
+  local short_module="$1"
 
-	local module=$(p6df::core::module::expand "$short_module")
-	p6_log "p6df::core::module::use($short_module) -> $module"
-    p6df::core::module::add "$short_module"
-	p6df::core::module::load "$module"
+  local module=$(p6df::core::module::expand "$short_module")
+  p6_log "p6df::core::module::use($short_module) -> $module"
+  p6df::core::module::add "$short_module"
+  p6df::core::module::init "$module"
 
-	p6_return_void
+  p6_return_void
 }
 
 # ---------------------------------------------------------------------------
@@ -60,17 +87,17 @@ p6df::core::module::use() {
 #>
 ######################################################################
 p6df::core::module::expand() {
-	local short_module="$1"
+  local short_module="$1"
 
-    local module=$short_module
-	case $short_module in
-	p6common) module="p6m7g8-dotfiles/p6common" ;;
-	p6df*) module="p6m7g8-dotfiles/$short_module" ;;
-	esac
+  local module=$short_module
+  case $short_module in
+  p6common) module="p6m7g8-dotfiles/p6common" ;;
+  p6df*) module="p6m7g8-dotfiles/$short_module" ;;
+  esac
 
-	p6_log "p6df::core::module::expand($short_module) -> $module"
+  p6_log "p6df::core::module::expand($short_module) -> $module"
 
-	p6_return_str "$module"
+  p6_return_str "$module"
 }
 
 ######################################################################
@@ -132,7 +159,9 @@ p6df::core::module::parse() {
 	  repo[load_path]=$repo[path]/wakatime.plugin.zsh # grumble
   elif [[ $repo[repo] =~ zsh ]]; then
 	  repo[load_path]=$repo[path]/$repo[plugin].plugin.zsh
-   fi
+  else
+      repo[no_load]=1
+  fi
 }
 
 ######################################################################
@@ -148,11 +177,11 @@ p6df::core::module::parse() {
 #>
 ######################################################################
 p6df::core::module::source() {
-    local relpath="$1"
-    local relaux="$2"
+  local relpath="$1"
+  local relaux="$2"
 
-    [[ -n "$relaux" ]] && p6df::core::file::load "$P6_DFZ_SRC_DIR/$relaux"
-    p6df::core::file::load "$P6_DFZ_SRC_DIR/$relpath"
+  [[ -n "$relaux" ]] && p6df::core::file::load "$P6_DFZ_SRC_DIR/$relaux"
+  p6df::core::file::load "$P6_DFZ_SRC_DIR/$relpath"
 }
 
 ######################################################################
@@ -169,11 +198,11 @@ p6df::core::module::source() {
 #>
 ######################################################################
 p6df::core::module::env::name() {
-	local module="$1"
+  local module="$1"
 
-	local str=$(p6_echo $module | sed -e 's,[^A-Za-z0-9_],_,g')
+  local str=$(p6_echo $module | sed -e 's,[^A-Za-z0-9_],_,g')
 
-	p6_return_str "$str"
+  p6_return_str "$str"
 }
 
 ######################################################################
@@ -189,59 +218,56 @@ p6df::core::module::env::name() {
 #>
 ######################################################################
 p6df::core::module::_recurse() {
-	local module="$1"
-    local callback="$2"
+  local module="$1"
+  local callback="$2"
+  shift 2
 
-    local t0=$EPOCHREALTIME                                                             # Start Timer
-	local breaker_var=$(p6df::core::module::env::name "PL_env_${module}-${callback}")   # Transliterate to a sh variable name
+  p6_log "=> p6df::core::module::_recurse($module, $callback)"
 
-	local breaker_val
-	p6_run_code "breaker_val=\$${breaker_var}"                                                   # val is the vaalue of this module's variable
+  # short circuit
+  local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_${module}-${callback}")
+  local breaker_val
+  p6_run_code "breaker_val=\$${breaker_var}"
 
-	if p6_string_eq "$breaker_val" "1"; then
-	  p6_log "short circuit"
- 	  return
-	else
-	  p6_log "continue"
-	fi
+  if p6_string_eq "$breaker_val" "1"; then
+    p6_log "short circuit"
+ 	return
+  else
+    p6_log "continue"
+  fi
+   p6_run_code "${breaker_var}=1"
 
-	# %repo
-	unset repo
-	p6df::core::module::parse "$module"
-	p6df::core::module::source "$repo[load_path]" "$repo[extra_load_path]"
+  # load
+  # %repo
+  p6df::core::module::parse "$module"
+  p6df::core::module::source "$repo[load_path]" "$repo[extra_load_path]"
+  local main_repo=$repo[repo]
+  local main_org=$repo[org]
+  local main_module="$main_org/$main_repo"
+  local main_prefix=$repo[prefix]
+  unset repo
 
-    p6_run_code "${breaker_var}=1"
+  # deps
+  # @ModuleDeps
+  unset ModuleDeps
+  local func_deps="$main_prefix::deps"
+  p6_run_if "$func_deps"
 
-	# Non p6 modules don't have deps
-	case $module in
-	*/p6*) ;;
-	*) return ;;
-	esac
+  local dep
+  for dep in $ModuleDeps[@]; do
+    p6_log "p6df::core::module::_recurse[dep]($dep, $callback)"
+    p6df::core::module::_recurse "$dep" "$callback" "$@"
+  done
 
-	# @ModuleDeps
-	unset ModuleDeps
-	local orig_prefix=$repo[prefix]
-	local func_deps="$orig_prefix::deps"
-	p6_run_if "$func_deps"
+  # relative to module or fully qualified callback
+  local func_callback
+  case $callback in
+  *p6df::core::*) func_callback="$callback" ;;
+  *) func_callback="$main_prefix::$callback"
+  esac
 
-	local dep
-	for dep in $ModuleDeps[@]; do
-		p6_log "$module -> $dep"
-	    local t2=$EPOCHREALTIME
-		p6df::core::module::load "$dep"
-	    local t3=$EPOCHREALTIME
-    	p6_time "$t2" "$t3" "===> p6df::core::module::load[dep]($dep)"
-	done
-    unset ModuleDeps
+  # tail recursive, do it at last
+  p6_run_if "$func_callback" "$P6_DFZ_SRC_DIR/$main_org/$main_repo" "$main_org/$main_repo"
 
-	local func_callback="$orig_prefix::$callback"
-	__p6_dir=$P6_DFZ_SRC_DIR/$module p6_run_if "$func_callback"
-
-	unset repo
-
-	local t1=$EPOCHREALTIME
-	p6_time "$t0" "$t1" "TOTAL: p6df::core::module::load($module)"
-
-	p6_log ""
-	p6_return_void
+  p6_return_void
 }

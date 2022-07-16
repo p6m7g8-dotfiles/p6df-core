@@ -43,8 +43,11 @@ p6df::core::path::cd::if() {
 #>
 ######################################################################
 p6df::core::path::init() {
+  local dir="$1"
 
   path=()
+  path+=($dir/bin)
+  path+=($dir/../p6common/bin)
   p6df::core::path::if /opt/X11/bin
   p6df::core::path::if /usr/local/bin
   p6df::core::path::if /usr/local/sbin

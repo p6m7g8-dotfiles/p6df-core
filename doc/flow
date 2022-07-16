@@ -8,7 +8,7 @@
 #       	p6df::user::modules::init::pre $P6_AWS_ORG
 #
 #         p6df::core::modules::load
-#         	p6df::core::modules::foreach "p6df::core::module::load" $P6_DFZ_MODULES
+#         	p6df::core::modules::foreach "p6df::core::module::init" $P6_DFZ_MODULES
 #             p6df::core::module::load "$module"<---+
 #               return if loaded                    |
 #             	p6_run_if "$func_deps"              |

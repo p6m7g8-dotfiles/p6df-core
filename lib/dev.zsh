@@ -27,59 +27,13 @@ EOF
 
   local module
   for module in $(p6_vertical "$modules"); do
-    p6df::core::dev::_recurse "$module" "_dot"
+    p6df::core::module::_recurse "$module" "p6df::core::dev::dot"
   done
 
   p6_echo "}"
 }
 
-######################################################################
-#<
-#
-# Function: p6df::core::dev::_recurse(module, callback, module, dep)
-#
-#  Args:
-#	module -
-#	callback -
-#	module -
-#	dep -
-#
-#  Environment:	 XXX
-#>
-######################################################################
-p6df::core::dev::_recurse() {
-  local module="$1"
-  local callback="$2"
-
-  # %repo
-  unset repo
-  p6df::core::module::parse "$module"
-  p6df::core::module::source "$repo[load_path]" "$repo[extra_load_path]"
-
-  # Non p6 modules don't have deps
-  case $module in
-  */p6*) ;;
-  *) return ;;
-  esac
-
-  # @ModuleDeps
-  unset ModuleDeps
-  local orig_prefix=$repo[prefix]
-  local func_deps="$orig_prefix::deps"
-  p6_run_if "$func_deps"
-
-  local dep
-  for dep in $ModuleDeps[@]; do
-    _dot "$module" "$dep" # XXX: callback
-    p6df::core::dev::_recurse "$dep" "$callback"
-  done
-  unset ModuleDeps
-  unset repo
-
-  p6_return_void
-}
-
-_dot() {
+p6df::core::dev::dot() {
   local module="$1"
   local dep="$2"
 

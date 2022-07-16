@@ -6,6 +6,9 @@
 #  Environment:	 EPOCHREALTIME
 #>
 ######################################################################
+p6_core_main_init() {
+	p6df::core::main::init
+}
 p6df::core::main::init() {
 
 	p6df::core::main::self::init
@@ -13,7 +16,7 @@ p6df::core::main::init() {
 
 	p6df::core::user::init
 
-	p6df::core::path::init
+	p6df::core::path::init "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core"
 	p6df::core::path::cd::init
 	p6df::core::aliases::init
 
@@ -24,6 +27,7 @@ p6df::core::main::init() {
 
 	local t100=$EPOCHREALTIME
 	p6_time "$t99" "$t100" "p6df::core::main::init()"
+	p6_time "0" "0" "-----------------------------------"
 }
 
 ######################################################################
