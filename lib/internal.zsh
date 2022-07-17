@@ -153,7 +153,7 @@ p6df::core::internal::doc() {
 #	callback -
 #	... - 
 #
-#  Environment:	 P6_DFZ_ P6_DFZ_SRC_DIR
+#  Environment:	 EPOCHREALTIME P6_DFZ_ P6_DFZ_SRC_DIR
 #>
 ######################################################################
 p6df::core::internal::recurse() {
@@ -162,6 +162,7 @@ p6df::core::internal::recurse() {
     local callback="$3"
     shift 3
 
+    local t4=$EPOCHREALTIME
     p6_log "=> p6df::core::internal::recurse($module, $dir, $callback)"
 
     # short circuit
@@ -208,6 +209,9 @@ p6df::core::internal::recurse() {
 
     # tail recursive, do it at last
     p6_run_if "$func_callback" "$main_org/$main_repo" "$P6_DFZ_SRC_DIR/$main_org/$main_repo" "$callbaack"
+
+    local t5=$EPOCHREALTIME
+    p6_time "$t4" "$t5" "p6df::core::internal::recurse($module, $dir, $callback)"
 
     p6_return_void
 }

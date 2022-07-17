@@ -80,6 +80,9 @@ p6df::core::cli::run() {
   doc) ;;
   diff) ;;
   status) ;;
+  push) ;;
+  pull) ;;
+  p6df::*) ;;
   *) p6df::core::cli::usage 1 "invalid cmd" ;;
   esac
 
@@ -106,7 +109,10 @@ p6df::core::cli::run() {
   if p6_string_eq "$flag_all" "1"; then
     p6df::core::cli::all "$cmd" "$@"
   else
-    p6df::core::module::${cmd} $module "$dir" "$@"
+    case $cmd in
+    p6df::*) p6_run_yield "$cmd" ;;
+    *) p6df::core::module::${cmd} $module "$dir" "$@" ;;
+    esac
   fi
 
   p6_msg_success "$cmd"
@@ -139,6 +145,7 @@ p6df::core::cli::all() {
     local dir
     for dir in p6*; do
       (
+        p6_h3 "$dir"
         cd $dir
         module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
         p6df::core::internal::${cmd} $module "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/$dir" "$@"

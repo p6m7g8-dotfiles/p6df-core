@@ -77,6 +77,7 @@
 
 - p6df::core::main::init()
 - p6df::core::main::self::init()
+- p6df::core::timing::init()
 
 #### p6df-core/lib/module.zsh:
 
@@ -134,10 +135,6 @@
 
 - p6df::core::theme::init()
 
-#### p6df-core/lib/timing.zsh:
-
-- p6df::core::timing::init()
-
 #### p6df-core/lib/user.zsh:
 
 - p6df::core::user::init()
@@ -158,10 +155,9 @@
 ├── path.zsh
 ├── prompt.zsh
 ├── theme.zsh
-├── timing.zsh
 └── user.zsh
 
-0 directories, 13 files
+0 directories, 12 files
 ```
 ## Author
 
