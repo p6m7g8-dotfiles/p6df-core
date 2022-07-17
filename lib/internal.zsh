@@ -8,8 +8,8 @@
 #>
 ######################################################################
 p6df::core::module::_fetch() {
-    local dir="$1"
-    local module="$2"
+    local module="$1"
+    local dir="$2"
 
     if ! p6_dir_exists "$dir"; then
         p6_msg "gh repo clone $module $dir"
@@ -22,17 +22,17 @@ p6df::core::module::_fetch() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_update(dir, module)
+# Function: p6df::core::module::_update(module, dir)
 #
 #  Args:
-#	dir -
 #	module -
+#	dir -
 #
 #>
 ######################################################################
 p6df::core::module::_update() {
-    local dir="$1"
-    local module="$2"
+    local module="$1"
+    local dir="$2"
 
     if ! p6_dir_exists "$dir"; then
         p6df::core::module::_fetch "$dir" "$module"
@@ -45,10 +45,91 @@ p6df::core::module::_update() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_recurse(module, callback, ...)
+# Function: p6df::core::module::_status(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::module::_status() {
+    local _module="$1"
+    local dir="$2"
+
+    p6_run_dir "$dir" "p6_git_p6_status"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::_diff(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::module::_diff() {
+    local _module="$1"
+    local dir="$2"
+
+    p6_run_dir "$dir" "p6_git_p6_diff"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::_pull(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::module::_pull() {
+    local _module="$1"
+    local dir="$2"
+
+    p6_run_dir "$dir" "p6_git_p6_pull"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::_push(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::module::_push() {
+    local _module="$1"
+    local dir="$2"
+
+    p6_run_dir "$dir" "p6_git_p6_push"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::_recurse(module, dir, callback, ...)
 #
 #  Args:
 #	module -
+#	dir -
 #	callback -
 #	... - 
 #
@@ -57,10 +138,11 @@ p6df::core::module::_update() {
 ######################################################################
 p6df::core::module::_recurse() {
     local module="$1"
-    local callback="$2"
-    shift 2
+    local dir="$2"
+    local callback="$3"
+    shift 3
 
-    p6_log "=> p6df::core::module::_recurse($module, $callback)"
+    p6_log "=> p6df::core::module::_recurse($module, $dir, $callback)"
 
     # short circuit
     local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_${module}-${callback}")
@@ -77,7 +159,7 @@ p6df::core::module::_recurse() {
 
     # load
     # %repo
-    p6df::core::module::parse "$module"
+    p6df::core::module::parse "$module" "$dir"
     p6df::core::module::source "$repo[load_path]" "$repo[extra_load_path]"
     local main_repo=$repo[repo]
     local main_org=$repo[org]
@@ -93,19 +175,39 @@ p6df::core::module::_recurse() {
 
     local dep
     for dep in $ModuleDeps[@]; do
-        p6_log "p6df::core::module::_recurse[dep]($dep, $callback)"
-        p6df::core::module::_recurse "$dep" "$callback" "$@"
+        p6_log "p6df::core::module::_recurse[dep]($dep, $dir, $callback)"
+        p6df::core::module::_recurse "$dep" "$dir" "$callback" "$@"
     done
 
     # relative to module or fully qualified callback
     local func_callback
     case $callback in
-    *p6df::core::*) func_callback="$callback" ;;
+    *p6df::core::* | *p6_*) func_callback="$callback" ;;
     *) func_callback="$main_prefix::$callback" ;;
     esac
 
     # tail recursive, do it at last
-    p6_run_if "$func_callback" "$P6_DFZ_SRC_DIR/$main_org/$main_repo" "$main_org/$main_repo"
+    p6_run_if "$func_callback" "$main_org/$main_repo" "$P6_DFZ_SRC_DIR/$main_org/$main_repo" "$callbaack"
 
     p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::source(relpath, relaux)
+#
+#  Args:
+#	relpath -
+#	relaux -
+#
+#  Environment:	 P6_DFZ_SRC_DIR
+#>
+######################################################################
+p6df::core::module::source() {
+    local relpath="$1"
+    local relaux="$2"
+
+    [[ -n "$relaux" ]] && p6df::core::file::load "$P6_DFZ_SRC_DIR/$relaux"
+    p6df::core::file::load "$P6_DFZ_SRC_DIR/$relpath"
 }

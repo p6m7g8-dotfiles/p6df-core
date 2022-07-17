@@ -46,21 +46,16 @@
 
 - p6df::core::aliases::init()
 
+#### p6df-core/lib/cli.zsh:
+
+- p6df::core::cli::all(cmd, ...)
+- p6df::core::cli::run(...)
+- p6df::core::cli::usage([rc=0], [msg=])
+
 #### p6df-core/lib/dev.zsh:
 
 - p6df::core::dev::dot(module, dep)
 - p6df::core::dev::graph()
-
-#### p6df-core/lib/df.zsh:
-
-- p6df::core::df::doc()
-- p6df::core::df::module(sub_cmd, module)
-- p6df::core::df::module::fetch(module)
-- p6df::core::df::module::langs(module)
-- p6df::core::df::module::update(module)
-- p6df::core::df::module::use(module)
-- p6df::core::df::module::vscodes(module)
-- p6df::usage([rc=0], [msg=], ..., flag_debug, cmd, ...)
 
 #### p6df-core/lib/file.zsh:
 
@@ -68,44 +63,44 @@
 
 #### p6df-core/lib/internal.zsh:
 
+- p6df::core::module::_diff(_module, dir)
 - p6df::core::module::_fetch()
-- p6df::core::module::_recurse(module, callback, ...)
-- p6df::core::module::_update(dir, module)
+- p6df::core::module::_pull(_module, dir)
+- p6df::core::module::_push(_module, dir)
+- p6df::core::module::_recurse(module, dir, callback, ...)
+- p6df::core::module::_status(_module, dir)
+- p6df::core::module::_update(module, dir)
+- p6df::core::module::source(relpath, relaux)
 
 #### p6df-core/lib/main.zsh:
 
 - p6df::core::main::init()
 - p6df::core::main::self::init()
 
-#### p6df-core/lib/mgmt.zsh:
-
-- p6df::core::mgmt::module::do(dir, callback)
-- p6df::core::mgmt::modules::foreach(callback)
-- p6df::core::mgmt::modules::git::diff()
-- p6df::core::mgmt::modules::git::pull()
-- p6df::core::mgmt::modules::git::push()
-- p6df::core::mgmt::modules::git::status()
-- p6df::core::mgmt::modules::git::sync()
-
 #### p6df-core/lib/module.zsh:
 
-- p6df::core::module::add(short_module)
-- p6df::core::module::brews(module)
-- p6df::core::module::fetch(module)
+- p6df::core::module::add(short_module, _dir)
+- p6df::core::module::brews(module, dir)
+- p6df::core::module::diff(module, dir)
+- p6df::core::module::doc(module, dir)
+- p6df::core::module::fetch(module, dir)
 - p6df::core::module::init()
-- p6df::core::module::langs(module)
-- p6df::core::module::parse(module)
-- p6df::core::module::source(relpath, relaux)
-- p6df::core::module::symlinks(module)
-- p6df::core::module::update(module)
-- p6df::core::module::use(short_module)
-- p6df::core::module::vscodes(module)
-- str module = p6df::core::module::expand(short_module)
-- str str = p6df::core::module::env::name(module)
+- p6df::core::module::langs(module, dir)
+- p6df::core::module::parse(module, _dir)
+- p6df::core::module::pull(module, dir)
+- p6df::core::module::push(module, dir)
+- p6df::core::module::status(module, dir)
+- p6df::core::module::symlinks(module, dir)
+- p6df::core::module::sync(module, dir)
+- p6df::core::module::update(module, dir)
+- p6df::core::module::use(short_module, _dir)
+- p6df::core::module::vscodes(module, dir)
+- str module = p6df::core::module::expand(short_module, _dir)
+- str str = p6df::core::module::env::name(module, _dir)
 
 #### p6df-core/lib/modules.zsh:
 
-- p6df::core::modules::bootstrap::p6common()
+- p6df::core::modules::bootstrap::p6common([dir=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6common])
 - p6df::core::modules::brews()
 - p6df::core::modules::foreach(callback)
 - p6df::core::modules::init()
@@ -152,12 +147,11 @@
 ```text
 .
 ├── aliases.zsh
+├── cli.zsh
 ├── dev.zsh
-├── df.zsh
 ├── file.zsh
 ├── internal.zsh
 ├── main.zsh
-├── mgmt.zsh
 ├── module.zsh
 ├── modules.zsh
 ├── path.zsh
@@ -166,7 +160,7 @@
 ├── timing.zsh
 └── user.zsh
 
-0 directories, 14 files
+0 directories, 13 files
 ```
 ## Author
 

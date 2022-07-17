@@ -5,7 +5,7 @@
 p6df::main() {
 
   # XXX: hack
-  . $P6_DFZ_LIB_DIR/df.zsh
+  . $P6_DFZ_LIB_DIR/cli.zsh
   . $P6_DFZ_LIB_DIR/file.zsh
   . $P6_DFZ_LIB_DIR/internal.zsh
   . $P6_DFZ_LIB_DIR/module.zsh
@@ -15,7 +15,7 @@ p6df::main() {
   # XXX: hack
   p6df::core::modules::bootstrap::p6common
 
-  p6::p6df "$@"
+  p6df::core::cli::run "$@"
 }
 
 p6df::main "$@"
