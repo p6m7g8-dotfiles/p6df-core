@@ -77,6 +77,7 @@ p6df::core::cli::run() {
   # security 101: only allow valid comamnds
   case $cmd in
   help) p6df::core::cli::usage ;;
+  branch) ;;
   doc) ;;
   diff) ;;
   status) ;;

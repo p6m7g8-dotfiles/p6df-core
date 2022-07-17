@@ -65,6 +65,26 @@ p6df::core::internal::status() {
 ######################################################################
 #<
 #
+# Function: p6df::core::internal::branch(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::internal::branch() {
+    local _module="$1"
+    local dir="$2"
+
+    p6_run_dir "$dir" "p6_git_p6_branch"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::internal::diff(_module, dir)
 #
 #  Args:

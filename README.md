@@ -63,6 +63,7 @@
 
 #### p6df-core/lib/internal.zsh:
 
+- p6df::core::internal::branch(_module, dir)
 - p6df::core::internal::diff(_module, dir)
 - p6df::core::internal::doc(_module, dir)
 - p6df::core::internal::fetch()
