@@ -3,11 +3,11 @@
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_fetch()
+# Function: p6df::core::internal::fetch()
 #
 #>
 ######################################################################
-p6df::core::module::_fetch() {
+p6df::core::internal::fetch() {
     local module="$1"
     local dir="$2"
 
@@ -22,7 +22,7 @@ p6df::core::module::_fetch() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_update(module, dir)
+# Function: p6df::core::internal::update(module, dir)
 #
 #  Args:
 #	module -
@@ -30,12 +30,12 @@ p6df::core::module::_fetch() {
 #
 #>
 ######################################################################
-p6df::core::module::_update() {
+p6df::core::internal::update() {
     local module="$1"
     local dir="$2"
 
     if ! p6_dir_exists "$dir"; then
-        p6df::core::module::_fetch "$dir" "$module"
+        p6df::core::internal::fetch "$dir" "$module"
     else
         p6_msg_no_nl "$dir: "
         p6_run_dir "$dir" "p6_git_p6_pull"
@@ -45,7 +45,7 @@ p6df::core::module::_update() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_status(_module, dir)
+# Function: p6df::core::internal::status(_module, dir)
 #
 #  Args:
 #	_module -
@@ -53,7 +53,7 @@ p6df::core::module::_update() {
 #
 #>
 ######################################################################
-p6df::core::module::_status() {
+p6df::core::internal::status() {
     local _module="$1"
     local dir="$2"
 
@@ -65,7 +65,7 @@ p6df::core::module::_status() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_diff(_module, dir)
+# Function: p6df::core::internal::diff(_module, dir)
 #
 #  Args:
 #	_module -
@@ -73,7 +73,7 @@ p6df::core::module::_status() {
 #
 #>
 ######################################################################
-p6df::core::module::_diff() {
+p6df::core::internal::diff() {
     local _module="$1"
     local dir="$2"
 
@@ -85,7 +85,7 @@ p6df::core::module::_diff() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_pull(_module, dir)
+# Function: p6df::core::internal::pull(_module, dir)
 #
 #  Args:
 #	_module -
@@ -93,7 +93,7 @@ p6df::core::module::_diff() {
 #
 #>
 ######################################################################
-p6df::core::module::_pull() {
+p6df::core::internal::pull() {
     local _module="$1"
     local dir="$2"
 
@@ -105,7 +105,7 @@ p6df::core::module::_pull() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_push(_module, dir)
+# Function: p6df::core::internal::push(_module, dir)
 #
 #  Args:
 #	_module -
@@ -113,7 +113,7 @@ p6df::core::module::_pull() {
 #
 #>
 ######################################################################
-p6df::core::module::_push() {
+p6df::core::internal::push() {
     local _module="$1"
     local dir="$2"
 
@@ -125,7 +125,27 @@ p6df::core::module::_push() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::_recurse(module, dir, callback, ...)
+# Function: p6df::core::internal::doc(_module, dir)
+#
+#  Args:
+#	_module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::internal::doc() {
+    local _module="$1"
+    local dir="$2"
+
+    p6_run_dir "$dir" "p6_cicd_doc_gen"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::internal::recurse(module, dir, callback, ...)
 #
 #  Args:
 #	module -
@@ -136,13 +156,13 @@ p6df::core::module::_push() {
 #  Environment:	 P6_DFZ_ P6_DFZ_SRC_DIR
 #>
 ######################################################################
-p6df::core::module::_recurse() {
+p6df::core::internal::recurse() {
     local module="$1"
     local dir="$2"
     local callback="$3"
     shift 3
 
-    p6_log "=> p6df::core::module::_recurse($module, $dir, $callback)"
+    p6_log "=> p6df::core::internal::recurse($module, $dir, $callback)"
 
     # short circuit
     local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_${module}-${callback}")
@@ -175,8 +195,8 @@ p6df::core::module::_recurse() {
 
     local dep
     for dep in $ModuleDeps[@]; do
-        p6_log "p6df::core::module::_recurse[dep]($dep, $dir, $callback)"
-        p6df::core::module::_recurse "$dep" "$dir" "$callback" "$@"
+        p6_log "p6df::core::internal::recurse[dep]($dep, $dir, $callback)"
+        p6df::core::internal::recurse "$dep" "$dir" "$callback" "$@"
     done
 
     # relative to module or fully qualified callback

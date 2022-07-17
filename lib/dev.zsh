@@ -27,7 +27,7 @@ EOF
 
   local module
   for module in $(p6_vertical "$modules"); do
-    p6df::core::module::_recurse "$module" "p6df::core::dev::dot"
+    p6df::core::internal::recurse "$module" "p6df::core::dev::dot"
   done
 
   p6_echo "}"

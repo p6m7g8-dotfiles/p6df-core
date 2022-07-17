@@ -22,7 +22,7 @@ p6df::core::module::init() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "init"
+  p6df::core::internal::recurse "$module" "$dir" "init"
 
   p6_return_void
 }
@@ -42,7 +42,7 @@ p6df::core::module::vscodes() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "vscodes"
+  p6df::core::internal::recurse "$module" "$dir" "vscodes"
 
   p6_return_void
 }
@@ -62,7 +62,7 @@ p6df::core::module::langs() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "langs"
+  p6df::core::internal::recurse "$module" "$dir" "langs"
 
   p6_return_void
 }
@@ -82,7 +82,7 @@ p6df::core::module::brews() {
    local module="$1"
    local dir="$2"
 
-   p6df::core::module::_recurse "$module" "$dir" "external::brew"
+   p6df::core::internal::recurse "$module" "$dir" "external::brew"
 
    p6_return_void
 }
@@ -102,7 +102,7 @@ p6df::core::module::symlinks() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "home::symlinks"
+  p6df::core::internal::recurse "$module" "$dir" "home::symlinks"
 
   p6_return_void
 }
@@ -122,7 +122,7 @@ p6df::core::module::fetch() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "p6df::core::module::_fetch"
+  p6df::core::module::recurse "$module" "$dir" "p6df::core::internal::fetch"
 
   p6_return_void
 }
@@ -142,7 +142,7 @@ p6df::core::module::update() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "p6df::core::module::_update"
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::update"
 
   p6_return_void
 }
@@ -162,7 +162,7 @@ p6df::core::module::status() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "p6df::core::module::_status"
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::status"
 
   p6_return_void
 }
@@ -182,7 +182,7 @@ p6df::core::module::diff() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "p6df::core::module::_diff"
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::diff"
 
   p6_return_void
 }
@@ -202,7 +202,7 @@ p6df::core::module::pull() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "p6df::core::module::_pull"
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::pull"
 
   p6_return_void
 }
@@ -222,7 +222,7 @@ p6df::core::module::push() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::_recurse "$module" "$dir" "p6df::core::module::_push"
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::push"
 
   p6_return_void
 }
@@ -270,7 +270,7 @@ p6df::core::module::doc() {
   local dir="$2"
 
   p6df::core::module::use "p6m7g8-dotfiles/p6df-perl"
-  p6df::core::module::_recurse "$module" "$dir" "p6_cicd_doc_gen"
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::doc"
 
   p6_return_void
 }

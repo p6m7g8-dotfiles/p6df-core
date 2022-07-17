@@ -63,13 +63,14 @@
 
 #### p6df-core/lib/internal.zsh:
 
-- p6df::core::module::_diff(_module, dir)
-- p6df::core::module::_fetch()
-- p6df::core::module::_pull(_module, dir)
-- p6df::core::module::_push(_module, dir)
-- p6df::core::module::_recurse(module, dir, callback, ...)
-- p6df::core::module::_status(_module, dir)
-- p6df::core::module::_update(module, dir)
+- p6df::core::internal::diff(_module, dir)
+- p6df::core::internal::doc(_module, dir)
+- p6df::core::internal::fetch()
+- p6df::core::internal::pull(_module, dir)
+- p6df::core::internal::push(_module, dir)
+- p6df::core::internal::recurse(module, dir, callback, ...)
+- p6df::core::internal::status(_module, dir)
+- p6df::core::internal::update(module, dir)
 - p6df::core::module::source(relpath, relaux)
 
 #### p6df-core/lib/main.zsh:

@@ -7,13 +7,17 @@
 #         p6df::user::modules
 #       	p6df::user::modules::init::pre $P6_AWS_ORG
 #
-#         p6df::core::modules::load
+#         p6df::core::modules::init
 #         	p6df::core::modules::foreach "p6df::core::module::init" $P6_DFZ_MODULES
-#             p6df::core::module::load "$module"<---+
+#             p6df::core::module::init "$module"<---+
 #               return if loaded                    |
 #             	p6_run_if "$func_deps"              |
-#                 foreach dep                       |
-#                   >-------------------------------+
-#   	          p6_run_if "$func_init" (tail recursive)
+#                 foreach dep >---------------------+
+#
+#   	        p6_run_if "$func_callback" #init (tail recursive)
 #
 #         p6df::user::modules::init::post
+#
+# bin/p6df
+#   p6df::core::cli::run
+#     p6df::core::module::$cmd

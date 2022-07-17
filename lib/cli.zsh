@@ -101,6 +101,7 @@ p6df::core::cli::run() {
   p6_msg "$cmd"
 
   p6df::core::module::use "p6m7g8-dotfiles/p6git"
+  p6df::core::module::use "p6m7g8-dotfiles/p6df-perl"
 
   if p6_string_eq "$flag_all" "1"; then
     p6df::core::cli::all "$cmd" "$@"
@@ -140,7 +141,7 @@ p6df::core::cli::all() {
       (
         cd $dir
         module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
-        p6df::core::module::_${cmd} $module "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/$dir" "$@"
+        p6df::core::internal::${cmd} $module "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/$dir" "$@"
       )
     done
   )
