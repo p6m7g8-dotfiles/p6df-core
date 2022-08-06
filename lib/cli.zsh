@@ -74,19 +74,6 @@ p6df::core::cli::run() {
   local cmd="$1"
   shift 1
 
-  # security 101: only allow valid comamnds
-  case $cmd in
-  help) p6df::core::cli::usage ;;
-  branch) ;;
-  doc) ;;
-  diff) ;;
-  status) ;;
-  push) ;;
-  pull) ;;
-  p6df::*) ;;
-  *) p6df::core::cli::usage 1 "invalid cmd" ;;
-  esac
-
   local dir=$(pwd)
 
   local module="$1"
@@ -106,13 +93,14 @@ p6df::core::cli::run() {
 
   p6df::core::module::use "p6m7g8-dotfiles/p6git"
   p6df::core::module::use "p6m7g8-dotfiles/p6df-perl"
+  p6df::core::module::use "p6m7g8-dotfiles/p6df-zsh"
 
   if p6_string_eq "$flag_all" "1"; then
     p6df::core::cli::all "$cmd" "$@"
   else
     case $cmd in
     p6df::*) p6_run_yield "$cmd" ;;
-    *) p6df::core::module::${cmd} $module "$dir" "$@" ;;
+    *) p6df::core::module::${cmd} "$module" "$dir" "$@" ;;
     esac
   fi
 
@@ -141,16 +129,33 @@ p6df::core::cli::all() {
   local cmd="$1"
   shift 1
 
-  (
-    cd $P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
-    local dir
-    for dir in p6*; do
-      (
-        p6_h3 "$dir"
-        cd $dir
-        module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
-        p6df::core::internal::${cmd} $module "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/$dir" "$@"
-      )
-    done
-  )
+  local dir
+  # for dir in /tmp/p6/test/p6m7g8-dotfiles/p6*; do
+  for dir in $P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6*; do
+    p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir"
+  done
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::cli::all::run(dir)
+#
+#  Args:
+#	dir -
+#
+#>
+######################################################################
+p6df::core::cli::all::run() {
+  local dir="$1"
+
+  module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
+
+  # %repo
+  p6df::core::module::parse "$module"
+  local prefix=$repo[prefix]
+  unset repo
+
+  p6_h1 "$module"
+  __p6_prefix=$prefix p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::${cmd}" "$@"
 }

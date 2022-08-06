@@ -181,7 +181,7 @@ p6_lang_prompt_info() {
     local cnt=$(p6_lang_version "$lang")
     if ! p6_string_blank "$cnt"; then
       if p6_string_eq "$f" "0"; then
-        str="langs:\t  $lang:$cnt"
+        str="langs:\t\t  $lang:$cnt"
         f=1
       else
         str=$(p6_string_append "$str" " $lang:$cnt")
@@ -201,6 +201,7 @@ p6_lang_prompt_info() {
 #>
 ######################################################################
 p6_lang_envs_prompt_info() {
+  return
 
   local lang
   local str

@@ -122,7 +122,7 @@ p6df::core::module::fetch() {
   local module="$1"
   local dir="$2"
 
-  p6df::core::module::recurse "$module" "$dir" "p6df::core::internal::fetch"
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::fetch"
 
   p6_return_void
 }
@@ -223,6 +223,26 @@ p6df::core::module::push() {
   local dir="$2"
 
   p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::push"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::diag(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::module::diag() {
+  local module="$1"
+  local dir="$2"
+
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::diag"
 
   p6_return_void
 }
@@ -342,11 +362,12 @@ p6df::core::module::expand() {
 
   local module=$short_module
   case $short_module in
-  p6common) module="p6m7g8-dotfiles/p6common" ;;
+  *p6m7g8-dotfiles*) module=$short_module ;;
   p6df*) module="p6m7g8-dotfiles/$short_module" ;;
+  p6*) module="p6m7g8-dotfiles/$short_module" ;;
   esac
 
-  p6_log "p6df::core::module::expand($short_module) -> $module"
+  p6df::core::internal::debug  "p6df::core::module::expand($short_module) -> $module"
 
   p6_return_str "$module"
 }
@@ -392,6 +413,7 @@ p6df::core::module::parse() {
   repo[version]=master
 
   repo[module]=${repo[repo]##p6df-}          # p6df-(repo)
+#  repo[module]=${repo[module]##p6}           # p6(repo)
   repo[prefix]=p6df::modules::$repo[module]  # p6df::modules::(repo) without p6df-
 
   repo[sub]=${module##*:}                    # subdir file path : sep

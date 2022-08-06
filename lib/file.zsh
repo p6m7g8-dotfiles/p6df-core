@@ -12,9 +12,10 @@ p6df::core::file::load() {
   local file="$1"
 
   if [[ -r "$file" ]]; then
-    echo ". $file" >>/tmp/p6/log.log
+    #    echo ". $file" >>/tmp/p6/log.log
     . "$file"
   else
-    echo "p6df::core::file::load($file): does not exist" >>/tmp/p6/log.log
+    true
+    #    echo "p6df::core::file::load($file): does not exist" >>/tmp/p6/log.log
   fi
 }

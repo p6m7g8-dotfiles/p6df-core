@@ -52,6 +52,8 @@ p6df::core::path::init() {
   path+=($dir/bin)
   path+=($dir/../p6common/bin)
   p6df::core::path::if /opt/X11/bin
+  p6df::core::path::if /opt/homebrew/bin # m1
+  p6df::core::path::if /opt/homebrew/sbin # m1
   p6df::core::path::if /usr/local/bin
   p6df::core::path::if /usr/local/sbin
   p6df::core::path::if /usr/bin

@@ -12,10 +12,7 @@ p6df::core::internal::fetch() {
     local dir="$2"
 
     if ! p6_dir_exists "$dir"; then
-        p6_msg "gh repo clone $module $dir"
-        p6_log "gh repo clone $module $dir"
-
-        gh repo clone $module $dir
+        p6_run_write_cmd "gh repo clone $module $dir"
     fi
 }
 
@@ -145,6 +142,45 @@ p6df::core::internal::push() {
 ######################################################################
 #<
 #
+# Function: p6df::core::internal::diag(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::internal::diag() {
+    local module="$1"
+    local dir="$2"
+
+    p6_h5 "m=[$module], d=[$dir]"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::internal::langs(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::internal::langs() {
+    local module="$1"
+    local dir="$2"
+
+    local function="${__p6_prefix}::langs"
+    p6_run_if "$function"
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::internal::doc(_module, dir)
 #
 #  Args:
@@ -183,7 +219,7 @@ p6df::core::internal::recurse() {
     shift 3
 
     local t4=$EPOCHREALTIME
-    p6_log "=> p6df::core::internal::recurse($module, $dir, $callback)"
+    p6df::core::internal::debug "=> p6df::core::internal::recurse($module, $dir, $callback)"
 
     # short circuit
     local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_${module}-${callback}")
@@ -191,10 +227,10 @@ p6df::core::internal::recurse() {
     p6_run_code "breaker_val=\$${breaker_var}"
 
     if p6_string_eq "$breaker_val" "1"; then
-        p6_log "short circuit"
+        p6df::core::internal::debug "short circuit"
         return
     else
-        p6_log "continue"
+        p6df::core::internal::debug "continue"
     fi
     p6_run_code "${breaker_var}=1"
 
@@ -212,23 +248,40 @@ p6df::core::internal::recurse() {
     # @ModuleDeps
     unset ModuleDeps
     local func_deps="$main_prefix::deps"
-    p6_run_if "$func_deps"
+
+    case $module in
+    *p6*)
+        p6_run_if "$func_deps"
+        ;;
+    *)
+        case $callback in
+        *fetch* | *update*)
+            p6_run_if "$func_deps"
+            ;;
+        *)
+            p6df::core::internal::debug "Not processing m=[$module]"
+            return
+            ;;
+        esac
+        ;;
+    esac
 
     local dep
     for dep in $ModuleDeps[@]; do
-        p6_log "p6df::core::internal::recurse[dep]($dep, $dir, $callback)"
+        p6df::core::internal::debug "p6df::core::internal::recurse[dep]($dep, $dir, $callback)"
         p6df::core::internal::recurse "$dep" "$dir" "$callback" "$@"
     done
 
     # relative to module or fully qualified callback
     local func_callback
     case $callback in
-    *p6df::core::* | *p6_*) func_callback="$callback" ;;
+    *p6df::core::internal* | *p6_*) func_callback="$callback" ;;
     *) func_callback="$main_prefix::$callback" ;;
     esac
 
     # tail recursive, do it at last
-    p6_run_if "$func_callback" "$main_org/$main_repo" "$P6_DFZ_SRC_DIR/$main_org/$main_repo" "$callbaack"
+    p6df::core::internal::debug "run_if fc=[$func_callback] m=[$main_org/$main_repo] dir=[$P6_DFZ_SRC_DIR/$main_org/$main_repo] c=[$callback]"
+    p6_run_if "$func_callback" "$main_org/$main_repo" "$P6_DFZ_SRC_DIR/$main_org/$main_repo" "$callback"
 
     local t5=$EPOCHREALTIME
     p6_time "$t4" "$t5" "p6df::core::internal::recurse($module, $dir, $callback)"
@@ -254,4 +307,20 @@ p6df::core::module::source() {
 
     [[ -n "$relaux" ]] && p6df::core::file::load "$P6_DFZ_SRC_DIR/$relaux"
     p6df::core::file::load "$P6_DFZ_SRC_DIR/$relpath"
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::internal::debug(msg)
+#
+#  Args:
+#	msg -
+#
+#>
+######################################################################
+p6df::core::internal::debug() {
+    local msg="$1"
+
+    p6_debug__core "$msg"
 }

@@ -109,6 +109,6 @@ p6df::core::modules::bootstrap::p6common() {
 	p6df::core::file::load "$dir/init.zsh"
 	p6df::modules::p6common::init "p6m7g8-dotfiles/p6common" "$dir"
 
-	p6_log "loading p6common"
+	p6df::core::internal::debug "loading p6common"
 	p6_env_export "P6_DFZ_env_p6m7g8_dotfiles_p6common_init" "1"
 }

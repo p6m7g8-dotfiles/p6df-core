@@ -4,16 +4,8 @@
 
 p6df::main() {
 
-  # XXX: hack
-  . $P6_DFZ_LIB_DIR/cli.zsh
-  . $P6_DFZ_LIB_DIR/file.zsh
-  . $P6_DFZ_LIB_DIR/internal.zsh
-  . $P6_DFZ_LIB_DIR/module.zsh
-  . $P6_DFZ_LIB_DIR/modules.zsh
-  . $P6_DFZ_LIB_DIR/prompt.zsh
-
-  # XXX: hack
-  p6df::core::modules::bootstrap::p6common
+  . $P6_DFZ_LIB_DIR/_bootstrap.zsh
+  p6df::core::_bootstrap
 
   p6df::core::cli::run "$@"
 }

@@ -49,6 +49,7 @@
 #### p6df-core/lib/cli.zsh:
 
 - p6df::core::cli::all(cmd, ...)
+- p6df::core::cli::all::run(dir)
 - p6df::core::cli::run(...)
 - p6df::core::cli::usage([rc=0], [msg=])
 
@@ -64,9 +65,12 @@
 #### p6df-core/lib/internal.zsh:
 
 - p6df::core::internal::branch(_module, dir)
+- p6df::core::internal::debug(msg)
+- p6df::core::internal::diag(module, dir)
 - p6df::core::internal::diff(_module, dir)
 - p6df::core::internal::doc(_module, dir)
 - p6df::core::internal::fetch()
+- p6df::core::internal::langs(module, dir)
 - p6df::core::internal::pull(_module, dir)
 - p6df::core::internal::push(_module, dir)
 - p6df::core::internal::recurse(module, dir, callback, ...)
@@ -84,6 +88,7 @@
 
 - p6df::core::module::add(short_module, _dir)
 - p6df::core::module::brews(module, dir)
+- p6df::core::module::diag(module, dir)
 - p6df::core::module::diff(module, dir)
 - p6df::core::module::doc(module, dir)
 - p6df::core::module::fetch(module, dir)
@@ -145,6 +150,7 @@
 ## Hier
 ```text
 .
+├── _bootstrap.zsh
 ├── aliases.zsh
 ├── cli.zsh
 ├── dev.zsh
@@ -158,7 +164,7 @@
 ├── theme.zsh
 └── user.zsh
 
-0 directories, 12 files
+0 directories, 13 files
 ```
 ## Author
 
