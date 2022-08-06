@@ -322,22 +322,22 @@ p6df::core::module::add() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::use(short_module, _dir)
+# Function: p6df::core::module::use(short_module, dir)
 #
 #  Args:
 #	short_module -
-#	_dir -
+#	dir -
 #
 #>
 ######################################################################
 p6df::core::module::use() {
   local short_module="$1"
-  local _dir="$2"
+  local dir="$2"
 
   local module=$(p6df::core::module::expand "$short_module")
   p6_log "p6df::core::module::use($short_module) -> $module"
   p6df::core::module::add "$short_module"
-  p6df::core::module::init "$module"
+  p6df::core::module::init "$module" "$dir"
 
   p6_return_void
 }
@@ -444,11 +444,12 @@ p6df::core::module::parse() {
 ######################################################################
 #<
 #
-# Function: str str = p6df::core::module::env::name(module, _dir)
+# Function: str str = p6df::core::module::env::name(module, _dir, callback)
 #
 #  Args:
 #	module -
 #	_dir -
+#	callback -
 #
 #  Returns:
 #	str - str
@@ -458,8 +459,9 @@ p6df::core::module::parse() {
 p6df::core::module::env::name() {
   local module="$1"
   local _dir="$2"
+  local callback="$3"
 
-  local str=$(p6_echo $module | sed -e 's,[^A-Za-z0-9_],_,g')
+  local str=$(p6_echo "${module}-${callback}" | sed -e 's,[^A-Za-z0-9_],_,g')
 
   p6_return_str "$str"
 }

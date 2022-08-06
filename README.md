@@ -101,10 +101,10 @@
 - p6df::core::module::symlinks(module, dir)
 - p6df::core::module::sync(module, dir)
 - p6df::core::module::update(module, dir)
-- p6df::core::module::use(short_module, _dir)
+- p6df::core::module::use(short_module, dir)
 - p6df::core::module::vscodes(module, dir)
 - str module = p6df::core::module::expand(short_module, _dir)
-- str str = p6df::core::module::env::name(module, _dir)
+- str str = p6df::core::module::env::name(module, _dir, callback)
 
 #### p6df-core/lib/modules.zsh:
 

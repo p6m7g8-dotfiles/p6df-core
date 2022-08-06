@@ -222,15 +222,15 @@ p6df::core::internal::recurse() {
     p6df::core::internal::debug "=> p6df::core::internal::recurse($module, $dir, $callback)"
 
     # short circuit
-    local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_${module}-${callback}")
+    local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_${module}" "$dir" "${callback}")
     local breaker_val
     p6_run_code "breaker_val=\$${breaker_var}"
 
     if p6_string_eq "$breaker_val" "1"; then
-        p6df::core::internal::debug "short circuit"
+        p6df::core::internal::debug "short circuit: <- $module, $dir, $callback"
         return
     else
-        p6df::core::internal::debug "continue"
+        p6df::core::internal::debug "continue -> $module, $dir, $callback"
     fi
     p6_run_code "${breaker_var}=1"
 
@@ -322,5 +322,5 @@ p6df::core::module::source() {
 p6df::core::internal::debug() {
     local msg="$1"
 
-    p6_debug__core "$msg"
+    p6_debug "p6df::core:: $msg"
 }

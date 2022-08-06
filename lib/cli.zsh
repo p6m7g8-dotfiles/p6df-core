@@ -130,8 +130,8 @@ p6df::core::cli::all() {
   shift 1
 
   local dir
-  # for dir in /tmp/p6/test/p6m7g8-dotfiles/p6*; do
   for dir in $P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6*; do
+    p6_h1 "$dir"
     p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir"
   done
 }
@@ -149,13 +149,8 @@ p6df::core::cli::all() {
 p6df::core::cli::all::run() {
   local dir="$1"
 
-  module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
+  local module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
+  p6_h2 "$module"
 
-  # %repo
-  p6df::core::module::parse "$module"
-  local prefix=$repo[prefix]
-  unset repo
-
-  p6_h1 "$module"
-  __p6_prefix=$prefix p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::${cmd}" "$@"
+  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::${cmd}" "$@"
 }
