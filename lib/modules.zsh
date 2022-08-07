@@ -67,6 +67,8 @@ p6df::core::modules::init() {
 	p6df::user::modules
 	p6df::user::modules::init::pre
 
+	p6df::core::homebrew::init
+
 	p6df::core::modules::load
 
 	p6df::user::modules::init::post
