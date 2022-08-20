@@ -209,7 +209,7 @@ p6df::core::internal::doc() {
 #	callback -
 #	... - 
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_ P6_DFZ_SRC_DIR
+#  Environment:	 EPOCHREALTIME P6_DFZ_ P6_DFZ_SRC_DIR XXX
 #>
 ######################################################################
 p6df::core::internal::recurse() {
@@ -249,6 +249,8 @@ p6df::core::internal::recurse() {
     unset ModuleDeps
     local func_deps="$main_prefix::deps"
 
+    # skip when not appropriate
+    # XXX: probably should be elsewhere
     case $module in
     *p6*)
         p6_run_if "$func_deps"
@@ -283,8 +285,7 @@ p6df::core::internal::recurse() {
     p6df::core::internal::debug "run_if fc=[$func_callback] m=[$main_org/$main_repo] dir=[$P6_DFZ_SRC_DIR/$main_org/$main_repo] c=[$callback]"
     p6_run_if "$func_callback" "$main_org/$main_repo" "$P6_DFZ_SRC_DIR/$main_org/$main_repo" "$callback"
 
-    local t5=$EPOCHREALTIME
-    p6_time "$t4" "$t5" "p6df::core::internal::recurse($module, $dir, $callback)"
+    p6_time "$t4" "p6df::core::internal::recurse($module, $dir, $callback)"
 
     p6_return_void
 }

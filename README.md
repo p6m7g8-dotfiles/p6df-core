@@ -45,6 +45,15 @@
 #### p6df-core/lib/aliases.zsh:
 
 - p6df::core::aliases::init()
+- p6df::core::aliases::module::init(module)
+
+#### p6df-core/lib/brew.zsh:
+
+- p6df::core::homebrew::brews::remove()
+- p6df::core::homebrew::casks::remove()
+- p6df::core::homebrew::init()
+- p6df::core::homebrew::install()
+- p6df::core::homebrew::nuke()
 
 #### p6df-core/lib/cli.zsh:
 
@@ -78,6 +87,10 @@
 - p6df::core::internal::update(module, dir)
 - p6df::core::module::source(relpath, relaux)
 
+#### p6df-core/lib/lang.zsh:
+
+- p6df::core::lang::mgr::init(dir, name)
+
 #### p6df-core/lib/main.zsh:
 
 - p6df::core::main::init()
@@ -87,6 +100,8 @@
 #### p6df-core/lib/module.zsh:
 
 - p6df::core::module::add(short_module, _dir)
+- p6df::core::module::add::export()
+- p6df::core::module::add::lazy(short_module, _dir)
 - p6df::core::module::brews(module, dir)
 - p6df::core::module::diag(module, dir)
 - p6df::core::module::diff(module, dir)
@@ -126,16 +141,16 @@
 
 #### p6df-core/lib/prompt.zsh:
 
-- p6_lang_envs_prompt_info()
-- p6_lang_prompt_info()
 - p6df::core::prompt::init()
 - p6df::core::prompt::lang::env::off(lang)
 - p6df::core::prompt::lang::line::add(thing)
 - p6df::core::prompt::lang::line::remove(thing)
 - p6df::core::prompt::line::add(thing)
 - p6df::core::prompt::line::remove(thing)
-- p6df::core::prompt::process()
+- p6df::core::prompt::module::init(module)
 - p6df::core::prompt::runtime()
+- str str = p6df::core::lang::prompt::env::line()
+- str str = p6df::core::lang::prompt::line()
 
 #### p6df-core/lib/theme.zsh:
 
@@ -152,10 +167,12 @@
 .
 ├── _bootstrap.zsh
 ├── aliases.zsh
+├── brew.zsh
 ├── cli.zsh
 ├── dev.zsh
 ├── file.zsh
 ├── internal.zsh
+├── lang.zsh
 ├── main.zsh
 ├── module.zsh
 ├── modules.zsh
@@ -164,7 +181,7 @@
 ├── theme.zsh
 └── user.zsh
 
-0 directories, 13 files
+0 directories, 15 files
 ```
 ## Author
 

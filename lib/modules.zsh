@@ -60,6 +60,7 @@ p6df::core::modules::symlinks() {
 #
 # Function: p6df::core::modules::init()
 #
+#  Environment:	 HOMEBREW_PREFIX
 #>
 ######################################################################
 p6df::core::modules::init() {
@@ -67,7 +68,7 @@ p6df::core::modules::init() {
 	p6df::user::modules
 	p6df::user::modules::init::pre
 
-	p6df::core::homebrew::init
+	p6df::core::homebrew::init # HOMEBREW_PREFIX, m1 et al
 
 	p6df::core::modules::load
 
@@ -111,6 +112,6 @@ p6df::core::modules::bootstrap::p6common() {
 	p6df::core::file::load "$dir/init.zsh"
 	p6df::modules::p6common::init "p6m7g8-dotfiles/p6common" "$dir"
 
-	p6df::core::internal::debug "loading p6common"
-	p6_env_export "P6_DFZ_env_p6m7g8_dotfiles_p6common_init" "1"
+	local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_p6m7g8-dotfiles/p6common" "$dir" "init")
+	p6_env_export "$breaker_var" "1"
 }

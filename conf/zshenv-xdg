@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # ZSH initialization
 # man zsh(1)
 #

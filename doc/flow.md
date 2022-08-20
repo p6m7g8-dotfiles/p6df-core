@@ -13,6 +13,8 @@
 #           foreach dep                         |
 #             recurse >-------------------------+
 #   	    p6_run_if "$func_callback" #init (tail recursive)
+#         p6df::core::prompt::module::init
+#         p6df::core::aliases::module::init
 #
 #         p6df::user::modules::init::post
 #

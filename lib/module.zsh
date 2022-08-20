@@ -24,6 +24,11 @@ p6df::core::module::init() {
 
   p6df::core::internal::recurse "$module" "$dir" "init"
 
+  # After 'Tail-recursion' also run api hooks
+  p6df::core::prompt::module::init "$module" "$dir"         # Prompt
+  p6df::core::aliases::module::init "$module" "$dir"        # Aliases
+  p6df::core::completions::module::init "$module" "$dir"    # Completions
+
   p6_return_void
 }
 
@@ -290,7 +295,8 @@ p6df::core::module::doc() {
   local dir="$2"
 
   p6df::core::module::use "p6m7g8-dotfiles/p6df-perl"
-  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::doc"
+#  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::doc"
+   p6_run_dir "$dir" "p6_cicd_doc_gen"
 
   p6_return_void
 }
@@ -314,11 +320,50 @@ p6df::core::module::add() {
   local module=$(p6df::core::module::expand "$short_module")
   local things=$(p6_word_unique "$P6_DFZ_MODULES $module" | xargs)
 
-  p6_env_export P6_DFZ_MODULES "$P6_DFZ_MODULES $module"
+  p6_env_export P6_DFZ_MODULES "$things"
 
   p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::core::module::add::lazy(short_module, _dir)
+#
+#  Args:
+#	short_module -
+#	_dir -
+#
+#  Environment:	 P6_DFZ_MODULES
+#>
+######################################################################
+p6df::core::module::add::lazy() {
+  local short_module="$1"
+  local _dir="$2"
+
+  local module=$(p6df::core::module::expand "$short_module")
+
+  P6_DFZ_MODULES="$P6_DFZ_MODULES $module"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::add::export()
+#
+#  Environment:	 P6_DFZ_MODULES
+#>
+######################################################################
+p6df::core::module::add::export() {
+
+  local things=$(p6_word_unique "$P6_DFZ_MODULES" | xargs)
+
+  p6_env_export P6_DFZ_MODULES "$things"
+
+  p6_return_void
+}
 ######################################################################
 #<
 #
@@ -406,7 +451,7 @@ p6df::core::module::parse() {
   declare -gA repo
 
   repo[repo]=${${module%%:*}##*/}            # org/(repo)
-  repo[proto]="https"                        # protocol
+  repo[proto]=https                        # protocol
   repo[host]=github.com                      # XXX:
   repo[org]=${module%%/*}                    # (org)/repo
   repo[path]=$repo[org]/$repo[repo]          # (org/repo)
@@ -415,6 +460,9 @@ p6df::core::module::parse() {
   repo[module]=${repo[repo]##p6df-}          # p6df-(repo)
 #  repo[module]=${repo[module]##p6}           # p6(repo)
   repo[prefix]=p6df::modules::$repo[module]  # p6df::modules::(repo) without p6df-
+  repo[prompt]=$repo[prefix]::prompt::line   # prompt function
+  repo[alias]=$repo[prefix]::aliases::init   # alias function
+  repo[completion]=$repo[prefix]::completions::init   # copmletion function
 
   repo[sub]=${module##*:}                    # subdir file path : sep
   repo[plugin]=${repo[sub]##*/}              # subdir plugin up to first /
