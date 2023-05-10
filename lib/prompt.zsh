@@ -175,7 +175,7 @@ p6df::core::prompt::module::init() {
   local cmd=$(p6_lang_cmd_2_env "$lang_name")
 
   case $cmd in
-  R | go | j | js | jl | lua | pl | py | rb | rust | scala)
+  rb | go | j | js | jl | lua | pl | py | rust | scala | R)
     p6df::core::prompt::lang::line::add "$cmd"
     ;;
   *)
@@ -210,7 +210,7 @@ p6df::core::lang::prompt::line() {
     p6_time "$t20" "p6_lang_version($lang)"
     if ! p6_string_blank "$cnt"; then
       if p6_string_eq "$f" "0"; then
-        str="langs:  $lang:$cnt"
+        str="langs:\t\t  $lang:$cnt"
         f=1
       else
         str=$(p6_string_append "$str" "$lang:$cnt")
@@ -240,7 +240,7 @@ p6df::core::lang::prompt::env::line() {
   for lang in $(p6_echo "$P6_DFZ_PROMPT_LANG_LINES"); do
     if ! p6_word_in "$lang" "$P6_DFZ_PROMPT_LANG_LINES_OFF"; then
       local func="p6df::modules::${lang}::env::prompt::info"
-      local cnt=$(p6_run_yield "$func" | grep -v _root)
+      local cnt=$(p6_run_yield "$func")
       if ! p6_string_blank "$cnt"; then
         if p6_string_eq "$f" "0"; then
           str="$cnt"
