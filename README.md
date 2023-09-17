@@ -62,6 +62,10 @@
 - p6df::core::cli::run(...)
 - p6df::core::cli::usage([rc=0], [msg=])
 
+#### p6df-core/lib/completions.zsh:
+
+- p6df::core::completions::module::init()
+
 #### p6df-core/lib/dev.zsh:
 
 - p6df::core::dev::dot(module, dep)
@@ -82,7 +86,7 @@
 - p6df::core::internal::langs(module, dir)
 - p6df::core::internal::pull(_module, dir)
 - p6df::core::internal::push(_module, dir)
-- p6df::core::internal::recurse(module, dir, callback, ...)
+- p6df::core::internal::recurse(module, dir, [callback=], ...)
 - p6df::core::internal::status(_module, dir)
 - p6df::core::internal::update(module, dir)
 - p6df::core::module::source(relpath, relaux)
@@ -169,6 +173,7 @@
 ├── aliases.zsh
 ├── brew.zsh
 ├── cli.zsh
+├── completions.zsh
 ├── dev.zsh
 ├── file.zsh
 ├── internal.zsh
@@ -181,7 +186,7 @@
 ├── theme.zsh
 └── user.zsh
 
-0 directories, 15 files
+0 directories, 16 files
 ```
 ## Author
 

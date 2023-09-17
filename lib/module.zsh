@@ -467,7 +467,10 @@ p6df::core::module::parse() {
   repo[sub]=${module##*:}                    # subdir file path : sep
   repo[plugin]=${repo[sub]##*/}              # subdir plugin up to first /
 
-  if [[ $repo[repo] =~ ^p6 ]]; then
+  if [[ $repo[repo] =~ ^p6- ]]; then
+    repo[load_path]=$repo[path]/$repo[repo].zsh
+    repo[load_path]="${repo[load_path]/-plugin.zsh/.plugin.zsh}"
+  elif [[ $repo[repo] =~ ^p6 ]]; then
     repo[load_path]=$repo[path]/init.zsh
   elif [[ $repo[org] = ohmyzsh ]]; then
       if [[ $repo[sub] =~ lib ]]; then

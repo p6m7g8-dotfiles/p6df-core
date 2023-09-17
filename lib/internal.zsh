@@ -201,12 +201,12 @@ p6df::core::internal::doc() {
 ######################################################################
 #<
 #
-# Function: p6df::core::internal::recurse(module, dir, callback, ...)
+# Function: p6df::core::internal::recurse(module, dir, [callback=], ...)
 #
 #  Args:
 #	module -
 #	dir -
-#	callback -
+#	OPTIONAL callback - []
 #	... - 
 #
 #  Environment:	 EPOCHREALTIME P6_DFZ_ P6_DFZ_SRC_DIR XXX
@@ -215,7 +215,7 @@ p6df::core::internal::doc() {
 p6df::core::internal::recurse() {
     local module="$1"
     local dir="$2"
-    local callback="$3"
+    local callback="${3:-}"
     shift 3
 
     local t4=$EPOCHREALTIME
@@ -277,7 +277,7 @@ p6df::core::internal::recurse() {
     # relative to module or fully qualified callback
     local func_callback
     case $callback in
-    *p6df::core::internal* | *p6_*) func_callback="$callback" ;;
+    *p6df::core::internal* | *p6df::core::dev* | *p6_*) func_callback="$callback" ;;
     *) func_callback="$main_prefix::$callback" ;;
     esac
 

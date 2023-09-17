@@ -5,7 +5,7 @@
 #
 # Function: p6df::core::dev::graph()
 #
-#  Environment:	 EOF P6_DFZ_MODULES
+#  Environment:	 DIR EOF P6_DFZ_MODULES
 #>
 ######################################################################
 p6df::core::dev::graph() {
@@ -27,7 +27,7 @@ EOF
 
   local module
   for module in $(p6_vertical "$modules"); do
-    p6df::core::internal::recurse "$module" "p6df::core::dev::dot"
+    p6df::core::internal::recurse "$module" "DIR" "p6df::core::dev::dot"
   done
 
   p6_echo "}"

@@ -175,7 +175,7 @@ p6df::core::prompt::module::init() {
   local cmd=$(p6_lang_cmd_2_env "$lang_name")
 
   case $cmd in
-  rb | go | j | js | jl | lua | pl | py | rust | scala | R)
+  rb | go | j | node | js | jl | lua | pl | py | rust | scala | R)
     p6df::core::prompt::lang::line::add "$cmd"
     ;;
   *)
