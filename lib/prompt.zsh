@@ -11,7 +11,7 @@ p6df::core::prompt::init() {
   p6_run_yield "p6df::user::prompt"
 
   p6df::core::prompt::line::add "p6df::core::lang::prompt::line"
-  p6df::core::prompt::line::add "p6df::core::lang::prompt::env::line"
+#  p6df::core::prompt::line::add "p6df::core::lang::prompt::env::line"
 
   setopt prompt_subst
   PROMPT="\$(p6df::core::prompt::runtime)"
