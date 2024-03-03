@@ -186,7 +186,7 @@
 ├── theme.zsh
 └── user.zsh
 
-0 directories, 16 files
+1 directory, 16 files
 ```
 ## Author
 
