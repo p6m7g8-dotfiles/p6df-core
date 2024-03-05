@@ -43,7 +43,7 @@ EOF
 # Function: p6df::core::cli::run(...)
 #
 #  Args:
-#	... - 
+#	... -
 #
 #  Environment:	 LC_ALL OPTIND
 #>
@@ -99,7 +99,8 @@ p6df::core::cli::run() {
     p6df::core::cli::all "$cmd" "$@"
   else
     case $cmd in
-    p6df::*) p6_run_yield "$cmd" ;;
+    help) p6df::core::cli::usage 0 "" ;;
+    p6df::*) p6_run_yield "$cmd" "$module" "$dir" "$@" ;;
     *) p6df::core::module::${cmd} "$module" "$dir" "$@" ;;
     esac
   fi
@@ -120,7 +121,7 @@ p6df::core::cli::run() {
 #
 #  Args:
 #	cmd -
-#	... - 
+#	... -
 #
 #  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
