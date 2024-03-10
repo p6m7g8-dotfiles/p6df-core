@@ -283,20 +283,13 @@ p6df::core::module::sync() {
 #	dir -
 #
 #>
-#/ Synopsis
-#/    bin/p6df [-D|-d] [cmd]
-#/
-#/ Synopsis
-#/    The entry point for bin/p6df
-#/
 ######################################################################
 p6df::core::module::doc() {
   local module="$1"
   local dir="$2"
 
   p6df::core::module::use "p6m7g8-dotfiles/p6df-perl"
-#  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::doc"
-   p6_run_dir "$dir" "p6_cicd_doc_gen"
+  p6df::core::internal::doc "$module" "$dir"
 
   p6_return_void
 }
