@@ -17,7 +17,7 @@ p6df::core::completions::module::init() {
   unset repo
 
   if type -f "$copmletions_func" >/dev/null 2>&1; then
-    p6_run_yield "$completions__func"
+    p6_run_yield "$completions_func"
   fi
 
   p6_return_void
