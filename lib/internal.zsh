@@ -201,6 +201,134 @@ p6df::core::internal::doc() {
 ######################################################################
 #<
 #
+# Function: p6df::core::internal::recurse::shortcircuit(module, dir, callback)
+#
+#  Args:
+#	module -
+#	dir -
+#	callback -
+#
+#  Environment:	 P6_DFZ_
+#>
+######################################################################
+p6df::core::internal::recurse::shortcircuit() {
+    local module="$1"
+    local dir="$2"
+    local callback="$3"
+
+    # short circuit
+    local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_${module}" "$dir" "${callback}")
+    local breaker_val
+    p6_run_code "breaker_val=\$${breaker_var}"
+
+    if p6_string_eq "$breaker_val" "1"; then
+        p6df::core::internal::debug "short circuit: <- $module, $dir, $callback"
+        return 0
+    else
+        p6df::core::internal::debug "continue -> $module, $dir, $callback"
+    fi
+
+    p6_run_code "${breaker_var}=1"
+
+    return 1
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::internal::recurse::deps::run(module, func_deps, callback)
+#
+#  Args:
+#	module -
+#	func_deps -
+#	callback -
+#
+#>
+######################################################################
+p6df::core::internal::recurse::deps::run() {
+    local module="$1"
+    local func_deps="$2"
+    local callback="$3"
+
+    case $module in
+    *p6*)
+        p6_run_if "$func_deps"
+        ;;
+    *)
+        case $callback in
+        *fetch* | *update*)
+            p6_run_if "$func_deps"
+            ;;
+        *)
+            p6df::core::internal::debug "Not processing m=[$module]"
+            return 1
+            ;;
+        esac
+        ;;
+    esac
+
+    return 0
+}
+
+######################################################################
+#<
+#
+# Function: str func_callback = p6df::core::internal::recurse::callback(callback, prefix)
+#
+#  Args:
+#	callback -
+#	prefix -
+#
+#  Returns:
+#	str - func_callback
+#
+#  Environment:	 CALLBACK
+#>
+######################################################################
+p6df::core::internal::recurse::callback() {
+    local callback="$1"
+    local prefix="$2"
+
+    case $callback in
+    *p6df::core::internal* | *p6df::core::dev* | *p6_*) func_callback="$callback" ;;
+    *) func_callback="$prefix::$callback" ;;
+    esac
+
+    p6df::core::internal::debug "CALLBACK: $func_callback"
+
+    p6_return_str "$func_callback"
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::internal::recurse::deps::each(dir, callback, ...)
+#
+#  Args:
+#	dir -
+#	callback -
+#	... - 
+#
+#  Environment:	 DEP
+#>
+######################################################################
+p6df::core::internal::recurse::deps::each() {
+    local dir="$1"
+    local callback="$2"
+    shift 2
+
+    local dep
+    for dep in $ModuleDeps[@]; do
+        p6df::core::internal::debug "DEP: p6df::core::internal::recurse[dep]($dep, $dir, $callback)"
+        p6df::core::internal::recurse "$dep" "$dir" "$callback" "$@"
+    done
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::internal::recurse(module, dir, [callback=], ...)
 #
 #  Args:
@@ -209,7 +337,7 @@ p6df::core::internal::doc() {
 #	OPTIONAL callback - []
 #	... - 
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_ P6_DFZ_SRC_DIR XXX
+#  Environment:	 EPOCHREALTIME P6_DFZ_SRC_DIR XXX
 #>
 ######################################################################
 p6df::core::internal::recurse() {
@@ -221,18 +349,9 @@ p6df::core::internal::recurse() {
     local t4=$EPOCHREALTIME
     p6df::core::internal::debug "=> p6df::core::internal::recurse($module, $dir, $callback)"
 
-    # short circuit
-    local breaker_var=$(p6df::core::module::env::name "P6_DFZ_env_${module}" "$dir" "${callback}")
-    local breaker_val
-    p6_run_code "breaker_val=\$${breaker_var}"
-
-    if p6_string_eq "$breaker_val" "1"; then
-        p6df::core::internal::debug "short circuit: <- $module, $dir, $callback"
+    if p6df::core::internal::recurse::shortcircuit "$module" "$dir" "$callback"; then
         return
-    else
-        p6df::core::internal::debug "continue -> $module, $dir, $callback"
     fi
-    p6_run_code "${breaker_var}=1"
 
     # load
     # %repo
@@ -245,41 +364,19 @@ p6df::core::internal::recurse() {
     unset repo
 
     # deps
-    # @ModuleDeps
-    unset ModuleDeps
     local func_deps="$main_prefix::deps"
 
     # skip when not appropriate
     # XXX: probably should be elsewhere
-    case $module in
-    *p6*)
-        p6_run_if "$func_deps"
-        ;;
-    *)
-        case $callback in
-        *fetch* | *update*)
-            p6_run_if "$func_deps"
-            ;;
-        *)
-            p6df::core::internal::debug "Not processing m=[$module]"
-            return
-            ;;
-        esac
-        ;;
-    esac
-
-    local dep
-    for dep in $ModuleDeps[@]; do
-        p6df::core::internal::debug "p6df::core::internal::recurse[dep]($dep, $dir, $callback)"
-        p6df::core::internal::recurse "$dep" "$dir" "$callback" "$@"
-    done
+    # @ModuleDeps
+    unset ModuleDeps
+    if ! p6df::core::internal::recurse::deps::run "$module" "$func_deps" "$callback"; then
+        return
+    fi
+    p6df::core::internal::recurse::deps::each "$dir" "$callback" "$@"
 
     # relative to module or fully qualified callback
-    local func_callback
-    case $callback in
-    *p6df::core::internal* | *p6df::core::dev* | *p6_*) func_callback="$callback" ;;
-    *) func_callback="$main_prefix::$callback" ;;
-    esac
+    local func_callback=$(p6df::core::internal::recurse::callback "$callback" "$main_prefix")
 
     # tail recursive, do it at last
     p6df::core::internal::debug "run_if fc=[$func_callback] m=[$main_org/$main_repo] dir=[$P6_DFZ_SRC_DIR/$main_org/$main_repo] c=[$callback]"
@@ -323,5 +420,5 @@ p6df::core::module::source() {
 p6df::core::internal::debug() {
     local msg="$1"
 
-    p6_debug "p6df::core:: $msg"
+    p6_debug "p6df::core: $msg"
 }

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 ######################################################################
 #<
 #
@@ -21,6 +22,7 @@ p6df::core::modules::brews() {
 
 	p6df::core::modules::foreach "p6df::core::module::brews"
 }
+
 ######################################################################
 #<
 #
@@ -32,6 +34,7 @@ p6df::core::modules::langs() {
 
 	p6df::core::modules::foreach "p6df::core::module::langs"
 }
+
 ######################################################################
 #<
 #
@@ -43,6 +46,7 @@ p6df::core::modules::vscodes() {
 
 	p6df::core::modules::foreach "p6df::core::module::vscodes"
 }
+
 ######################################################################
 #<
 #
@@ -83,7 +87,7 @@ p6df::core::modules::init() {
 #  Args:
 #	callback -
 #
-#  Environment:	 P6_DFZ_MODULES
+#  Environment:	 P6_DFZ_MODULES P6_DFZ_SRC_DIR
 #>
 ######################################################################
 p6df::core::modules::foreach() {
@@ -91,7 +95,7 @@ p6df::core::modules::foreach() {
 
 	local module
 	for module in $(p6_vertical "$P6_DFZ_MODULES"); do
-		p6_run_yield "$callback $module"
+		p6_run_yield "$callback $module $P6_DFZ_SRC_DIR/$module"
 	done
 }
 

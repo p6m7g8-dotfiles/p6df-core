@@ -30,7 +30,7 @@ $PROMPT
 ######################################################################
 p6df::core::prompt::runtime() {
 
-  #  p6_log_disable
+  p6_log_disable
 
   local lf
   local t1=$EPOCHREALTIME
@@ -45,7 +45,7 @@ p6df::core::prompt::runtime() {
   done
   p6_time "$t1" "TOTAL: p6df::core::prompt::runtime"
 
-  #  p6_log_enable
+  p6_log_enable
 }
 
 ######################################################################
