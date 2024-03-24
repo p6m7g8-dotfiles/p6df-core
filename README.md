@@ -10,8 +10,7 @@
   - [Summary](#summary)
   - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
-  - [Changes](#changes)
-    - [Usage](#usage)
+  - [Usage](#usage)
   - [Author](#author)
 
 ### Badges
@@ -34,11 +33,13 @@
 
 - [Code of Conduct](https://github.com/p6m7g8/.github/blob/master/CODE_OF_CONDUCT.md)
 
-## Changes
-
-- [Change Log](CHANGELOG.md)
-
 ## Usage
+
+
+### Aliases
+
+
+### Functions
 
 ### p6df-core/lib:
 
@@ -46,14 +47,6 @@
 
 - p6df::core::aliases::init()
 - p6df::core::aliases::module::init(module)
-
-#### p6df-core/lib/brew.zsh:
-
-- p6df::core::homebrew::brews::remove()
-- p6df::core::homebrew::casks::remove()
-- p6df::core::homebrew::init()
-- p6df::core::homebrew::install()
-- p6df::core::homebrew::nuke()
 
 #### p6df-core/lib/cli.zsh:
 
@@ -75,6 +68,14 @@
 
 - p6df::core::file::load(file)
 
+#### p6df-core/lib/homebrew.zsh:
+
+- p6df::core::homebrew::brews::remove()
+- p6df::core::homebrew::casks::remove()
+- p6df::core::homebrew::init()
+- p6df::core::homebrew::install()
+- p6df::core::homebrew::nuke()
+
 #### p6df-core/lib/internal.zsh:
 
 - p6df::core::internal::branch(_module, dir)
@@ -87,9 +88,13 @@
 - p6df::core::internal::pull(_module, dir)
 - p6df::core::internal::push(_module, dir)
 - p6df::core::internal::recurse(module, dir, [callback=], ...)
+- p6df::core::internal::recurse::deps::each(dir, callback, ...)
+- p6df::core::internal::recurse::deps::run(module, func_deps, callback)
+- p6df::core::internal::recurse::shortcircuit(module, dir, callback)
 - p6df::core::internal::status(_module, dir)
 - p6df::core::internal::update(module, dir)
 - p6df::core::module::source(relpath, relaux)
+- str func_callback = p6df::core::internal::recurse::callback(callback, prefix)
 
 #### p6df-core/lib/lang.zsh:
 
@@ -171,11 +176,11 @@
 .
 ├── _bootstrap.zsh
 ├── aliases.zsh
-├── brew.zsh
 ├── cli.zsh
 ├── completions.zsh
 ├── dev.zsh
 ├── file.zsh
+├── homebrew.zsh
 ├── internal.zsh
 ├── lang.zsh
 ├── main.zsh
