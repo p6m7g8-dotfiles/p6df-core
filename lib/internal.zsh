@@ -94,7 +94,7 @@ p6df::core::internal::diff() {
     local _module="$1"
     local dir="$2"
 
-    p6_run_dir "$dir" "p6_git_p6_diff"
+    p6_run_dir "$dir" "p6_git_cli_diff"
 
     p6_return_void
 }
