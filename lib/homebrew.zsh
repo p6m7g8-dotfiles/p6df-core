@@ -16,6 +16,7 @@ p6df::core::homebrew::init() {
 
   local homebrew_prefix=$(brew --config | awk -F: '/PREFIX/ { print $2 }' | sed -e 's, ,,g')
 
+  p6_env_export "HOMEBREW_NO_ANALYTICS" "1"
   p6_env_export "HOMEBREW_EDITOR" "vim"
   p6_env_export "HOMEBREW_PREFIX" "$homebrew_prefix"
 }
