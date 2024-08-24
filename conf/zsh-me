@@ -5,10 +5,21 @@ p6df::_int::bootstrap::msg() {
   echo "Delete this entire function when done. (p6df::_int::bootstrap::msg)"
 }
 
-p6df::user::prompt() {
+p6df::user::modules::init::pre() {
 }
 
 p6df::user::modules() {
+
+  p6df::core::module::add::lazy p6df-zsh
+}
+
+p6df::user::modules::init::post() {
+}
+
+p6df::user::prompt() {
+
+  p6df::core::prompt::line::add "p6df::modules::zsh::std::prompt::line"
+  p6df::core::prompt::line::add "p6df::modules::zsh::dir::prompt::line"
 }
 
 p6df::user::theme() {
