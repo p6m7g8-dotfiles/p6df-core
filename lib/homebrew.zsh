@@ -18,7 +18,12 @@ p6df::core::homebrew::init() {
 
   p6_env_export "HOMEBREW_NO_ANALYTICS" "1"
   p6_env_export "HOMEBREW_EDITOR" "vim"
+  p6_env_export "HOMEBREW_CELLAR" "$homebrew_prefix/Cellar"
+  p6_env_export "HOMEBREW_REPOSITORY" "$homebrew_prefix"
   p6_env_export "HOMEBREW_PREFIX" "$homebrew_prefix"
+  p6_env_export "INFOPATH" "$homebrew_prefix/share/info:${INFOPATH:-}"
+
+  p6_return_void
 }
 
 ######################################################################

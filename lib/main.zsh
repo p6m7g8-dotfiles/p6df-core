@@ -43,6 +43,10 @@ p6df::core::main::self::init() {
 	# boostrap
 	. $P6_DFZ_LIB_DIR/file.zsh
 
+	if ! test -d /tmp/p6; then
+	    mkdir -p /tmp/p6
+	fi
+
 	local file
 	for file in $P6_DFZ_LIB_DIR/*.zsh; do
 		p6df::core::file::load "$file"
