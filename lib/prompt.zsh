@@ -30,6 +30,7 @@ $PROMPT
 ######################################################################
 p6df::core::prompt::runtime() {
 
+  P6_DFZ_REAL_CMD=$(fc -ln -1)
   p6_log_disable
 
   local lf
@@ -200,14 +201,29 @@ p6df::core::prompt::module::init() {
 #>
 ######################################################################
 p6df::core::lang::prompt::line() {
-
   local lang
-  local str
+  local str=""
   local f=0
+
+  local cache_file="/tmp/p6_lang_cache.txt"
+
+  case "$P6_DFZ_REAL_CMD" in
+  *env* | *cd*)
+    cat /dev/null >"$cache_file"
+    ;;
+  esac
+
   for lang in $(p6_echo "$P6_DFZ_PROMPT_LANG_LINES"); do
     local t20=$EPOCHREALTIME
-    local cnt=$(p6_lang_version "$lang")
+
+    local cnt=$(grep -E "^$lang=" "$cache_file" | tail -1 | cut -d '=' -f 2)
+
+    if p6_string_blank "$cnt"; then
+      local cnt=$(p6_lang_version "$lang")
+      echo "$lang=$cnt" >>"$cache_file"
+    fi
     p6_time "$t20" "p6_lang_version($lang)"
+
     if ! p6_string_blank "$cnt"; then
       if p6_string_eq "$f" "0"; then
         str="langs:\t\t  $lang:$cnt"
