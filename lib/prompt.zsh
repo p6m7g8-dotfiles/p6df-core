@@ -205,22 +205,20 @@ p6df::core::lang::prompt::line() {
   local str=""
   local f=0
 
-  local cache_file="/tmp/p6_lang_cache.txt"
-
   case "$P6_DFZ_REAL_CMD" in
   *env* | *cd*)
-    cat /dev/null >"$cache_file"
+    cat /dev/null >"$P6_DFZ_PROMPT_CACHE"
     ;;
   esac
 
   for lang in $(p6_echo "$P6_DFZ_PROMPT_LANG_LINES"); do
     local t20=$EPOCHREALTIME
 
-    local cnt=$(grep -E "^$lang=" "$cache_file" | tail -1 | cut -d '=' -f 2)
+    local cnt=$(grep -E "^$lang=" "$P6_DFZ_PROMPT_CACHE" | tail -1 | cut -d '=' -f 2)
 
     if p6_string_blank "$cnt"; then
       local cnt=$(p6_lang_version "$lang")
-      echo "$lang=$cnt" >>"$cache_file"
+      echo "$lang=$cnt" >>"$P6_DFZ_PROMPT_CACHE"
     fi
     p6_time "$t20" "p6_lang_version($lang)"
 

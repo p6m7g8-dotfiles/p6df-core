@@ -8,6 +8,9 @@
 ######################################################################
 p6df::core::main::init() {
 
+        rm -f "$P6_DFZ_PROMPT_CACHE"
+        touch "$P6_DFZ_PROMPT_CACHE"
+
 	p6df::core::timing::init
 
 	local t0=$EPOCHREALTIME
