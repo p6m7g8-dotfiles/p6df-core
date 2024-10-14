@@ -1,7 +1,5 @@
 p6df::core::init() {
 
-  mkdir -p /tmp/p6 
-  rm -f /tmp/p6/lang_cache.txt && touch /tmp/p6/lang_cache.txt
   . $P6_DFZ_LIB_DIR/main.zsh
   p6df::core::main::init
 }
