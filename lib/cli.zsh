@@ -57,12 +57,14 @@ p6df::core::cli::run() {
   # default options
   local flag_debug=0
   local flag_all=0
+  local flag_bootstrap=0
 
   # parse options
   local flag
-  while getopts "adD" flag; do
+  while getopts "abdD" flag; do
     case $flag in
     a) flag_all=1 ;;
+    b) flag_bootstrap=1 ;;
     D) flag_debug=0 ;;
     d) flag_debug=1 ;;
     *) p6df::core::cli::usage 1 "invalid flag" ;;
@@ -131,7 +133,14 @@ p6df::core::cli::all() {
   shift 1
 
   local dir
-  for dir in $P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6*; do
+ 
+  local modules
+  if p6_string_eq_1 "$flag_bootstrap"; then
+    modules="$P6_DFZ_MODULES"
+  else
+    modules=$(p6_dir_list "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
+  fi
+  for dir in $(p6_echo $modules); do
     p6_h1 "$dir"
     p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir"
   done
