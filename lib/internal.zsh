@@ -34,8 +34,7 @@ p6df::core::internal::update() {
     if ! p6_dir_exists "$dir"; then
         p6df::core::internal::fetch "$dir" "$module"
     else
-        p6_msg_no_nl "$dir: "
-        p6_run_dir "$dir" "p6_git_p6_pull"
+        p6df::core::internal::pull "$dir" "$module"
     fi
 }
 
@@ -54,7 +53,7 @@ p6df::core::internal::status() {
     local _module="$1"
     local dir="$2"
 
-    p6_run_dir "$dir" "p6_git_p6_status"
+    p6_run_dir "$dir" "p6_git_cli_status_s"
 
     p6_return_void
 }
@@ -74,7 +73,7 @@ p6df::core::internal::branch() {
     local _module="$1"
     local dir="$2"
 
-    p6_run_dir "$dir" "p6_git_p6_branch"
+    p6_run_dir "$dir" "p6_git_cli_branch_verbose_verbose"
 
     p6_return_void
 }
@@ -114,7 +113,7 @@ p6df::core::internal::pull() {
     local _module="$1"
     local dir="$2"
 
-    p6_run_dir "$dir" "p6_git_p6_pull"
+    p6_run_dir "$dir" "p6_git_cli_pull_rebase_autostash_ff_only"
 
     p6_return_void
 }
@@ -134,7 +133,7 @@ p6df::core::internal::push() {
     local _module="$1"
     local dir="$2"
 
-    p6_run_dir "$dir" "p6_git_p6_push"
+    p6_run_dir "$dir" "p6_git_cli_push_u"
 
     p6_return_void
 }
@@ -174,8 +173,9 @@ p6df::core::internal::langs() {
     local module="$1"
     local dir="$2"
 
-    local function="${__p6_prefix}::langs"
-    p6_run_if "$function"
+    p6_run_if "p6df::core::modules::langs"
+
+    p6_return_void
 }
 
 ######################################################################
