@@ -402,6 +402,7 @@ p6df::core::module::expand() {
   case $short_module in
   *p6m7g8-dotfiles*) module=$short_module ;;
   p6df*) module="p6m7g8-dotfiles/$short_module" ;;
+  p6-*) module=p6m7g8/$short_module ;;
   p6*) module="p6m7g8-dotfiles/$short_module" ;;
   esac
 
