@@ -26,3 +26,24 @@ p6df::core::lang::mgr::init() {
 
     p6_return_void
 }
+
+######################################################################
+#<
+#
+# Function: p6df::core::lang::mgr::init2(cmd, name)
+#
+#  Args:
+#	cmd -
+#	name -
+#
+#  Environment:	 HOME
+#>
+######################################################################
+p6df::core::lang::mgr::init2() {
+    local cmd="$1"
+    local name="$2"
+
+    p6_path_if "$HOME/.local/bin"
+
+    p6_return_void
+}

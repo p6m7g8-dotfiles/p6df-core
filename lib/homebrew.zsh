@@ -5,7 +5,7 @@
 #
 # Function: p6df::core::homebrew::init()
 #
-#  Environment:	 HOMEBREW_EDITOR HOMEBREW_PREFIX PREFIX
+#  Environment:	 HOMEBREW_CELLAR HOMEBREW_EDITOR HOMEBREW_NO_ANALYTICS HOMEBREW_PREFIX HOMEBREW_REPOSITORY INFOPATH PREFIX
 #>
 #/ Synopsis
 #/   Warning: Using vim because no editor was set in the environment.

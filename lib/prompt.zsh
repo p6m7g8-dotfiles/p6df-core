@@ -25,7 +25,7 @@ $PROMPT
 #
 # Function: p6df::core::prompt::runtime()
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_LINES TOTAL
+#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_LINES P6_DFZ_REAL_CMD TOTAL
 #>
 ######################################################################
 p6df::core::prompt::runtime() {
@@ -192,12 +192,16 @@ p6df::core::prompt::module::init() {
 ######################################################################
 #<
 #
-# Function: str str = p6df::core::lang::prompt::line()
+# Function: str str = p6df::core::lang::prompt::line(str, f)
+#
+#  Args:
+#	str -
+#	f -
 #
 #  Returns:
 #	str - str
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_LANG_LINES
+#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_CACHE P6_DFZ_PROMPT_LANG_LINES P6_DFZ_REAL_CMD
 #>
 ######################################################################
 p6df::core::lang::prompt::line() {

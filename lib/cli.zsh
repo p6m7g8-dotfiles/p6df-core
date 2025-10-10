@@ -125,7 +125,7 @@ p6df::core::cli::run() {
 #	cmd -
 #	... - 
 #
-#  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#  Environment:	 P6_DFZ_MODULES P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
 p6df::core::cli::all() {
