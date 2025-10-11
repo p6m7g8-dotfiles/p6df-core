@@ -47,7 +47,7 @@ Installs things from package managers. A decision is to be made to use `clones()
 
 - Presence: OPTIONAL
 
-Installs language managers. Also installs 3rd Party Language extensions like cran, pip, cpan, gems etc. Do not use brew for the extensions unless you must.
+Installs language managers. Also installs 3rd Party Language extensions like cran, uv, cpan, gems etc. Do not use brew for the extensions unless you must.
 
 ## aliases::init
 
