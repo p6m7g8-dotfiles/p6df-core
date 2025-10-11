@@ -72,6 +72,7 @@ p6df::core::path::init() {
 ######################################################################
 p6df::core::path::cd::init() {
 
+  PYTHONPATH=
   cdpath=()
   p6df::core::path::cd::if $P6_DFZ_SRC_GH_DIR
   p6df::core::path::cd::if $P6_DFZ_SRC_DIR
