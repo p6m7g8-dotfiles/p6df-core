@@ -55,13 +55,13 @@ Installs language managers. Also installs 3rd Party Language extensions like cra
 
 - Presence: OPTIONAL
 
-Setups up aliases. Every alias should be name spaced and point to a function not straight up shell one liners.
+Sets up aliases. Every alias should be name spaced and point to a function not straight up shell one liners.
 
 ## completions::init
 
 - Presence: OPTIONAL
 
-Setups up shell cli completions.
+Sets up shell cli completions.
 
 ## vscodes
 
