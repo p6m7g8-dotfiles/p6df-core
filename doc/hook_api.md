@@ -7,7 +7,9 @@
   - [external::brew](#externalbrew)
   - [langs(module, dir)](#langsmodule-dir)
   - [aliases::init](#aliasesinit)
+  - [completions::init](#completionsinit)
   - [vscodes](#vscodes)
+  - [vscodes::config](#vscodesconfig)
   - [prompt::init](#promptinit)
   - [prompt::line](#promptline)
 
@@ -55,20 +57,37 @@ Installs language managers. Also installs 3rd Party Language extensions like cra
 
 Setups up aliases. Every alias should be name spaced and point to a function not straight up shell one liners.
 
+## completions::init
+
+- Presence: OPTIONAL
+
+Setups up shell cli completions.
+
 ## vscodes
 
 - Presence: OPTIONAL
 
-Installs vscode market place extensions. If a brew or 3rd party Language extension is super related to the vscode extension and not used outside of vscode setup then it can and should be installed here too.
+Installs vscode market place extensions.
+If a brew or 3rd party Language extension is super related to the vscode extension and not used outside of vscode setup then it can and should be installed here too.
+
+## vscodes::config
+
+- Presence: OPTIONAL
+
+Returns a valid JSON snippet of vscode config for this module and its code extensions
 
 ## prompt::init
 
 - Presence: OPTIONAL
 
-Do you really want a module without a prompt presence of some kind?  If you need to do setup work do it here. This is not what will be called to render the prompt
+If you need to do setup work do it here.
+This is not what will be called to render the prompt
 
 ## prompt::line
 
 - Presence: OPTIONAL
 
 This renders the actual prompt
+
+Do you really want a module without a prompt presence of some kind?
+This is not what will be called to render the prompt
