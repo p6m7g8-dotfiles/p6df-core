@@ -25,15 +25,15 @@ After loading init.zsh, call p6df::modules::\$mod::init(module, dir)
 
 - Presence: REQUIRED
 
-All modules should depend on `p6common` either directly because its the only `p6df` dependency 
-or in-directly via another module. Use what you use. `deps` are not possible to skip cloning 
+All modules should depend on `p6common` either directly because its the only `p6df` dependency
+or in-directly via another module. Use what you use. `deps` are not possible to skip cloning
 b/c they are used directly by the module.
 
 `clones()` can be configured on/off or delayed.
 
 All modules _must_ tail recurse through their dependency chain. The framework does this.
 
-Deps is the only required hook. It doesn't make sense to only depend on `p6common` or another dep 
+Deps is the only required hook. It doesn't make sense to only depend on `p6common` or another dep
 b/c it wouldn't be used by `this` module. Instead if all you have are depends, then use `clones()`.
 
 ## home::symlinks
