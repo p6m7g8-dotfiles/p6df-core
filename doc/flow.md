@@ -1,6 +1,7 @@
 # p6df Initialization and CLI Flow
 
-This document describes the initialization sequence of `p6df` as executed from `.zshrc`, including module dependency recursion, callbacks, and the CLI execution path.
+This document describes the initialization sequence of `p6df` as executed from `.zshrc`,
+including module dependency recursion, callbacks, and the CLI execution path.
 
 ---
 
