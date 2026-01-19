@@ -7,6 +7,7 @@
   - [external::brew](#externalbrew)
   - [langs(module, dir)](#langsmodule-dir)
   - [aliases::init](#aliasesinit)
+  - [path::init](#pathinit)
   - [completions::init](#completionsinit)
   - [vscodes](#vscodes)
   - [vscodes::config](#vscodesconfig)
@@ -62,6 +63,12 @@ Do not use brew for the extensions unless you must.
 - Presence: OPTIONAL
 
 Sets up aliases. Every alias should be name spaced and point to a function not straight up shell one liners.
+
+## path::init
+
+- Presence: OPTIONAL
+
+Sets up module path entries.
 
 ## completions::init
 

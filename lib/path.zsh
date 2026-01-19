@@ -64,6 +64,31 @@ p6df::core::path::init() {
 ######################################################################
 #<
 #
+# Function: p6df::core::path::module::init(module)
+#
+#  Args:
+#	module -
+#
+#>
+######################################################################
+p6df::core::path::module::init() {
+  local module="$1"
+
+  # %repo
+  p6df::core::module::parse "$module"
+  local path_func=$repo[path_init]
+  unset repo
+
+  if type -f "$path_func" >/dev/null 2>&1; then
+    p6_run_yield "$path_func"
+  fi
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::path::cd::init()
 #
 #  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_FOCUSED_DIR P6_DFZ_SRC_GH_DIR P6_DFZ_SRC_P6M7G8_ACTIONS_DIR P6_DFZ_SRC_P6M7G8_AUTOMATION_DIR P6_DFZ_SRC_P6M7G8_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR P6_DFZ_SRC_WORK_ARKESTRO_DIR P6_DFZ_SRC_WORK_DIR
