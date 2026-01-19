@@ -142,6 +142,7 @@ TODO: Add a short summary of this module.
 - `p6df::core::path::cd::init()`
 - `p6df::core::path::if(dir)`
 - `p6df::core::path::init(dir)`
+- `p6df::core::path::module::init(module)`
 
 ##### p6df-core/lib/profile.zsh
 
