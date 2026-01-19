@@ -5,7 +5,7 @@
 #
 # Function: p6df::core::dev::graph()
 #
-#  Environment:	 DIR EOF P6_DFZ_MODULES
+#  Environment:	 P6_DFZ_MODULES
 #>
 ######################################################################
 p6df::core::dev::graph() {

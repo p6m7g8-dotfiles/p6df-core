@@ -3,7 +3,7 @@
 #
 # Function: p6df::core::prompt::init()
 #
-#  Environment:	 P6_DFZ_PROMPT_ENV_LINES P6_DFZ_PROMPT_LANG_LINES P6_DFZ_PROMPT_MOD_BOTTOM_LINES P6_DFZ_PROMPT_MOD_FIRSTLINES P6_DFZ_PROMPT_MOD_LINES PROMPT
+#  Environment:	 P6_DFZ_PROMPT_ENV_LINES P6_DFZ_PROMPT_LANG_LINES P6_DFZ_PROMPT_MOD_BOTTOM_LINES P6_DFZ_PROMPT_MOD_FIRST_LINES P6_DFZ_PROMPT_MOD_LINES PROMPT
 #>
 ######################################################################
 p6df::core::prompt::init() {
@@ -35,7 +35,6 @@ $PROMPT
 #  Returns:
 #	stream - 
 #
-#  Environment:	 P6_DFZ_REAL_CMD
 #>
 ######################################################################
 p6df::core::prompt::runtime() {
@@ -56,8 +55,8 @@ p6df::core::prompt::runtime() {
 #  Returns:
 #	stream - 
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_MOD_FIRST_LINES TOTAL
-#>  
+#  Environment:	 EPOCHREALTIME _
+#>
 ######################################################################
 p6df::core::prompt::runtime::lines() {
 

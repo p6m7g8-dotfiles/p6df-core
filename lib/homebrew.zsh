@@ -5,7 +5,7 @@
 #
 # Function: p6df::core::homebrew::init()
 #
-#  Environment:	 HOMEBREW_CELLAR HOMEBREW_EDITOR HOMEBREW_NO_ANALYTICS HOMEBREW_PREFIX HOMEBREW_REPOSITORY INFOPATH PREFIX
+#  Environment:	 HOMEBREW_CELLAR HOMEBREW_EDITOR HOMEBREW_NO_ANALYTICS HOMEBREW_PREFIX HOMEBREW_REPOSITORY INFOPATH
 #>
 #/ Synopsis
 #/   Warning: Using vim because no editor was set in the environment.
@@ -31,7 +31,6 @@ p6df::core::homebrew::init() {
 #
 # Function: p6df::core::homebrew::casks::remove()
 #
-#  Environment:	 NONINTERACTIVE
 #>
 ######################################################################
 p6df::core::homebrew::casks::remove() {
@@ -49,7 +48,6 @@ p6df::core::homebrew::casks::remove() {
 #
 # Function: p6df::core::homebrew::brews::remove()
 #
-#  Environment:	 NONINTERACTIVE
 #>
 ######################################################################
 p6df::core::homebrew::brews::remove() {
@@ -81,7 +79,6 @@ p6df::core::homebrew::nuke() {
 #
 # Function: p6df::core::homebrew::install()
 #
-#  Environment:	 HEAD
 #>
 ######################################################################
 p6df::core::homebrew::install() {

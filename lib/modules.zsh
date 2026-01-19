@@ -64,7 +64,6 @@ p6df::core::modules::symlinks() {
 #
 # Function: p6df::core::modules::init()
 #
-#  Environment:	 HOMEBREW_PREFIX
 #>
 ######################################################################
 p6df::core::modules::init() {
@@ -107,7 +106,7 @@ p6df::core::modules::foreach() {
 #  Args:
 #	OPTIONAL dir - [$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6common]
 #
-#  Environment:	 P6_DFZ_ P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 ######################################################################
 p6df::core::modules::bootstrap::p6common() {

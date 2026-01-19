@@ -7,7 +7,7 @@
 #	OPTIONAL rc - [0]
 #	OPTIONAL msg - []
 #
-#  Environment:	 ALL EOF P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
+#  Environment:	 P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
 #/ Synopsis
 #/    bin/p6df [-D|-d] [cmd]
@@ -45,7 +45,6 @@ EOF
 #  Args:
 #	... - 
 #
-#  Environment:	 LC_ALL OPTIND
 #>
 ######################################################################
 p6df::core::cli::run() {
