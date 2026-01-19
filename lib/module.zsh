@@ -27,6 +27,7 @@ p6df::core::module::init() {
   # After 'Tail-recursion' also run api hooks
   p6df::core::prompt::module::init "$module" "$dir"         # Prompt
   p6df::core::aliases::module::init "$module" "$dir"        # Aliases
+  p6df::core::path::module::init "$module" "$dir"           # Path
   p6df::core::completions::module::init "$module" "$dir"    # Completions
 
   p6_return_void
@@ -457,6 +458,7 @@ p6df::core::module::parse() {
   repo[prompt_env]=$repo[prefix]::prompt::env         # prompt env function
   repo[prompt_lang]=$repo[prefix]::prompt::lang       # prompt lang function
   repo[alias]=$repo[prefix]::aliases::init            # alias function
+  repo[path_init]=$repo[prefix]::path::init           # path function
   repo[completion]=$repo[prefix]::completions::init   # completion function
 
   repo[sub]=${module##*:}                    # subdir file path : sep
