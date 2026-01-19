@@ -208,7 +208,6 @@ p6df::core::internal::doc() {
 #	dir -
 #	callback -
 #
-#  Environment:	 P6_DFZ_
 #>
 ######################################################################
 p6df::core::internal::recurse::shortcircuit() {
@@ -282,7 +281,6 @@ p6df::core::internal::recurse::deps::run() {
 #  Returns:
 #	str - func_callback
 #
-#  Environment:	 CALLBACK
 #>
 ######################################################################
 p6df::core::internal::recurse::callback() {
@@ -309,7 +307,7 @@ p6df::core::internal::recurse::callback() {
 #	callback -
 #	... - 
 #
-#  Environment:	 DEP
+#  Environment:	 M
 #>
 ######################################################################
 p6df::core::internal::recurse::deps::each() {
@@ -337,7 +335,7 @@ p6df::core::internal::recurse::deps::each() {
 #	OPTIONAL callback - []
 #	... - 
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_SRC_DIR XXX
+#  Environment:	 EPOCHREALTIME M P6_DFZ_SRC_DIR
 #>
 ######################################################################
 p6df::core::internal::recurse() {

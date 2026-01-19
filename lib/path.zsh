@@ -42,7 +42,6 @@ p6df::core::path::cd::if() {
 #  Args:
 #	dir -
 #
-#  Environment:	 X11
 #>
 ######################################################################
 p6df::core::path::init() {
@@ -67,7 +66,7 @@ p6df::core::path::init() {
 #
 # Function: p6df::core::path::cd::init()
 #
-#  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_FOCUSED_DIR P6_DFZ_SRC_GH_DIR P6_DFZ_SRC_P6M7G8_ACTIONS_DIR P6_DFZ_SRC_P6M7G8_AUTOMATION_DIR P6_DFZ_SRC_P6M7G8_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR P6_DFZ_SRC_WORK_ARKESTRO_DIR P6_DFZ_SRC_WORK_DIR PYTHONPATH
+#  Environment:	 P6_DFZ_SRC_DIR P6_DFZ_SRC_FOCUSED_DIR P6_DFZ_SRC_GH_DIR P6_DFZ_SRC_P6M7G8_ACTIONS_DIR P6_DFZ_SRC_P6M7G8_AUTOMATION_DIR P6_DFZ_SRC_P6M7G8_DIR P6_DFZ_SRC_P6M7G8_DOTFILES_DIR P6_DFZ_SRC_WORK_ARKESTRO_DIR P6_DFZ_SRC_WORK_DIR
 #>
 ######################################################################
 p6df::core::path::cd::init() {

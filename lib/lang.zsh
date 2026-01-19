@@ -7,7 +7,7 @@
 #	dir -
 #	name -
 #
-#  Environment:	 ENV_ROOT P6_DFZ_LANGS_DISABLE XXX
+#  Environment:	 P6_DFZ_LANGS_DISABLE
 #>
 ######################################################################
 p6df::core::lang::mgr::init() {
@@ -30,7 +30,7 @@ p6df::core::lang::mgr::init() {
 ######################################################################
 #<
 #
-# Function: str str = p6df::core::lang::prompt::lang(label, mgr_cmd, sys_cmd)
+# Function: str label:$ver = p6df::core::lang::prompt::lang(label, mgr_cmd, sys_cmd)
 #
 #  Args:
 #	label -
@@ -38,7 +38,7 @@ p6df::core::lang::mgr::init() {
 #	sys_cmd -
 #
 #  Returns:
-#	str - str
+#	str - label:$ver
 #
 #>
 ######################################################################

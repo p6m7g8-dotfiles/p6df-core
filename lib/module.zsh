@@ -420,7 +420,6 @@ p6df::core::module::expand() {
 #	module -
 #	_dir -
 #
-#  Environment:	 XXX
 #>
 #/ Synopsis:
 #/   Given a module as (organization/repository) return a hash/dict
