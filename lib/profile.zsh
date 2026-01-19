@@ -3,7 +3,7 @@
 ######################################################################
 #<
 #
-# Function: str str = p6df::modules::profile::prompt::mod()
+# Function: str str = p6df::core::profile::prompt::mod()
 #
 #  Returns:
 #	str - str
