@@ -18,12 +18,11 @@ p6df::user::modules::init::post() {
 
 p6df::user::prompt() {
 
-  p6df::core::prompt::line::add "p6df::modules::zsh::std::prompt::line"
-  p6df::core::prompt::line::add "p6df::modules::zsh::dir::prompt::line"
+  p6df::core::prompt::line::add::mod "p6df::modules::zsh::std::prompt::mod"
+  p6df::core::prompt::line::add::mod "p6df::modules::zsh::dir::prompt::mod"
 }
 
 p6df::user::theme() {
 
   export PAGER=less
 }
-

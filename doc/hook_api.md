@@ -11,7 +11,7 @@
   - [vscodes](#vscodes)
   - [vscodes::config](#vscodesconfig)
   - [prompt::init](#promptinit)
-  - [prompt::line](#promptline)
+  - [prompt::mod](#promptline)
 
 ## init(module, dir)
 
@@ -90,7 +90,7 @@ Returns a valid JSON snippet of vscode config for this module and its code exten
 If you need to do setup work do it here.
 This is not what will be called to render the prompt
 
-## prompt::line
+## prompt::mod
 
 - Presence: OPTIONAL
 

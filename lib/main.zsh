@@ -24,11 +24,11 @@ p6df::core::main::init() {
 	p6df::core::aliases::init
 
 	local t1=$EPOCHREALTIME
+	p6df::core::prompt::init
 	p6df::core::modules::init
 	p6_time "$t1" "p6df::core::modules::init()"
 
 	p6df::core::theme::init
-	p6df::core::prompt::init
 
 	p6_time "$t0" "STARTED: p6df::core::main::init()$P6_NL"
 }
