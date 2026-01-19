@@ -10,11 +10,11 @@
 
 ## Contributing
 
-- [How to Contribute](<https://github.com//.github/blob/main/CONTRIBUTING.md>)
+- [How to Contribute](<https://github.com/p6m7g8-dotfiles/p6m7g8-core/.github/blob/main/CONTRIBUTING.md>)
 
 ## Code of Conduct
 
-- [Code of Conduct](<https://github.com//.github/blob/main/CODE_OF_CONDUCT.md>)
+- [Code of Conduct](<https://github.com/p6m7g8-dotfiles/p6df-core/.github/blob/main/CODE_OF_CONDUCT.md>)
 
 ## Usage
 
@@ -93,9 +93,9 @@
 
 ### p6df-core/lib/module.zsh
 
-- p6df::core::module::add(short_module, _dir)
+- p6df::core::module::add(short_module, dir)
 - p6df::core::module::add::export()
-- p6df::core::module::add::lazy(short_module, _dir)
+- p6df::core::module::add::lazy(short_module, dir)
 - p6df::core::module::brews(module, dir)
 - p6df::core::module::diag(module, dir)
 - p6df::core::module::diff(module, dir)
@@ -103,7 +103,7 @@
 - p6df::core::module::fetch(module, dir)
 - p6df::core::module::init()
 - p6df::core::module::langs(module, dir)
-- p6df::core::module::parse(module, _dir)
+- p6df::core::module::parse(module, dir)
 - p6df::core::module::pull(module, dir)
 - p6df::core::module::push(module, dir)
 - p6df::core::module::status(module, dir)
@@ -112,8 +112,8 @@
 - p6df::core::module::update(module, dir)
 - p6df::core::module::use(short_module, dir)
 - p6df::core::module::vscodes(module, dir)
-- str module = p6df::core::module::expand(short_module, _dir)
-- str str = p6df::core::module::env::name(module, _dir, callback)
+- str module = p6df::core::module::expand(short_module, dir)
+- str str = p6df::core::module::env::name(module, dir, callback)
 
 ### p6df-core/lib/modules.zsh
 
