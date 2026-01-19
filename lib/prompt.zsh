@@ -76,7 +76,7 @@ p6df::core::prompt::runtime::lines() {
     sep=" "
   done
 
-  if p6_string_blank "$lang_line"; then
+  if ! p6_string_blank "$langs_line"; then
      p6_echo "langs:\t\t  ${langs_line}"
   fi
 
