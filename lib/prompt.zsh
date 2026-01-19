@@ -179,7 +179,7 @@ p6df::core::prompt::module::init() {
 p6df::core::prompt::line::add::mod::first() {
   local func="$1"
 
-  p6_env_export P6_DFZ_PROMPT_MOD_FIRST_LINES "${P6_DFZ_PROMPT_MOD_FIRST_LINES:+$P6_DFZ_PROMPT_MOD_FIRST_LINES}$func"
+  p6_env_export P6_DFZ_PROMPT_MOD_FIRST_LINES "${P6_DFZ_PROMPT_MOD_FIRST_LINES:+$P6_DFZ_PROMPT_MOD_FIRST_LINES }$func"
 
   p6_return_void
 }
