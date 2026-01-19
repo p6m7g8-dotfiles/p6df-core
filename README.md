@@ -5,18 +5,16 @@
 ## Badges
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Mergify](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges//p6df-core/&style=flat)](https://mergify.io)
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](<https://gitpod.io/#https://github.com//p6df-core>)
 
 ## Summary
 
 ## Contributing
 
-- [How to Contribute](<https://github.com//.github/blob/main/CONTRIBUTING.md>)
+- [How to Contribute](<https://github.com/p6m7g8-dotfiles/p6m7g8-core/.github/blob/main/CONTRIBUTING.md>)
 
 ## Code of Conduct
 
-- [Code of Conduct](<https://github.com//.github/blob/main/CODE_OF_CONDUCT.md>)
+- [Code of Conduct](<https://github.com/p6m7g8-dotfiles/p6df-core/.github/blob/main/CODE_OF_CONDUCT.md>)
 
 ## Usage
 
@@ -86,7 +84,6 @@
 ### p6df-core/lib/lang.zsh
 
 - p6df::core::lang::mgr::init(dir, name)
-- p6df::core::lang::mgr::init2(cmd, name)
 
 ### p6df-core/lib/main.zsh
 
@@ -136,18 +133,22 @@
 - p6df::core::path::if(dir)
 - p6df::core::path::init(dir)
 
+### p6df-core/lib/profile.zsh
+
+- str str = p6df::modules::profile::prompt::mod()
+
 ### p6df-core/lib/prompt.zsh
 
 - p6df::core::prompt::init()
-- p6df::core::prompt::lang::env::off(lang)
-- p6df::core::prompt::lang::line::add(thing)
-- p6df::core::prompt::lang::line::remove(thing)
-- p6df::core::prompt::line::add(thing)
-- p6df::core::prompt::line::remove(thing)
+- p6df::core::prompt::line::add::env(func)
+- p6df::core::prompt::line::add::lang(func)
+- p6df::core::prompt::line::add::mod(func)
+- p6df::core::prompt::line::add::mod::bottom(func)
+- p6df::core::prompt::line::add::mod::first(func)
 - p6df::core::prompt::module::init(module)
-- p6df::core::prompt::runtime()
-- str str = p6df::core::lang::prompt::env::line()
-- str str = p6df::core::lang::prompt::line(str, f)
+- str cnt = p6df::core::prompt::runtime::line(func)
+- stream  = p6df::core::prompt::runtime()
+- stream  = p6df::core::prompt::runtime::lines()
 
 ### p6df-core/lib/theme.zsh
 
@@ -185,13 +186,14 @@
 │   ├── module.zsh
 │   ├── modules.zsh
 │   ├── path.zsh
+│   ├── profile.zsh
 │   ├── prompt.zsh
 │   ├── theme.zsh
 │   └── user.zsh
 ├── README.md
 └── share
 
-6 directories, 24 files
+6 directories, 25 files
 ```
 
 ## Author

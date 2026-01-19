@@ -451,12 +451,14 @@ p6df::core::module::parse() {
   repo[path]=$repo[org]/$repo[repo]          # (org/repo)
   repo[version]=master
 
-  repo[module]=${repo[repo]##p6df-}          # p6df-(repo)
-#  repo[module]=${repo[module]##p6}           # p6(repo)
-  repo[prefix]=p6df::modules::$repo[module]  # p6df::modules::(repo) without p6df-
-  repo[prompt]=$repo[prefix]::prompt::line   # prompt function
-  repo[alias]=$repo[prefix]::aliases::init   # alias function
-  repo[completion]=$repo[prefix]::completions::init   # copmletion function
+  repo[module]=${repo[repo]##p6df-}                   # p6df-(repo)
+#  repo[module]=${repo[module]##p6}                   # p6(repo)
+  repo[prefix]=p6df::modules::$repo[module]           # p6df::modules::(repo) without p6df-
+  repo[prompt_mod]=$repo[prefix]::prompt::mod         # prompt module function
+  repo[prompt_env]=$repo[prefix]::prompt::env         # prompt env function
+  repo[prompt_lang]=$repo[prefix]::prompt::lang       # prompt lang function
+  repo[alias]=$repo[prefix]::aliases::init            # alias function
+  repo[completion]=$repo[prefix]::completions::init   # completion function
 
   repo[sub]=${module##*:}                    # subdir file path : sep
   repo[plugin]=${repo[sub]##*/}              # subdir plugin up to first /
@@ -475,8 +477,6 @@ p6df::core::module::parse() {
   elif [[ $repo[repo] = prezto ]]; then
       repo[load_path]=$repo[path]/$repo[sub]/init.zsh
       repo[extra_load_path]=$repo[path]/init.zsh
-  elif [[ $repo[repo] =~ wakatime-zsh-plugin ]]; then
-	  repo[load_path]=$repo[path]/wakatime.plugin.zsh # grumble
   elif [[ $repo[repo] =~ zsh ]]; then
 	  repo[load_path]=$repo[path]/$repo[plugin].plugin.zsh
   else
