@@ -11,7 +11,7 @@
   - [vscodes](#vscodes)
   - [vscodes::config](#vscodesconfig)
   - [prompt::init](#promptinit)
-  - [prompt::mod](#promptline)
+  - [prompt::mod](#promptmod)
 
 ## init(module, dir)
 
