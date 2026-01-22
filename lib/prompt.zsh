@@ -3,18 +3,15 @@
 #
 # Function: p6df::core::prompt::init()
 #
-#  Environment:	 P6_DFZ_PROMPT_ENV_LINES P6_DFZ_PROMPT_LANG_LINES P6_DFZ_PROMPT_MOD_BOTTOM_LINES P6_DFZ_PROMPT_MOD_FIRST_LINES P6_DFZ_PROMPT_MOD_LINES PROMPT
+#  Environment:	 P6_DFZ_PROMPT_ENV_LINES P6_DFZ_PROMPT_LANG_LINES P6_DFZ_PROMPT_MOD_BOTTOM_LINES P6_DFZ_PROMPT_MOD_LINES PROMPT
 #>
 ######################################################################
 p6df::core::prompt::init() {
 
-  p6_env_export P6_DFZ_PROMPT_MOD_FIRST_LINES ""
   p6_env_export P6_DFZ_PROMPT_LANG_LINES ""
   p6_env_export P6_DFZ_PROMPT_ENV_LINES ""
   p6_env_export P6_DFZ_PROMPT_MOD_LINES ""
   p6_env_export P6_DFZ_PROMPT_MOD_BOTTOM_LINES ""
-
-  p6df::core::prompt::line::add::mod::first "p6df::core::profile::prompt::mod"
 
   p6_run_yield "p6df::user::prompt"
 
@@ -82,7 +79,6 @@ p6df::core::prompt::runtime::lines() {
   local -a _other_lines
   _other_lines=(
     ${=P6_DFZ_PROMPT_ENV_LINES}
-    ${=P6_DFZ_PROMPT_MOD_FIRST_LINES}
     ${=P6_DFZ_PROMPT_MOD_LINES}
     ${=P6_DFZ_PROMPT_MOD_BOTTOM_LINES}
   )
@@ -138,16 +134,12 @@ p6df::core::prompt::module::init() {
 
   # %repo
   p6df::core::module::parse "$module"
-  local prompt_mod_first_func=$repo[prompt_mod_first]
   local prompt_lang_func=$repo[prompt_lang]
   local prompt_env_func=$repo[prompt_env]
   local prompt_mod_func=$repo[prompt_mod]
   local prompt_mod_bottom_func=$repo[prompt_mod_bottom]
   unset repo
 
-  if type -f "$prompt_mod_first_func" > /dev/null 2>&1; then
-    p6df::core::prompt::line::add::mod::first "$prompt_mod_first_func"
-  fi
   if type -f "$prompt_lang_func" >/dev/null 2>&1; then
     p6df::core::prompt::line::add::lang "$prompt_lang_func"
   fi
@@ -160,25 +152,6 @@ p6df::core::prompt::module::init() {
   if type -f "$prompt_mod_bottom_func" >/dev/null 2>&1; then
     p6df::core::prompt::line::add::mod::bottom "$prompt_mod_bottom_func"
   fi
-
-  p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::core::prompt::line::add::mod::first(func)
-#
-#  Args:
-#	func -
-#
-#  Environment:	 P6_DFZ_PROMPT_MOD_FIRST_LINES
-#>
-######################################################################
-p6df::core::prompt::line::add::mod::first() {
-  local func="$1"
-
-  p6_env_export P6_DFZ_PROMPT_MOD_FIRST_LINES "${P6_DFZ_PROMPT_MOD_FIRST_LINES:+$P6_DFZ_PROMPT_MOD_FIRST_LINES }$func"
 
   p6_return_void
 }
