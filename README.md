@@ -155,7 +155,6 @@ TODO: Add a short summary of this module.
 - `p6df::core::prompt::line::add::lang(func)`
 - `p6df::core::prompt::line::add::mod(func)`
 - `p6df::core::prompt::line::add::mod::bottom(func)`
-- `p6df::core::prompt::line::add::mod::first(func)`
 - `p6df::core::prompt::module::init(module)`
 - `str cnt = p6df::core::prompt::runtime::line(func)`
 - `stream  = p6df::core::prompt::runtime()`
