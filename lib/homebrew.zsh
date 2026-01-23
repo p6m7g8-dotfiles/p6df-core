@@ -29,6 +29,113 @@ p6df::core::homebrew::init() {
 ######################################################################
 #<
 #
+# Function: p6df::core::homebrew::aliases::init()
+#
+#>
+######################################################################
+p6df::core::homebrew::aliases::init() {
+
+  p6_alias "p6_hbr" "p6df::core::homebrew::remove"
+  p6_alias "p6_hbcr" "p6df::core::homebrew::casks::remove"
+  p6_alias "p6_hbbr" "p6df::core::homebrew::brews::remove"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::homebrew::cmd::brew(...)
+#
+#  Args:
+#	... -
+#
+#>
+#/ Synopsis
+#/   Wrapper function to execute brew commands
+######################################################################
+p6df::core::homebrew::cmd::brew() {
+  shift 0
+
+  brew "$@"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::homebrew::cli::brew::install(...)
+#
+#  Args:
+#	... -
+#
+#>
+######################################################################
+p6df::core::homebrew::cli::brew::install() {
+  shift 0
+
+  p6df::core::homebrew::cmd::brew install "$@"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::homebrew::cli::brew::services::start(...)
+#
+#  Args:
+#	... -
+#
+#>
+######################################################################
+p6df::core::homebrew::cli::brew::services::start() {
+  shift 0
+
+  p6df::core::homebrew::cmd::brew services start "$@"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::homebrew::cli::brew::services::stop(...)
+#
+#  Args:
+#	... -
+#
+#>
+######################################################################
+p6df::core::homebrew::cli::brew::services::stop() {
+  shift 0
+
+  p6df::core::homebrew::cmd::brew services stop "$@"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::homebrew::remove()
+#
+#>
+#/ Synopsis
+#/   Removes all casks and brews
+######################################################################
+p6df::core::homebrew::remove() {
+
+  p6df::core::homebrew::casks::remove
+  p6df::core::homebrew::brews::remove
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::homebrew::casks::remove()
 #
 #>
@@ -41,6 +148,8 @@ p6df::core::homebrew::casks::remove() {
   for formula in $(p6_echo "$formuli"); do
     NONINTERACTIVE=1 brew uninstall --cask "$formula"
   done
+
+  p6_return_void
 }
 
 ######################################################################
@@ -58,6 +167,8 @@ p6df::core::homebrew::brews::remove() {
   for formula in $(p6_echo "$formuli"); do
     NONINTERACTIVE=1 brew uninstall --ignore-dependencies --force "$formula"
   done
+
+  p6_return_void
 }
 
 ######################################################################
@@ -67,11 +178,15 @@ p6df::core::homebrew::brews::remove() {
 #
 #  Environment:	 HOMEBREW_PREFIX
 #>
+#/ Synopsis
+#/   Removes and recreates the HOMEBREW_PREFIX directory
 ######################################################################
 p6df::core::homebrew::nuke() {
 
   p6_dir_rmrf "$HOMEBREW_PREFIX"
   p6_dir_mk "$HOMEBREW_PREFIX"
+
+  p6_return_void
 }
 
 ######################################################################
@@ -80,8 +195,12 @@ p6df::core::homebrew::nuke() {
 # Function: p6df::core::homebrew::install()
 #
 #>
+#/ Synopsis
+#/   Installs Homebrew from the official GitHub repository
 ######################################################################
 p6df::core::homebrew::install() {
 
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  p6_return_void
 }

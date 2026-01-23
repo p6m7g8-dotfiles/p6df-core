@@ -14,6 +14,9 @@ p6df::core::aliases::init() {
   p6_alias "p6df_mP" "p6df -a push"
   p6_alias "p6df_mS" "p6df -a sync"
   p6_alias "p6df_ms" "p6df -a status"
+
+  # Homebrew aliases
+  p6df::core::homebrew::aliases::init
 }
 
 ######################################################################
