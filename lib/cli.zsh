@@ -122,7 +122,7 @@ p6df::core::cli::run() {
 #
 #  Args:
 #	cmd -
-#	... - 
+#	... -
 #
 #  Environment:	 P6_DFZ_MODULES P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
@@ -132,7 +132,7 @@ p6df::core::cli::all() {
   shift 1
 
   local dir
- 
+
   local modules
   if p6_string_eq_1 "$flag_bootstrap"; then
     modules="$P6_DFZ_MODULES"
@@ -141,22 +141,24 @@ p6df::core::cli::all() {
   fi
   for dir in $(p6_echo $modules); do
     p6_h1 "$dir"
-    p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir"
+    p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir" "$cmd"
   done
 }
 
 ######################################################################
 #<
 #
-# Function: p6df::core::cli::all::run(dir)
+# Function: p6df::core::cli::all::run(dir, cmd)
 #
 #  Args:
 #	dir -
+#	cmd -
 #
 #>
 ######################################################################
 p6df::core::cli::all::run() {
   local dir="$1"
+  local cmd="$2"
 
   local module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
   p6_h2 "$module"
