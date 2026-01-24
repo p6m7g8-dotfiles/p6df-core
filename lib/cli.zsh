@@ -122,7 +122,7 @@ p6df::core::cli::run() {
 #
 #  Args:
 #	cmd -
-#	... -
+#	... - 
 #
 #  Environment:	 P6_DFZ_MODULES P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>

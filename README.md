@@ -45,7 +45,7 @@ TODO: Add a short summary of this module.
 ##### p6df-core/lib/cli.zsh
 
 - `p6df::core::cli::all(cmd, ...)`
-- `p6df::core::cli::all::run(dir)`
+- `p6df::core::cli::all::run(dir, cmd)`
 - `p6df::core::cli::run(...)`
 - `p6df::core::cli::usage([rc=0], [msg=])`
 
@@ -66,9 +66,14 @@ TODO: Add a short summary of this module.
 
 - `p6df::core::homebrew::brews::remove()`
 - `p6df::core::homebrew::casks::remove()`
+- `p6df::core::homebrew::cli::brew::install(...)`
+- `p6df::core::homebrew::cli::brew::services::start(...)`
+- `p6df::core::homebrew::cli::brew::services::stop(...)`
+- `p6df::core::homebrew::cmd::brew(...)`
 - `p6df::core::homebrew::init()`
 - `p6df::core::homebrew::install()`
 - `p6df::core::homebrew::nuke()`
+- `p6df::core::homebrew::remove()`
 
 ##### p6df-core/lib/internal.zsh
 
@@ -201,9 +206,11 @@ TODO: Add a short summary of this module.
 │   ├── theme.zsh
 │   └── user.zsh
 ├── README.md
-└── share
+├── share
+└── t
+    └── cli.sh
 
-6 directories, 25 files
+7 directories, 26 files
 ```
 
 ## Author
