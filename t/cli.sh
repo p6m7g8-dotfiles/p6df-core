@@ -30,7 +30,7 @@ main() {
 		p6_test_run "
 			p6df::core::internal::recurse() {
 				local callback=\$3
-				echo \$callback | sed 's/p6df::core::internal:://'
+				p6_echo \"\$callback\" | p6_filter_extract_after \"p6df::core::internal::\"
 			}
 			p6df::core::module::expand() { echo 'p6df-test'; }
 			p6_uri_name() { echo 'test'; }
@@ -65,7 +65,7 @@ main() {
 	######################################################################
 	p6_test_start "cmd parameter defined in all::run"
 	(
-		p6_test_run "grep -A 5 'p6df::core::cli::all::run()' $P6_DFZ_LIB_DIR/cli.zsh | grep -q 'local cmd=\"\$2\"'"
+		p6_test_run "p6_filter_row_select_and_after 'p6df::core::cli::all::run()' 5 < $P6_DFZ_LIB_DIR/cli.zsh | p6_filter_row_select 'local cmd=\"\$2\"' >/dev/null"
 		p6_test_assert_run_rc "cmd=\$2 found" 0
 	)
 	p6_test_finish
@@ -75,7 +75,7 @@ main() {
 	######################################################################
 	p6_test_start "cmd passed from all to all::run"
 	(
-		p6_test_run "grep 'p6df::core::cli::all::run' $P6_DFZ_LIB_DIR/cli.zsh | grep -q '\"\$dir\" \"\$cmd\"'"
+		p6_test_run "p6_filter_row_select 'p6df::core::cli::all::run' < $P6_DFZ_LIB_DIR/cli.zsh | p6_filter_row_select '\"\$dir\" \"\$cmd\"' >/dev/null"
 		p6_test_assert_run_rc "cmd passed in call" 0
 	)
 	p6_test_finish

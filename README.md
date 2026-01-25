@@ -51,12 +51,12 @@ TODO: Add a short summary of this module.
 
 ##### p6df-core/lib/completions.zsh
 
-- `p6df::core::completions::module::init()`
+- `p6df::core::completions::module::init(module, dir)`
 
 ##### p6df-core/lib/dev.zsh
 
 - `p6df::core::dev::dot(module, dep)`
-- `p6df::core::dev::graph()`
+- `p6df::core::dev::graph([modules=$P6_DFZ_MODULES])`
 
 ##### p6df-core/lib/file.zsh
 
@@ -82,7 +82,7 @@ TODO: Add a short summary of this module.
 - `p6df::core::internal::diag(module, dir)`
 - `p6df::core::internal::diff(_module, dir)`
 - `p6df::core::internal::doc(_module, dir)`
-- `p6df::core::internal::fetch()`
+- `p6df::core::internal::fetch(module, dir)`
 - `p6df::core::internal::langs(module, dir)`
 - `p6df::core::internal::pull(_module, dir)`
 - `p6df::core::internal::push(_module, dir)`
@@ -116,7 +116,7 @@ TODO: Add a short summary of this module.
 - `p6df::core::module::diff(module, dir)`
 - `p6df::core::module::doc(module, dir)`
 - `p6df::core::module::fetch(module, dir)`
-- `p6df::core::module::init()`
+- `p6df::core::module::init(module, dir)`
 - `p6df::core::module::langs(module, dir)`
 - `p6df::core::module::parse(module, _dir)`
 - `p6df::core::module::pull(module, dir)`

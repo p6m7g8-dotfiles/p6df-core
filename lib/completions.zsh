@@ -3,7 +3,11 @@
 ######################################################################
 #<
 #
-# Function: p6df::core::completions::module::init()
+# Function: p6df::core::completions::module::init(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
 #
 #>
 ######################################################################
