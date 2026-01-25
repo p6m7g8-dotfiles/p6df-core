@@ -3,7 +3,11 @@
 ######################################################################
 #<
 #
-# Function: p6df::core::internal::fetch()
+# Function: p6df::core::internal::fetch(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
 #
 #>
 ######################################################################
@@ -401,7 +405,7 @@ p6df::core::module::source() {
     local relpath="$1"
     local relaux="$2"
 
-    [[ -n "$relaux" ]] && p6df::core::file::load "$P6_DFZ_SRC_DIR/$relaux"
+    p6_string_blank_NOT "$relaux" && p6df::core::file::load "$P6_DFZ_SRC_DIR/$relaux"
     p6df::core::file::load "$P6_DFZ_SRC_DIR/$relpath"
 }
 

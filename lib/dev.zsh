@@ -3,7 +3,10 @@
 ######################################################################
 #<
 #
-# Function: p6df::core::dev::graph()
+# Function: p6df::core::dev::graph([modules=$P6_DFZ_MODULES])
+#
+#  Args:
+#	OPTIONAL modules - [$P6_DFZ_MODULES]
 #
 #  Environment:	 P6_DFZ_MODULES
 #>
@@ -48,8 +51,8 @@ p6df::core::dev::dot() {
   local module="$1"
   local dep="$2"
 
-  module=$(p6_echo $module | sed -e 's,[:\./-],_,g')
-  dep=$(p6_echo $dep | sed -e 's,[:\./-],_,g')
+  module=$(p6_string_sanitize_dot_id "$module")
+  dep=$(p6_string_sanitize_dot_id "$dep")
 
   p6_echo "$module -> $dep;"
 }

@@ -14,7 +14,11 @@
 ######################################################################
 #<
 #
-# Function: p6df::core::module::init()
+# Function: p6df::core::module::init(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
 #
 #>
 ######################################################################
@@ -464,21 +468,21 @@ p6df::core::module::parse() {
   repo[sub]=${module##*:}                    # subdir file path : sep
   repo[plugin]=${repo[sub]##*/}              # subdir plugin up to first /
 
-  if [[ $repo[repo] =~ ^p6- ]]; then
+  if p6_string_match_regex "${repo[repo]}" '^p6-'; then
     repo[load_path]=$repo[path]/$repo[repo].zsh
     repo[load_path]="${repo[load_path]/-plugin.zsh/.plugin.zsh}"
-  elif [[ $repo[repo] =~ ^p6 ]]; then
+  elif p6_string_match_regex "${repo[repo]}" '^p6'; then
     repo[load_path]=$repo[path]/init.zsh
-  elif [[ $repo[org] = ohmyzsh ]]; then
-      if [[ $repo[sub] =~ lib ]]; then
+  elif p6_string_eq "${repo[org]}" "ohmyzsh"; then
+      if p6_string_match_regex "${repo[sub]}" 'lib'; then
         repo[load_path]=$repo[path]/$repo[sub].zsh
       else
         repo[load_path]=$repo[path]/$repo[sub]/$repo[plugin].plugin.zsh
       fi
-  elif [[ $repo[repo] = prezto ]]; then
+  elif p6_string_eq "${repo[repo]}" "prezto"; then
       repo[load_path]=$repo[path]/$repo[sub]/init.zsh
       repo[extra_load_path]=$repo[path]/init.zsh
-  elif [[ $repo[repo] =~ zsh ]]; then
+  elif p6_string_match_regex "${repo[repo]}" 'zsh'; then
 	  repo[load_path]=$repo[path]/$repo[plugin].plugin.zsh
   else
       repo[no_load]=1
@@ -507,7 +511,7 @@ p6df::core::module::env::name() {
   local _dir="$2"
   local callback="$3"
 
-  local str=$(p6_echo "${module}-${callback}" | sed -e 's,[^A-Za-z0-9_],_,g')
+  local str=$(p6_string_sanitize_identifier "${module}-${callback}")
 
   p6_return_str "$str"
 }

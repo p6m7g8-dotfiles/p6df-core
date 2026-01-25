@@ -17,7 +17,7 @@ p6df::core::cli::usage() {
   local rc="${1:-0}"
   local msg="${2:-}"
 
-  if [ -n "$msg" ]; then
+  if p6_string_blank_NOT "$msg"; then
     p6_msg "$msg"
   fi
   cat <<EOF
@@ -32,7 +32,11 @@ Cmds:
   help
 EOF
 
-  grep ^p6df $P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/lib/module.zsh | sed -e 's,.*::,  ,' -e 's,(.*,,' | sort
+  p6_filter_row_select_regex '^p6df' < "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/lib/module.zsh" \
+    | p6_filter_extract_after "::" \
+    | p6_filter_extract_before "(" \
+    | p6_filter_translate_start_to_arg "  " \
+    | p6_filter_sort
 
   exit "$rc"
 }
@@ -85,7 +89,7 @@ p6df::core::cli::run() {
   fi
 
   # setup -x based on flag_debug
-  [ ${flag_debug} = 1 ] && set -x
+  p6_string_eq_1 "$flag_debug" && set -x
 
   # exit if any cli errors w/ >0 return code
   # the commands can still disable locally if needed
@@ -110,7 +114,7 @@ p6df::core::cli::run() {
   # set +e
 
   # stop debugging if it was enabled
-  [ ${flag_debug} = 1 ] && set +x
+  p6_string_eq_1 "$flag_debug" && set +x
 
   return 0
 }
@@ -122,7 +126,7 @@ p6df::core::cli::run() {
 #
 #  Args:
 #	cmd -
-#	... -
+#	... - 
 #
 #  Environment:	 P6_DFZ_MODULES P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
 #>
