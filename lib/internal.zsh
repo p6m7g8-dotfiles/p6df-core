@@ -165,6 +165,26 @@ p6df::core::internal::diag() {
 ######################################################################
 #<
 #
+# Function: p6df::core::internal::vscodes(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::internal::vscodes() {
+    local module="$1"
+    local dir="$2"
+
+    p6_run_if "p6df::modules::$module::vscodes"
+
+    p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::internal::langs(module, dir)
 #
 #  Args:
@@ -177,7 +197,7 @@ p6df::core::internal::langs() {
     local module="$1"
     local dir="$2"
 
-    p6_run_if "p6df::core::modules::langs"
+    p6_run_if "p6df::core::$module::langs"
 
     p6_return_void
 }

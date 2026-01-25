@@ -9,6 +9,10 @@ p6df::core::aliases::init() {
 
   p6_alias "p6df_i" "p6df::core::init"
 
+  p6_alias "p6_hbr" "p6df::core::homebrew::remove"
+  p6_alias "p6_hbcr" "p6df::core::homebrew::casks::remove"
+  p6_alias "p6_hbbr" "p6df::core::homebrew::brews::remove"
+
   p6_alias "p6df_md" "p6df -a diff"
   p6_alias "p6df_mp" "p6df -a pull"
   p6_alias "p6df_mP" "p6df -a push"

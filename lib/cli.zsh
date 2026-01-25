@@ -98,6 +98,7 @@ p6df::core::cli::run() {
 
   p6df::core::module::use "p6m7g8-dotfiles/p6git"
   p6df::core::module::use "p6m7g8-dotfiles/p6df-perl"
+  p6df::core::module::use "p6m7g8-dotfiles/p6df-vscode"
   p6df::core::module::use "p6m7g8-dotfiles/p6df-zsh"
 
   if p6_string_eq "$flag_all" "1"; then
