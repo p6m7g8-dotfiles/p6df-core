@@ -66,9 +66,14 @@ TODO: Add a short summary of this module.
 
 - `p6df::core::homebrew::brews::remove()`
 - `p6df::core::homebrew::casks::remove()`
+- `p6df::core::homebrew::cli::brew::install(...)`
+- `p6df::core::homebrew::cli::brew::services::start(...)`
+- `p6df::core::homebrew::cli::brew::services::stop(...)`
+- `p6df::core::homebrew::cmd::brew(...)`
 - `p6df::core::homebrew::init()`
 - `p6df::core::homebrew::install()`
 - `p6df::core::homebrew::nuke()`
+- `p6df::core::homebrew::remove()`
 
 ##### p6df-core/lib/internal.zsh
 
