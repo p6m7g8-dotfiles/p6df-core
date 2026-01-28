@@ -72,7 +72,7 @@ p6df::core::prompt::runtime::lines() {
     sep=" "
   done
 
-  if ! p6_string_blank "$langs_line"; then
+  if p6_string_blank_NOT "$langs_line"; then
      p6_echo "langs:\t\t  ${langs_line}"
   fi
 
@@ -112,7 +112,7 @@ p6df::core::prompt::runtime::line() {
     local t3=$EPOCHREALTIME
     local cnt=$(p6_run_yield "$func")
     p6_time "$t3" "p6df::core::prompt::runtime: $func"
-    if ! p6_string_blank "$cnt"; then
+    if p6_string_blank_NOT "$cnt"; then
         p6_return_str "$cnt"
     else
         p6_return_void

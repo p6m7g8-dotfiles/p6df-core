@@ -15,7 +15,7 @@ p6df::core::internal::fetch() {
     local module="$1"
     local dir="$2"
 
-    if ! p6_dir_exists "$dir"; then
+    if p6_dir_exists_NOT "$dir"; then
         p6_run_write_cmd "gh repo clone $module $dir"
     fi
 }
@@ -35,7 +35,7 @@ p6df::core::internal::update() {
     local module="$1"
     local dir="$2"
 
-    if ! p6_dir_exists "$dir"; then
+    if p6_dir_exists_NOT "$dir"; then
         p6df::core::internal::fetch "$dir" "$module"
     else
         p6df::core::internal::pull "$dir" "$module"
