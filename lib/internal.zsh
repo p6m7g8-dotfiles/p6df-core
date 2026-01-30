@@ -378,8 +378,8 @@ p6df::core::internal::recurse() {
     # load
     # %repo
     p6df::core::module::parse "$module" "$dir"
-    if p6_string_blank "$no_load"; then
-      p6_file_load "$P6_DFZ_SRC_DIR/$relpath"
+    if p6_string_blank "$repo[no_load]"; then
+      p6_file_load "$P6_DFZ_SRC_DIR/$repo[load_path]"
     fi
     local main_repo=$repo[repo]
     local main_org=$repo[org]
