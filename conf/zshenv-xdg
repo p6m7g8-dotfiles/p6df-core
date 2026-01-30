@@ -58,7 +58,6 @@ export P6_DFZ_ZSHENV_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zshenv
 export P6_DFZ_ZSHRC_FILE=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/conf/zshrc
 
 export P6_DFZ_CACHE_DIR=$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR/p6df-core/share/.cache
-export P6_DFZ_PROMPT_CACHE=$P6_DFZ_CACHE_DIR/prompt
 
 export P6_DEBUG=
 export P6_VERBOSE=0
