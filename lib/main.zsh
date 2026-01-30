@@ -12,6 +12,7 @@ p6df::core::main::init() {
 
 	local t0=$EPOCHREALTIME
 	p6df::core::main::self::init
+
 	p6_time "$t0" "p6df::core::main::self::init()"
 
 	p6df::core::user::init

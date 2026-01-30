@@ -479,9 +479,6 @@ p6df::core::module::parse() {
       else
         repo[load_path]=$repo[path]/$repo[sub]/$repo[plugin].plugin.zsh
       fi
-  elif p6_string_eq "${repo[repo]}" "prezto"; then
-      repo[load_path]=$repo[path]/$repo[sub]/init.zsh
-      repo[extra_load_path]=$repo[path]/init.zsh
   elif p6_string_match_regex "${repo[repo]}" 'zsh'; then
 	  repo[load_path]=$repo[path]/$repo[plugin].plugin.zsh
   else

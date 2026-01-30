@@ -12,7 +12,7 @@ p6df::core::file::load() {
   local file="$1"
 
   if [[ -r "$file" ]]; then
-    echo ". $file" >>/tmp/p6/log.log
+    echo "p6df-core . $file" >>/tmp/p6/log.log
     . "$file"
   else
     true

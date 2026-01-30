@@ -378,7 +378,9 @@ p6df::core::internal::recurse() {
     # load
     # %repo
     p6df::core::module::parse "$module" "$dir"
-    p6df::core::module::source "$repo[load_path]" "$repo[extra_load_path]"
+    if p6_string_blank "$no_load"; then
+      p6_file_load "$P6_DFZ_SRC_DIR/$relpath"
+    fi
     local main_repo=$repo[repo]
     local main_org=$repo[org]
     local main_module="$main_org/$main_repo"
@@ -407,26 +409,6 @@ p6df::core::internal::recurse() {
     p6_time "$t4" "p6df::core::internal::recurse($module, $dir, $callback)"
 
     p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: p6df::core::module::source(relpath, relaux)
-#
-#  Args:
-#	relpath -
-#	relaux -
-#
-#  Environment:	 P6_DFZ_SRC_DIR
-#>
-######################################################################
-p6df::core::module::source() {
-    local relpath="$1"
-    local relaux="$2"
-
-    p6_string_blank_NOT "$relaux" && p6df::core::file::load "$P6_DFZ_SRC_DIR/$relaux"
-    p6df::core::file::load "$P6_DFZ_SRC_DIR/$relpath"
 }
 
 ######################################################################
