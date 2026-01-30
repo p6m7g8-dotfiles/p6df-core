@@ -32,6 +32,7 @@ p6df::core::aliases::init() {
 ######################################################################
 p6df::core::aliases::module::init() {
   local module="$1"
+  local dir="$2"
 
   # %repo
   p6df::core::module::parse "$module"
@@ -39,7 +40,7 @@ p6df::core::aliases::module::init() {
   unset repo
 
   if type -f "$alias_func" >/dev/null 2>&1; then
-    p6_run_yield "$alias_func"
+    p6_run_yield "$alias_func $module $dir"
   fi
 
   p6_return_void
