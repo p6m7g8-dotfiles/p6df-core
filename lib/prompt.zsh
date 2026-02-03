@@ -77,11 +77,15 @@ p6df::core::prompt::runtime::lines() {
   fi
 
   local -a _other_lines
-  _other_lines=(
-    ${=P6_DFZ_PROMPT_ENV_LINES}
-    ${=P6_DFZ_PROMPT_MOD_LINES}
-    ${=P6_DFZ_PROMPT_MOD_BOTTOM_LINES}
-  )
+  if p6_string_blank "$P6_DFZ_PROMPT_IN_VSCODE"; then
+    _other_lines=(
+      ${=P6_DFZ_PROMPT_ENV_LINES}
+      ${=P6_DFZ_PROMPT_MOD_LINES}
+      ${=P6_DFZ_PROMPT_MOD_BOTTOM_LINES}
+    )
+  else
+    _other_lines=(${=P6_DFZ_PROMPT_MOD_BOTTOM_LINES})
+  fi
 
   for lf in $_other_lines; do
     p6df::core::prompt::runtime::line "$lf"
