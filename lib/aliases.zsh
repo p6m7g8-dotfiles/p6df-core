@@ -23,10 +23,11 @@ p6df::core::aliases::init() {
 ######################################################################
 #<
 #
-# Function: p6df::core::aliases::module::init(module)
+# Function: p6df::core::aliases::module::init(module, dir)
 #
 #  Args:
 #	module -
+#	dir -
 #
 #>
 ######################################################################

@@ -52,7 +52,7 @@ p6df::core::prompt::runtime() {
 #  Returns:
 #	stream - 
 #
-#  Environment:	 EPOCHREALTIME _
+#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_IN_VSCODE _
 #>
 ######################################################################
 p6df::core::prompt::runtime::lines() {

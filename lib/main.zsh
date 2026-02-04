@@ -3,7 +3,7 @@
 #
 # Function: p6df::core::main::init()
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_CACHE P6_DFZ_SRC_P6M7G8_DOTFILES_DIR P6_NL
+#  Environment:	 EPOCHREALTIME P6_DFZ_SRC_P6M7G8_DOTFILES_DIR P6_NL
 #>
 ######################################################################
 p6df::core::main::init() {
