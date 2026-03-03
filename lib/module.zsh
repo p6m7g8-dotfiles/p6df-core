@@ -92,7 +92,7 @@ p6df::core::module::brews() {
    local module="$1"
    local dir="$2"
 
-   p6df::core::internal::recurse "$module" "$dir" "external::brew"
+   p6df::core::internal::recurse "$module" "$dir" "external::brews"
 
    p6_return_void
 }

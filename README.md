@@ -42,22 +42,22 @@ TODO: Add a short summary of this module.
 - `p6df::core::aliases::init()`
 - `p6df::core::aliases::module::init(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 
 ##### p6df-core/lib/cli.zsh
 
 - `p6df::core::cli::all(cmd, ...)`
   - Args:
-    - cmd - 
-    - ... - 
+    - cmd -
+    - ... -
 - `p6df::core::cli::all::run(dir, cmd)`
   - Args:
-    - dir - 
-    - cmd - 
+    - dir -
+    - cmd -
 - `p6df::core::cli::run(...)`
   - Args:
-    - ... - 
+    - ... -
 - `p6df::core::cli::usage([rc=0], [msg=])`
   - Synopsis: bin/p6df [-D|-d] [cmd]
   - Args:
@@ -68,15 +68,15 @@ TODO: Add a short summary of this module.
 
 - `p6df::core::completions::module::init(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 
 ##### p6df-core/lib/dev.zsh
 
 - `p6df::core::dev::dot(module, dep)`
   - Args:
-    - module - 
-    - dep - 
+    - module -
+    - dep -
 - `p6df::core::dev::graph([modules=$P6_DFZ_MODULES])`
   - Args:
     - OPTIONAL modules - [$P6_DFZ_MODULES]
@@ -85,7 +85,7 @@ TODO: Add a short summary of this module.
 
 - `p6df::core::file::load(file)`
   - Args:
-    - file - 
+    - file -
 
 ##### p6df-core/lib/homebrew.zsh
 
@@ -93,18 +93,18 @@ TODO: Add a short summary of this module.
 - `p6df::core::homebrew::casks::remove()`
 - `p6df::core::homebrew::cli::brew::install(...)`
   - Args:
-    - ... - 
+    - ... -
 - `p6df::core::homebrew::cli::brew::services::start(...)`
   - Args:
-    - ... - 
+    - ... -
 - `p6df::core::homebrew::cli::brew::services::stop(...)`
   - Args:
-    - ... - 
+    - ... -
 - `p6df::core::homebrew::cmd::brew(...)`
   - Args:
-    - ... - 
+    - ... -
 - `p6df::core::homebrew::init()`
-  - Synopsis: Warning: Using vim because no editor was set in the environment. This may change in the future, so we recommend setting EDITOR, or HOMEBREW_EDITOR to your preferred text editor.
+  - Synopsis: Warning: Using vim because no editor was set in the environment. This may change in the future, so we recommend setting EDITOR, or HOMEBREW_EDITOR to your preferred text editor. <!-- markdownlint-disable-line MD013 -->
 - `p6df::core::homebrew::install()`
 - `p6df::core::homebrew::nuke()`
 - `p6df::core::homebrew::remove()`
@@ -113,88 +113,88 @@ TODO: Add a short summary of this module.
 
 - `p6df::core::internal::branch(_module, dir)`
   - Args:
-    - _module - 
-    - dir - 
+    - _module -
+    - dir -
 - `p6df::core::internal::debug(msg)`
   - Args:
-    - msg - 
+    - msg -
 - `p6df::core::internal::diag(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::internal::diff(_module, dir)`
   - Args:
-    - _module - 
-    - dir - 
+    - _module -
+    - dir -
 - `p6df::core::internal::doc(_module, dir)`
   - Args:
-    - _module - 
-    - dir - 
+    - _module -
+    - dir -
 - `p6df::core::internal::fetch(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::internal::langs(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::internal::pull(_module, dir)`
   - Args:
-    - _module - 
-    - dir - 
+    - _module -
+    - dir -
 - `p6df::core::internal::push(_module, dir)`
   - Args:
-    - _module - 
-    - dir - 
+    - _module -
+    - dir -
 - `p6df::core::internal::recurse(module, dir, [callback=], ...)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
     - OPTIONAL callback - []
-    - ... - 
+    - ... -
 - `p6df::core::internal::recurse::deps::each(dir, callback, ...)`
   - Args:
-    - dir - 
-    - callback - 
-    - ... - 
+    - dir -
+    - callback -
+    - ... -
 - `p6df::core::internal::recurse::deps::run(module, func_deps, callback)`
   - Args:
-    - module - 
-    - func_deps - 
-    - callback - 
+    - module -
+    - func_deps -
+    - callback -
 - `p6df::core::internal::recurse::shortcircuit(module, dir, callback)`
   - Args:
-    - module - 
-    - dir - 
-    - callback - 
+    - module -
+    - dir -
+    - callback -
 - `p6df::core::internal::status(_module, dir)`
   - Args:
-    - _module - 
-    - dir - 
+    - _module -
+    - dir -
 - `p6df::core::internal::update(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::internal::vscodes(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `str func_callback = p6df::core::internal::recurse::callback(callback, prefix)`
   - Args:
-    - callback - 
-    - prefix - 
+    - callback -
+    - prefix -
 
 ##### p6df-core/lib/lang.zsh
 
 - `p6df::core::lang::mgr::init(dir, name)`
   - Args:
-    - dir - 
-    - name - 
+    - dir -
+    - name -
 - `str label:$ver = p6df::core::lang::prompt::lang(label, mgr_cmd, sys_cmd)`
   - Args:
-    - label - 
-    - mgr_cmd - 
-    - sys_cmd - 
+    - label -
+    - mgr_cmd -
+    - sys_cmd -
 
 ##### p6df-core/lib/main.zsh
 
@@ -206,87 +206,87 @@ TODO: Add a short summary of this module.
 
 - `p6df::core::module::add(short_module, _dir)`
   - Args:
-    - short_module - 
-    - _dir - 
+    - short_module -
+    - _dir -
 - `p6df::core::module::add::export()`
 - `p6df::core::module::add::lazy(short_module, _dir)`
   - Args:
-    - short_module - 
-    - _dir - 
+    - short_module -
+    - _dir -
 - `p6df::core::module::brews(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::diag(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::diff(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::doc(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::fetch(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::init(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::langs(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::parse(module, _dir)`
-  - Synopsis: Given a module as (organization/repository) return a hash/dict module="p6m7g8-dotfiles/p6df-js[:/path/to/dir]" dict = { repo:    p6df-js module:  js org:     p6m7g8-dotfiles path:    p6m7g8-dotfiles/p6df-js prefix:  p6df::modules::js [sub:     /path/to/dir] [plugin:  dir] version: master proto:   https host:    github.com }
+  - Synopsis: Given a module as (organization/repository) return a hash/dict module="p6m7g8-dotfiles/p6df-js[:/path/to/dir]" dict = { repo:    p6df-js module:  js org:     p6m7g8-dotfiles path:    p6m7g8-dotfiles/p6df-js prefix:  p6df::modules::js [sub:     /path/to/dir] [plugin:  dir] version: master proto:   https host:    github.com } <!-- markdownlint-disable-line MD013 -->
   - Args:
-    - module - 
-    - _dir - 
+    - module -
+    - _dir -
 - `p6df::core::module::pull(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::push(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::status(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::symlinks(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::sync(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::update(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `p6df::core::module::use(short_module, dir)`
   - Args:
-    - short_module - 
-    - dir - 
+    - short_module -
+    - dir -
 - `p6df::core::module::vscodes(module, dir)`
   - Args:
-    - module - 
-    - dir - 
+    - module -
+    - dir -
 - `str module = p6df::core::module::expand(short_module, _dir)`
   - Args:
-    - short_module - 
-    - _dir - 
+    - short_module -
+    - _dir -
 - `str str = p6df::core::module::env::name(module, _dir, callback)`
   - Args:
-    - module - 
-    - _dir - 
-    - callback - 
+    - module -
+    - _dir -
+    - callback -
 
 ##### p6df-core/lib/modules.zsh
 
@@ -296,7 +296,7 @@ TODO: Add a short summary of this module.
 - `p6df::core::modules::brews()`
 - `p6df::core::modules::foreach(callback)`
   - Args:
-    - callback - 
+    - callback -
 - `p6df::core::modules::init()`
 - `p6df::core::modules::langs()`
 - `p6df::core::modules::load()`
@@ -307,17 +307,17 @@ TODO: Add a short summary of this module.
 
 - `p6df::core::path::cd::if(dir)`
   - Args:
-    - dir - 
+    - dir -
 - `p6df::core::path::cd::init()`
 - `p6df::core::path::if(dir)`
   - Args:
-    - dir - 
+    - dir -
 - `p6df::core::path::init(dir)`
   - Args:
-    - dir - 
+    - dir -
 - `p6df::core::path::module::init(module)`
   - Args:
-    - module - 
+    - module -
 
 ##### p6df-core/lib/profile.zsh
 
@@ -328,22 +328,22 @@ TODO: Add a short summary of this module.
 - `p6df::core::prompt::init()`
 - `p6df::core::prompt::line::add::env(func)`
   - Args:
-    - func - 
+    - func -
 - `p6df::core::prompt::line::add::lang(func)`
   - Args:
-    - func - 
+    - func -
 - `p6df::core::prompt::line::add::mod(func)`
   - Args:
-    - func - 
+    - func -
 - `p6df::core::prompt::line::add::mod::bottom(func)`
   - Args:
-    - func - 
+    - func -
 - `p6df::core::prompt::module::init(module)`
   - Args:
-    - module - 
+    - module -
 - `str cnt = p6df::core::prompt::runtime::line(func)`
   - Args:
-    - func - 
+    - func -
 - `stream  = p6df::core::prompt::runtime()`
 - `stream  = p6df::core::prompt::runtime::lines()`
 

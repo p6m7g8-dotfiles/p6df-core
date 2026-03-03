@@ -146,7 +146,7 @@ p6df::core::cli::all() {
   fi
   for dir in $(p6_echo $modules); do
     p6_h1 "$dir"
-    p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir" "$cmd"
+    p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir" "$cmd" "$@"
   done
 }
 
@@ -164,9 +164,14 @@ p6df::core::cli::all() {
 p6df::core::cli::all::run() {
   local dir="$1"
   local cmd="$2"
+  shift 2
 
   local module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
   p6_h2 "$module"
 
-  p6df::core::internal::recurse "$module" "$dir" "p6df::core::internal::${cmd}" "$@"
+  case $cmd in
+  help) p6df::core::cli::usage 0 "" ;;
+  p6df::*) p6_run_yield "$cmd" "$module" "$dir" "$@" ;;
+  *) p6df::core::module::${cmd} "$module" "$dir" "$@" ;;
+  esac
 }

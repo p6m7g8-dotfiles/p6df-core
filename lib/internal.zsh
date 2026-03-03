@@ -16,7 +16,7 @@ p6df::core::internal::fetch() {
     local dir="$2"
 
     if p6_dir_exists_NOT "$dir"; then
-        p6_run_write_cmd "gh repo clone $module $dir"
+        gh repo clone "$module" "$dir"
     fi
 }
 
@@ -158,6 +158,15 @@ p6df::core::internal::diag() {
     local dir="$2"
 
     p6_h5 "m=[$module], d=[$dir]"
+
+    p6_return_void
+}
+
+p6df::core::internal::brews() {
+    local module="$1"
+
+    echo "p6df::modules::$module::external::brews" >&2
+    p6_run_if "p6df::modules::$module::external::brews"
 
     p6_return_void
 }

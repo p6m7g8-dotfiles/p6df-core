@@ -71,7 +71,7 @@ p6df::core::modules::init() {
 	p6df::user::modules
 	p6df::user::modules::init::pre
 
-	p6df::core::homebrew::init # HOMEBREW_PREFIX, m1 et al
+	p6df::core::homebrew::init
 
 	p6df::core::modules::load
 
