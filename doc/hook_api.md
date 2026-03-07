@@ -72,6 +72,7 @@ their binaries are discoverable. This is the install-time counterpart to `mcp::e
 Called via `p6df mcp` (CLI) or `p6df::core::modules::mcp` (programmatic).
 
 Example things to do here:
+
 - `npm install -g @modelcontextprotocol/server-github`
 - `p6df::core::path::if "$HOME/.local/bin"`
 
@@ -88,6 +89,7 @@ Called when switching profiles (`profile::on` / `profile::off`) or explicitly vi
 Variables set here should be unset in the corresponding `profile::off` implementation.
 
 Example variables managed here:
+
 - API tokens (`GITHUB_PERSONAL_ACCESS_TOKEN`, `DD_API_KEY`, `SLACK_BOT_TOKEN`, etc.)
 - Server config (`MCP_SERVER_URL`, account IDs, team IDs)
 
