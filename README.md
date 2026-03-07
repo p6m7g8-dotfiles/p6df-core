@@ -26,7 +26,8 @@
 - Alias and PATH initialization per module
 - CLI entry point (`bin/p6df`) for running any hook across one or all modules
 
-See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and [`doc/flow.md`](doc/flow.md) for the initialization and CLI dispatch flow.
+See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and
+[`doc/flow.md`](doc/flow.md) for the initialization and CLI dispatch flow.
 
 ## Contributing
 
