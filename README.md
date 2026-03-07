@@ -255,6 +255,14 @@ See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and
   - Args:
     - module
     - dir
+- `p6df::core::module::mcp(module, dir)`
+  - Args:
+    - module
+    - dir
+- `p6df::core::module::mcp::env(module, dir)`
+  - Args:
+    - module
+    - dir
 - `p6df::core::module::parse(module, _dir)`
   - Synopsis: Given a module as (organization/repository) return a hash/dict module="p6m7g8-dotfiles/p6df-js[:/path/to/d
   - Args:
@@ -314,6 +322,8 @@ See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and
 - `p6df::core::modules::init()`
 - `p6df::core::modules::langs()`
 - `p6df::core::modules::load()`
+- `p6df::core::modules::mcp()`
+- `p6df::core::modules::mcp::env()`
 - `p6df::core::modules::symlinks()`
 - `p6df::core::modules::vscodes()`
 

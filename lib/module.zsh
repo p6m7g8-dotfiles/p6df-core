@@ -80,6 +80,46 @@ p6df::core::module::langs() {
 ######################################################################
 #<
 #
+# Function: p6df::core::module::mcp(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::module::mcp() {
+  local module="$1"
+  local dir="$2"
+
+  p6df::core::internal::recurse "$module" "$dir" "mcp"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::module::mcp::env(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::module::mcp::env() {
+  local module="$1"
+  local dir="$2"
+
+  p6df::core::internal::recurse "$module" "$dir" "mcp::env"
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::module::brews(module, dir)
 #
 #  Args:
