@@ -6,6 +6,8 @@
   - [home::symlinks](#homesymlinks)
   - [external::brew](#externalbrew)
   - [langs(module, dir)](#langsmodule-dir)
+  - [mcp(module, dir)](#mcpmodule-dir)
+  - [mcp::env(module, dir)](#mcpenvmodule-dir)
   - [aliases::init](#aliasesinit)
   - [path::init](#pathinit)
   - [completions::init](#completionsinit)
@@ -57,6 +59,39 @@ Only `langs()` specific things should not work until `langs()` is run.
 
 Installs language managers. Also installs 3rd Party Language extensions like cran, uv, cpan, gems etc.
 Do not use brew for the extensions unless you must.
+
+## mcp(module, dir)
+
+- Presence: OPTIONAL
+
+Installs MCP (Model Context Protocol) servers required by this module and adds their executables to PATH.
+
+Use this hook to install MCP server packages (via `npm`, `pip`, `go install`, `brew`, etc.) and ensure
+their binaries are discoverable. This is the install-time counterpart to `mcp::env`.
+
+Called via `p6df mcp` (CLI) or `p6df::core::modules::mcp` (programmatic).
+
+Example things to do here:
+
+- `npm install -g @modelcontextprotocol/server-github`
+- `p6df::core::path::if "$HOME/.local/bin"`
+
+## mcp::env(module, dir)
+
+- Presence: OPTIONAL
+
+Sets or unsets environment variables required for MCP server authentication and configuration.
+Works in tandem with the profile system (`profile::on` / `profile::off`) so tokens and config
+are only active for the relevant profile.
+
+Called when switching profiles (`profile::on` / `profile::off`) or explicitly via `p6df mcp::env`.
+
+Variables set here should be unset in the corresponding `profile::off` implementation.
+
+Example variables managed here:
+
+- API tokens (`GITHUB_PERSONAL_ACCESS_TOKEN`, `DD_API_KEY`, `SLACK_BOT_TOKEN`, etc.)
+- Server config (`MCP_SERVER_URL`, account IDs, team IDs)
 
 ## aliases::init
 

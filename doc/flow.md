@@ -41,6 +41,10 @@ including module dependency recursion, callbacks, and the CLI execution path.
 bin/p6df
 └─ p6df::core::cli::run
    └─ p6df::core::module::$cmd
+
+Available $cmd values (dispatched via p6df::core::module::$cmd):
+  init, brews, langs, mcp, symlinks, vscodes, doc
+  fetch, update, pull, push, diff, status, diag, sync
 ```
 
 ```mermaid
@@ -73,5 +77,29 @@ flowchart TD
     D --> N[p6df::user::modules::init::post]
 
     CLI[bin/p6df] --> O[p6df::core::cli::run]
-    O --> P[p6df::core::module cmd]
+    O --> P[p6df::core::module::cmd]
+
+    P -->|cmd=mcp| MCP[p6df::modules::mod::mcp]
+    P -->|cmd=mcp::env| MCPENV[p6df::modules::mod::mcp::env]
+```
+
+---
+
+## MCP Hook Flow
+
+`mcp` and `mcp::env` are CLI-only hooks (not called during shell init).
+
+```text
+bin/p6df mcp [module]
+└─ p6df::core::module::mcp(module, dir)
+   └─ p6df::core::internal::recurse(module, dir, "mcp")
+      └─ p6df::modules::<mod>::mcp(module, dir)
+         ├─ install MCP server packages
+         └─ add server bin dirs to PATH
+
+bin/p6df mcp::env [module]
+└─ p6df::core::module::mcp::env(module, dir)
+   └─ p6df::core::internal::recurse(module, dir, "mcp::env")
+      └─ p6df::modules::<mod>::mcp::env(module, dir)
+         └─ set/unset auth tokens and config env vars
 ```
