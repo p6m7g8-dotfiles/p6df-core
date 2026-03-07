@@ -115,7 +115,7 @@ See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and
   - Args:
     - ...
 - `p6df::core::homebrew::init()`
-  - Synopsis: Warning: Using vim because no editor was set in the environment. This may change in the future, so we recommend setting EDITOR, or HOMEBREW_EDITOR to your preferred text editor.
+  - Synopsis: Warning: Using vim because no editor was set in the environment. This may change in the future, so we reco
 - `p6df::core::homebrew::install()`
 - `p6df::core::homebrew::nuke()`
 - `p6df::core::homebrew::remove()`
@@ -256,7 +256,7 @@ See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and
     - module
     - dir
 - `p6df::core::module::parse(module, _dir)`
-  - Synopsis: Given a module as (organization/repository) return a hash/dict module="p6m7g8-dotfiles/p6df-js[:/path/to/dir]" dict = { repo:    p6df-js module:  js org:     p6m7g8-dotfiles path:    p6m7g8-dotfiles/p6df-js prefix:  p6df::modules::js [sub:     /path/to/dir] [plugin:  dir] version: master proto:   https host:    github.com }
+  - Synopsis: Given a module as (organization/repository) return a hash/dict module="p6m7g8-dotfiles/p6df-js[:/path/to/d
   - Args:
     - module
     - _dir
