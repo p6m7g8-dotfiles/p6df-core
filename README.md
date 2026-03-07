@@ -17,7 +17,16 @@
 
 ## Summary
 
-TODO: Add a short summary of this module.
+`p6df-core` is the framework foundation for the `p6df` dotfiles system. It provides:
+
+- Module lifecycle management: `init`, `deps`, `brews`, `langs`, `mcp`, `symlinks`, `vscodes`
+- Profile-based environment switching via `profile::on` / `profile::off`
+- MCP (Model Context Protocol) server installation and env config hooks
+- Shell prompt composition across modules
+- Alias and PATH initialization per module
+- CLI entry point (`bin/p6df`) for running any hook across one or all modules
+
+See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and [`doc/flow.md`](doc/flow.md) for the initialization and CLI dispatch flow.
 
 ## Contributing
 
