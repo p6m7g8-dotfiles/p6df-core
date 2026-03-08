@@ -1,72 +1,57 @@
 # Hook API
 
-- [Hook API](#hook-api)
-  - [init(module, dir)](#initmodule-dir)
-  - [deps()](#deps)
-  - [home::symlinks](#homesymlinks)
-  - [external::brew](#externalbrew)
-  - [langs(module, dir)](#langsmodule-dir)
-  - [mcp(module, dir)](#mcpmodule-dir)
-  - [aliases::init](#aliasesinit)
-  - [path::init](#pathinit)
-  - [completions::init](#completionsinit)
-  - [vscodes](#vscodes)
-  - [vscodes::config](#vscodesconfig)
-  - [prompt::init](#promptinit)
-  - [prompt::mod](#promptmod)
+Module hooks are implemented as `p6df::modules::<mod>::<hook>`.
+Unless noted, hooks are optional.
 
 ## init(module, dir)
 
 - Presence: OPTIONAL
+- Purpose: module setup after `init.zsh` is loaded.
 
-After loading init.zsh, call p6df::modules::\$mod::init(module, dir)
-
-`p6df::core::main::init` and `p6df::core::module::use` do this automatically as do any `p6df` tools that need a module.
+Framework callers (`p6df::core::main::init`, `p6df::core::module::use`, and tool paths that load modules)
+invoke this automatically.
 
 ## deps()
 
 - Presence: REQUIRED
 
-All modules should depend on `p6common` either directly because its the only `p6df` dependency
-or in-directly via another module. Use what you use. `deps` are not possible to skip cloning
-b/c they are used directly by the module.
+Declare runtime module dependencies.
+Guidelines:
 
-`clones()` can be configured on/off or delayed.
-
-All modules _must_ tail recurse through their dependency chain. The framework does this.
-
-Deps is the only required hook. It doesn't make sense to only depend on `p6common` or another dep
-b/c it wouldn't be used by `this` module. Instead if all you have are depends, then use `clones()`.
+- Depend on what the module actually uses.
+- Most modules depend on `p6common` directly or transitively.
+- Dependency recursion is handled by the framework.
+- Use `clones()` for repos that are not required at module runtime.
 
 ## home::symlinks
 
 - Presence: OPTIONAL
+- Purpose: symlink versioned config files into place.
 
-Symlinks versioned config files into place. Some will need TOKEN substitutions for secrets.
+Some files may require token substitution for secrets.
 
 ## external::brew
 
 - Presence: OPTIONAL
+- Purpose: install external packages.
 
-Installs things from package managers. A decision is to be made to use `clones()`, `deps()`, `external::brews`.
-Brews will need to install things `langs()` depend on. It is expected stuff will not work with brews.
-Only `langs()` specific things should not work until `langs()` is run.
+Choose intentionally between `clones()`, `deps()`, and `external::brew`.
+Install prerequisites needed by `langs()`. Only language-specific setup should wait for `langs()`.
 
 ## langs(module, dir)
 
 - Presence: OPTIONAL
+- Purpose: install language managers and ecosystem tooling.
 
-Installs language managers. Also installs 3rd Party Language extensions like cran, uv, cpan, gems etc.
-Do not use brew for the extensions unless you must.
+Includes third-party language tooling (`cran`, `uv`, `cpan`, `gems`, etc.).
+Do not use brew for language ecosystem tooling unless required.
 
 ## mcp(module, dir)
 
 - Presence: OPTIONAL
+- Purpose: install MCP servers for this module and expose their binaries.
 
 Installs MCP (Model Context Protocol) servers required by this module and adds their executables to PATH.
-
-Use this hook to install MCP server packages (via `npm`, `pip`, `go install`, `brew`, etc.) and ensure
-their binaries are discoverable.
 
 Called via `p6df mcp` (CLI) or `p6df::core::modules::mcp` (programmatic).
 
@@ -76,55 +61,51 @@ Example things to do here:
 - `p6df::core::path::if "$HOME/.local/bin"`
 
 MCP auth tokens and config env vars are managed by each module's `profile::on` / `profile::off`
-hooks (implemented in downstream modules such as `p6df-1password`, `p6df-claudecode`, etc.) —
-not in `p6df-core` itself. Secrets are typically fetched from 1Password inside a profile
-selector function (e.g. `profile::select::me()` in a home profile module) and exported to the
-environment before MCP servers are started.
+hooks (implemented in downstream modules such as `p6df-1password`, `p6df-claudecode`, etc.), not
+in `p6df-core`. Secrets are typically fetched inside a profile selector and exported before MCP
+servers are started.
 
 ## aliases::init
 
 - Presence: OPTIONAL
+- Purpose: define module aliases.
 
-Sets up aliases. Every alias should be name spaced and point to a function not straight up shell one liners.
+Aliases should be namespaced and should call functions (not shell one-liners).
 
 ## path::init
 
 - Presence: OPTIONAL
-
-Sets up module path entries.
+- Purpose: add module path entries.
 
 ## completions::init
 
 - Presence: OPTIONAL
-
-Sets up shell cli completions.
+- Purpose: register shell completions for module CLIs.
 
 ## vscodes
 
 - Presence: OPTIONAL
+- Purpose: install VS Code extensions.
 
-Installs vscode market place extensions.
-If a brew or 3rd party Language extension is super related to the vscode extension and not used outside
-of vscode setup then it can and should be installed here too.
+If a brew package or third-party language extension is only needed for VS Code, it may be installed here.
 
 ## vscodes::config
 
 - Presence: OPTIONAL
+- Purpose: emit module VS Code settings fragment.
 
-Returns a valid JSON snippet of vscode config for this module and its code extensions
+Return valid JSON for this module and its extensions.
 
 ## prompt::init
 
 - Presence: OPTIONAL
+- Purpose: run prompt setup work.
 
-If you need to do setup work do it here.
-This is not what will be called to render the prompt
+This hook is setup-only; it does not render prompt output.
 
 ## prompt::mod
 
 - Presence: OPTIONAL
+- Purpose: render the module's prompt segment.
 
-This renders the actual prompt
-
-Do you really want a module without a prompt presence of some kind?
-This is not what will be called to render the prompt
+Use this hook for visible prompt content.
