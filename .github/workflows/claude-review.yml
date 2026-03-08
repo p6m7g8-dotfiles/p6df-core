@@ -12,13 +12,13 @@ permissions:
 jobs:
   claude-review:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Skip on merge queue
         if: github.event_name == 'merge_group'
         run: echo "Skipping review in merge queue context"
       - name: Run claude review
         if: github.event_name != 'merge_group' && github.event.pull_request.draft == false
+        continue-on-error: true
         uses: p6m7g8-actions/claude@main
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
