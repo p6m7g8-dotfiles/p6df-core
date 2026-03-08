@@ -364,7 +364,6 @@ TODO: Add a short summary of this module.
 
 ```text
 .
-├── AGENTS.md
 ├── bin
 │   └── p6df
 ├── conf
@@ -373,6 +372,7 @@ TODO: Add a short summary of this module.
 │   ├── zshenv-xdg
 │   └── zshrc
 ├── doc
+│   ├── AGENTS.md
 │   ├── flow.md
 │   └── hook_api.md
 ├── lib
