@@ -292,8 +292,8 @@ p6df::core::module::sync() {
   local module="$1"
   local dir="$2"
 
-   p6df::core::module::pull
-   p6df::core::module::push
+  p6df::core::module::pull "$module" "$dir"
+  p6df::core::module::push "$module" "$dir"
 
   p6_return_void
 }
@@ -322,20 +322,19 @@ p6df::core::module::doc() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::add(short_module, _dir)
+# Function: p6df::core::module::add(module, _dir)
 #
 #  Args:
-#	short_module -
+#	module -
 #	_dir -
 #
 #  Environment:	 P6_DFZ_MODULES
 #>
 ######################################################################
 p6df::core::module::add() {
-  local short_module="$1"
+  local module="$1"
   local _dir="$2"
 
-  local module=$(p6df::core::module::expand "$short_module")
   local things=$(p6_word_unique "$P6_DFZ_MODULES $module" | xargs)
 
   p6_env_export P6_DFZ_MODULES "$things"
@@ -346,20 +345,18 @@ p6df::core::module::add() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::add::lazy(short_module, _dir)
+# Function: p6df::core::module::add::lazy(module, _dir)
 #
 #  Args:
-#	short_module -
+#	module -
 #	_dir -
 #
 #  Environment:	 P6_DFZ_MODULES
 #>
 ######################################################################
 p6df::core::module::add::lazy() {
-  local short_module="$1"
+  local module="$1"
   local _dir="$2"
-
-  local module=$(p6df::core::module::expand "$short_module")
 
   P6_DFZ_MODULES="$P6_DFZ_MODULES $module"
 
@@ -385,55 +382,22 @@ p6df::core::module::add::export() {
 ######################################################################
 #<
 #
-# Function: p6df::core::module::use(short_module, dir)
+# Function: p6df::core::module::use(module, dir)
 #
 #  Args:
-#	short_module -
+#	module -
 #	dir -
 #
 #>
 ######################################################################
 p6df::core::module::use() {
-  local short_module="$1"
+  local module="$1"
   local dir="$2"
 
-  local module=$(p6df::core::module::expand "$short_module")
-  p6_log "p6df::core::module::use($short_module) -> $module"
-  p6df::core::module::add "$short_module"
+  p6df::core::module::add "$module"
   p6df::core::module::init "$module" "$dir"
 
   p6_return_void
-}
-
-######################################################################
-#<
-#
-# Function: str module = p6df::core::module::expand(short_module, _dir)
-#
-#  Args:
-#	short_module -
-#	_dir -
-#
-#  Returns:
-#	str - module
-#
-#>
-######################################################################
-p6df::core::module::expand() {
-  local short_module="$1"
-  local _dir="$2"
-
-  local module=$short_module
-  case $short_module in
-  *p6m7g8-dotfiles*) module=$short_module ;;
-  p6df*) module="p6m7g8-dotfiles/$short_module" ;;
-  p6-*) module=p6m7g8/$short_module ;;
-  p6*) module="p6m7g8-dotfiles/$short_module" ;;
-  esac
-
-  p6df::core::internal::debug  "p6df::core::module::expand($short_module) -> $module"
-
-  p6_return_str "$module"
 }
 
 ######################################################################
