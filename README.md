@@ -17,17 +17,9 @@
 
 ## Summary
 
-`p6df-core` is the framework foundation for the `p6df` dotfiles system. It provides:
-
-- Module lifecycle management: `init`, `deps`, `brews`, `langs`, `mcp`, `symlinks`, `vscodes`
-- Profile-based environment switching via `profile::on` / `profile::off`
-- MCP (Model Context Protocol) server installation and env config hooks
-- Shell prompt composition across modules
-- Alias and PATH initialization per module
-- CLI entry point (`bin/p6df`) for running any hook across one or all modules
-
-See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and
-[`doc/flow.md`](doc/flow.md) for the initialization and CLI dispatch flow.
+Core framework for p6df shell modules. Manages module loading, hook dispatch (init, deps,
+mcp, aliases, path, completions, prompt), CLI tooling, and the profile system driving
+credential management via 1Password.
 
 ## Contributing
 
@@ -259,10 +251,6 @@ See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and
   - Args:
     - module
     - dir
-- `p6df::core::module::mcp::env(module, dir)`
-  - Args:
-    - module
-    - dir
 - `p6df::core::module::parse(module, _dir)`
   - Synopsis: Given a module as (organization/repository) return a hash/dict module="p6m7g8-dotfiles/p6df-js[:/path/to/d
   - Args:
@@ -323,7 +311,6 @@ See [`doc/hook_api.md`](doc/hook_api.md) for the full hook contract and
 - `p6df::core::modules::langs()`
 - `p6df::core::modules::load()`
 - `p6df::core::modules::mcp()`
-- `p6df::core::modules::mcp::env()`
 - `p6df::core::modules::symlinks()`
 - `p6df::core::modules::vscodes()`
 
