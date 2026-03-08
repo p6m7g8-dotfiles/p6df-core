@@ -12,6 +12,7 @@ permissions:
 jobs:
   claude-review:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Skip on merge queue
         if: github.event_name == 'merge_group'
