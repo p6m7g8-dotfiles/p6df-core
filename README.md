@@ -17,7 +17,9 @@
 
 ## Summary
 
-Core framework for p6df shell modules. Manages module loading, hook dispatch (init, deps, mcp, aliases, path, completions, prompt), CLI tooling, and the profile system driving credential management via 1Password.
+Core framework for p6df shell modules. Manages module loading, hook dispatch (init, deps,
+mcp, aliases, path, completions, prompt), CLI tooling, and the profile system driving
+credential management via 1Password.
 
 ## Contributing
 
