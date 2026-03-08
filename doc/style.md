@@ -17,5 +17,3 @@ Shared coding style for all `p6m7g8-dotfiles` repos.
 
 - Pollute the top-level namespace.
 - Naming precedence is: `p6|p6df` -> `p6_` -> alias -> function.
-
-
