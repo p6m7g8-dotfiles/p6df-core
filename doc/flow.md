@@ -80,14 +80,13 @@ flowchart TD
     O --> P[p6df::core::module::cmd]
 
     P -->|cmd=mcp| MCP[p6df::modules::mod::mcp]
-    P -->|cmd=mcp::env| MCPENV[p6df::modules::mod::mcp::env]
 ```
 
 ---
 
 ## MCP Hook Flow
 
-`mcp` and `mcp::env` are CLI-only hooks (not called during shell init).
+`mcp` is a CLI-only hook (not called during shell init).
 
 ```text
 bin/p6df mcp [module]
@@ -96,10 +95,7 @@ bin/p6df mcp [module]
       └─ p6df::modules::<mod>::mcp(module, dir)
          ├─ install MCP server packages
          └─ add server bin dirs to PATH
-
-bin/p6df mcp::env [module]
-└─ p6df::core::module::mcp::env(module, dir)
-   └─ p6df::core::internal::recurse(module, dir, "mcp::env")
-      └─ p6df::modules::<mod>::mcp::env(module, dir)
-         └─ set/unset auth tokens and config env vars
 ```
+
+MCP auth env vars are set by `profile::on` / `profile::off`, with secrets fetched from
+1Password inside `profile::select::me()`.

@@ -162,6 +162,16 @@ p6df::core::internal::diag() {
     p6_return_void
 }
 
+######################################################################
+#<
+#
+# Function: p6df::core::internal::brews(module)
+#
+#  Args:
+#	module -
+#
+#>
+######################################################################
 p6df::core::internal::brews() {
     local module="$1"
 
