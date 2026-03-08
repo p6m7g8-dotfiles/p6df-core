@@ -17,9 +17,7 @@
 
 ## Summary
 
-Core framework for p6df shell modules. Manages module loading, hook dispatch (init, deps,
-mcp, aliases, path, completions, prompt), CLI tooling, and the profile system driving
-credential management via 1Password.
+TODO: Add a short summary of this module.
 
 ## Contributing
 
@@ -210,14 +208,14 @@ credential management via 1Password.
 
 ##### p6df-core/lib/module.zsh
 
-- `p6df::core::module::add(short_module, _dir)`
+- `p6df::core::module::add(module, _dir)`
   - Args:
-    - short_module
+    - module
     - _dir
 - `p6df::core::module::add::export()`
-- `p6df::core::module::add::lazy(short_module, _dir)`
+- `p6df::core::module::add::lazy(module, _dir)`
   - Args:
-    - short_module
+    - module
     - _dir
 - `p6df::core::module::brews(module, dir)`
   - Args:
@@ -280,18 +278,14 @@ credential management via 1Password.
   - Args:
     - module
     - dir
-- `p6df::core::module::use(short_module, dir)`
+- `p6df::core::module::use(module, dir)`
   - Args:
-    - short_module
+    - module
     - dir
 - `p6df::core::module::vscodes(module, dir)`
   - Args:
     - module
     - dir
-- `str module = p6df::core::module::expand(short_module, _dir)`
-  - Args:
-    - short_module
-    - _dir
 - `str str = p6df::core::module::env::name(module, _dir, callback)`
   - Args:
     - module
@@ -370,6 +364,7 @@ credential management via 1Password.
 
 ```text
 .
+├── AGENTS.md
 ├── bin
 │   └── p6df
 ├── conf
@@ -403,7 +398,7 @@ credential management via 1Password.
 └── t
     └── cli.sh
 
-7 directories, 26 files
+7 directories, 27 files
 ```
 
 ## Author

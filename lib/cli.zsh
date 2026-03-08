@@ -25,7 +25,7 @@ Usage: bin/p6df [-D|-d] [-a] [cmd]
 
 Options:
   -a  ALL modules
-  -D  debeug off
+  -D  debug off
   -d  debug on
 
 Cmds:
@@ -83,7 +83,7 @@ p6df::core::cli::run() {
 
   local module="$1"
   if p6_string_blank "$module"; then
-    module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
+    module="$(p6_uri_name "$dir")"
   else
     shift 1
   fi
@@ -167,7 +167,8 @@ p6df::core::cli::all::run() {
   local cmd="$2"
   shift 2
 
-  local module=$(p6df::core::module::expand $(p6_uri_name "$dir"))
+  local module
+  module="$(p6_uri_name "$dir")"
   p6_h2 "$module"
 
   case $cmd in

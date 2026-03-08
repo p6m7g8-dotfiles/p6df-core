@@ -36,7 +36,6 @@ main() {
 	p6_test_start "p6df::core::cli::all::run dispatches via case"
 	(
 		p6_test_run "
-			p6df::core::module::expand() { echo 'p6df-test'; }
 			p6_uri_name() { echo 'test'; }
 			p6_h2() { :; }
 			p6df::core::module::status() { return 0; }
@@ -54,7 +53,6 @@ main() {
 	(
 		p6_test_run "
 			set -u
-			p6df::core::module::expand() { echo 'p6df-test'; }
 			p6_uri_name() { echo 'test'; }
 			p6_h2() { :; }
 			p6df::core::module::status() { return 0; }
@@ -91,7 +89,6 @@ main() {
 	p6_test_start "extra args forwarded past dir and cmd"
 	(
 		p6_test_run "
-			p6df::core::module::expand() { echo 'p6df-test'; }
 			p6_uri_name() { echo 'test'; }
 			p6_h2() { :; }
 			p6df::core::module::deploy() { return 0; }
