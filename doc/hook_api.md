@@ -75,8 +75,11 @@ Example things to do here:
 - `npm install -g @modelcontextprotocol/server-github`
 - `p6df::core::path::if "$HOME/.local/bin"`
 
-MCP auth tokens and config env vars are managed by `profile::on` / `profile::off` — fetched from
-1Password in `profile::select::me()` and passed through to each module's profile functions.
+MCP auth tokens and config env vars are managed by each module's `profile::on` / `profile::off`
+hooks (implemented in downstream modules such as `p6df-1password`, `p6df-claudecode`, etc.) —
+not in `p6df-core` itself. Secrets are typically fetched from 1Password inside a profile
+selector function (e.g. `profile::select::me()` in a home profile module) and exported to the
+environment before MCP servers are started.
 
 ## aliases::init
 

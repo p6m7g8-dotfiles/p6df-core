@@ -97,5 +97,7 @@ bin/p6df mcp [module]
          └─ add server bin dirs to PATH
 ```
 
-MCP auth env vars are set by `profile::on` / `profile::off`, with secrets fetched from
-1Password inside `profile::select::me()`.
+MCP auth env vars are set by each downstream module's `profile::on` / `profile::off` hooks
+(e.g. in `p6df-1password`, `p6df-claudecode`). Secrets are fetched from 1Password inside a
+profile selector (e.g. `profile::select::me()` in a home profile module). These hooks are not
+part of `p6df-core`.
