@@ -36,9 +36,9 @@ p6df::core::internal::update() {
     local dir="$2"
 
     if p6_dir_exists_NOT "$dir"; then
-        p6df::core::internal::fetch "$dir" "$module"
+        p6df::core::internal::fetch "$module" "$dir"
     else
-        p6df::core::internal::pull "$dir" "$module"
+        p6df::core::internal::pull "$module" "$dir"
     fi
 }
 

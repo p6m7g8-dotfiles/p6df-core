@@ -142,11 +142,15 @@ p6df::core::cli::all() {
   if p6_string_eq_1 "$flag_bootstrap"; then
     modules="$P6_DFZ_MODULES"
   else
-    modules=$(p6_dir_list "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
+    local _org
+    _org=$(p6_uri_name "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
+    local _repos
+    _repos=$(p6_dir_list "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
+    modules=$(for _r in $(p6_echo $_repos); do echo "$_org/$_r"; done | xargs)
   fi
   for dir in $(p6_echo $modules); do
     p6_h1 "$dir"
-    p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir" "$cmd" "$@"
+    p6_run_dir "$P6_DFZ_SRC_DIR/$dir" "p6df::core::cli::all::run" "$dir" "$cmd" "$@"
   done
 }
 
@@ -163,17 +167,15 @@ p6df::core::cli::all() {
 #>
 ######################################################################
 p6df::core::cli::all::run() {
-  local dir="$1"
+  local module="$1"
   local cmd="$2"
   shift 2
 
-  local module
-  module="$(p6_uri_name "$dir")"
   p6_h2 "$module"
 
   case $cmd in
   help) p6df::core::cli::usage 0 "" ;;
-  p6df::*) p6_run_yield "$cmd" "$module" "$dir" "$@" ;;
-  *) p6df::core::module::${cmd} "$module" "$dir" "$@" ;;
+  p6df::*) p6_run_yield "$cmd" "$module" "$module" "$@" ;;
+  *) p6df::core::module::${cmd} "$module" "$module" "$@" ;;
   esac
 }
