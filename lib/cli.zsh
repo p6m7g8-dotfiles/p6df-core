@@ -146,7 +146,7 @@ p6df::core::cli::all() {
     _org=$(p6_uri_name "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
     local _repos
     _repos=$(p6_dir_list "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
-    modules=$(for _r in $(p6_echo $_repos); do echo "$_org/$_r"; done | xargs)
+    modules=$(for _r in $(p6_echo $_repos); do p6_echo "$_org/$_r"; done | p6_filter_join_words)
   fi
   for dir in $(p6_echo $modules); do
     p6_h1 "$dir"

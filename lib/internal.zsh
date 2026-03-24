@@ -175,7 +175,7 @@ p6df::core::internal::diag() {
 p6df::core::internal::brews() {
     local module="$1"
 
-    echo "p6df::modules::$module::external::brews" >&2
+    p6_error "p6df::modules::$module::external::brews"
     p6_run_if "p6df::modules::$module::external::brews"
 
     p6_return_void
