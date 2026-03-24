@@ -172,10 +172,11 @@ p6df::core::cli::all::run() {
   shift 2
 
   p6_h2 "$module"
+  local dir="$P6_DFZ_SRC_DIR/$module"
 
   case $cmd in
   help) p6df::core::cli::usage 0 "" ;;
-  p6df::*) p6_run_yield "$cmd" "$module" "$module" "$@" ;;
-  *) p6df::core::module::${cmd} "$module" "$module" "$@" ;;
+  p6df::*) p6_run_yield "$cmd" "$module" "$dir" "$@" ;;
+  *) p6df::core::module::${cmd} "$module" "$dir" "$@" ;;
   esac
 }
