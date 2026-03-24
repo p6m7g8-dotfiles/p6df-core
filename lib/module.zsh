@@ -335,7 +335,7 @@ p6df::core::module::add() {
   local module="$1"
   local _dir="$2"
 
-  local things=$(p6_word_unique "$P6_DFZ_MODULES $module" | xargs)
+  local things=$(p6_word_unique "$P6_DFZ_MODULES $module" | p6_filter_join_words)
 
   p6_env_export P6_DFZ_MODULES "$things"
 
@@ -373,7 +373,7 @@ p6df::core::module::add::lazy() {
 ######################################################################
 p6df::core::module::add::export() {
 
-  local things=$(p6_word_unique "$P6_DFZ_MODULES" | xargs)
+  local things=$(p6_word_unique "$P6_DFZ_MODULES" | p6_filter_join_words)
 
   p6_env_export P6_DFZ_MODULES "$things"
 
