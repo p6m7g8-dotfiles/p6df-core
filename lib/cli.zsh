@@ -142,11 +142,15 @@ p6df::core::cli::all() {
   if p6_string_eq_1 "$flag_bootstrap"; then
     modules="$P6_DFZ_MODULES"
   else
-    modules=$(p6_dir_list "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
+    local _org
+    _org=$(p6_uri_name "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
+    local _repos
+    _repos=$(p6_dir_list "$P6_DFZ_SRC_P6M7G8_DOTFILES_DIR")
+    modules=$(for _r in $(p6_echo $_repos); do echo "$_org/$_r"; done | xargs)
   fi
   for dir in $(p6_echo $modules); do
     p6_h1 "$dir"
-    p6_run_dir "$dir" "p6df::core::cli::all::run" "$dir" "$cmd" "$@"
+    p6_run_dir "$P6_DFZ_SRC_DIR/$dir" "p6df::core::cli::all::run" "$dir" "$cmd" "$@"
   done
 }
 
