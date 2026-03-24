@@ -167,12 +167,13 @@ p6df::core::cli::all() {
 #>
 ######################################################################
 p6df::core::cli::all::run() {
-  local module="$1"
+  local dir="$1"
   local cmd="$2"
   shift 2
 
+  local module
+  module="$(p6_uri_name "$dir")"
   p6_h2 "$module"
-  local dir="$P6_DFZ_SRC_DIR/$module"
 
   case $cmd in
   help) p6df::core::cli::usage 0 "" ;;
