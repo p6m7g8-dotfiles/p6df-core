@@ -53,10 +53,10 @@ main() {
 	(
 		p6_test_run "
 			set -u
+			P6_DFZ_SRC_DIR=/tmp
 			p6_uri_name() { echo 'test'; }
 			p6_h2() { :; }
 			p6df::core::module::status() { return 0; }
-			mkdir -p testdir
 			p6df::core::cli::all::run testdir status 2>&1
 		"
 		p6_test_assert_run_rc "no unbound variable" 0
