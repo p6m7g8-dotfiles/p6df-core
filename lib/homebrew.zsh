@@ -20,7 +20,7 @@ p6df::core::homebrew::init() {
   p6_env_export "HOMEBREW_PREFIX" "$homebrew_prefix" # Forces Homebrew to use /opt/homebrew as its prefix.
   p6_env_export "HOMEBREW_CELLAR" "$homebrew_prefix/Cellar" # Stores formulae in /opt/homebrew/Cellar.
   p6_env_export "HOMEBREW_REPOSITORY" "$homebrew_prefix" # Treats /opt/homebrew as the brew repository path.
-  p6_env_export "INFOPATH" "$homebrew_prefix/share/info:${INFOPATH:-}" # Adds Homebrew info pages to Info search path.
+  p6_env_export "INFOPATH" "$homebrew_prefix/share/info:$INFOPATH" # Adds Homebrew info pages to Info search path.
 
   # Recommended (changed)
   p6_env_export "HOMEBREW_NO_ANALYTICS" "1" # Disables Homebrew analytics collection.
@@ -43,7 +43,7 @@ p6df::core::homebrew::init() {
   # local homebrew_forbid_paths_default="" # Default forbid-paths setting (enabled when not developer).
   # local homebrew_install_badge_default=$'\\U0001F37A' # Default install badge (Beer Mug emoji).
   #
-  # if [[ -n "${XDG_CONFIG_HOME:-}" ]]; then
+  # if [[ -n "$XDG_CONFIG_HOME" ]]; then
   #   homebrew_livecheck_watchlist_default="$XDG_CONFIG_HOME/homebrew/livecheck_watchlist.txt"
   # else
   #   homebrew_livecheck_watchlist_default="$HOME/.homebrew/livecheck_watchlist.txt"
@@ -53,13 +53,13 @@ p6df::core::homebrew::init() {
   #   homebrew_make_jobs_default="$(sysctl -n hw.ncpu 2>/dev/null)"
   # fi
   #
-  # if [[ -n "${HOMEBREW_NO_INSTALL_FROM_API:-}" ]]; then
+  # if [[ -n "$HOMEBREW_NO_INSTALL_FROM_API" ]]; then
   #   homebrew_auto_update_secs_default="300"
-  # elif [[ -n "${HOMEBREW_DEVELOPER:-}" ]]; then
+  # elif [[ -n "$HOMEBREW_DEVELOPER" ]]; then
   #   homebrew_auto_update_secs_default="3600"
   # fi
   #
-  # if [[ -z "${HOMEBREW_DEVELOPER:-}" ]]; then
+  # if [[ -z "$HOMEBREW_DEVELOPER" ]]; then
   #   homebrew_forbid_paths_default="1"
   # fi
   #

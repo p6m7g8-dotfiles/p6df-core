@@ -61,7 +61,7 @@ Example things to do here:
 - `p6df::core::path::if "$HOME/.local/bin"`
 
 MCP auth tokens and config env vars are managed by each module's `profile::on` / `profile::off`
-hooks (implemented in downstream modules such as `p6df-1password`, `p6df-claudecode`, etc.), not
+hooks (implemented in downstream modules such as `p6df-1password`, `p6df-claude`, etc.), not
 in `p6df-core`. Secrets are typically fetched inside a profile selector and exported before MCP
 servers are started.
 
