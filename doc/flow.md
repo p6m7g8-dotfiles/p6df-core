@@ -55,4 +55,4 @@ bin/p6df mcp [module]
 ```
 
 MCP auth/env config is handled in downstream modules via `profile::on` and `profile::off` hooks
-(for example `p6df-1password`, `p6df-claudecode`), not in `p6df-core`.
+(for example `p6df-1password`, `p6df-claude`), not in `p6df-core`.

@@ -11,7 +11,7 @@ main() {
 	p6_bootstrap "$p6common_dir"
 
 	# Set absolute path so test subshells that cd to temp dirs can still access lib files
-	if [ -z "${P6_DFZ_LIB_DIR:-}" ]; then
+	if [ -z "$P6_DFZ_LIB_DIR" ]; then
 		P6_DFZ_LIB_DIR="$p6df_root/lib"
 	fi
 
