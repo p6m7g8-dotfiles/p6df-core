@@ -18,6 +18,8 @@ p6df::core::internal::fetch() {
     if p6_dir_exists_NOT "$dir"; then
         gh repo clone "$module" "$dir"
     fi
+
+    p6_return_void
 }
 
 ######################################################################
@@ -40,6 +42,8 @@ p6df::core::internal::update() {
     else
         p6df::core::internal::pull "$module" "$dir"
     fi
+
+    p6_return_void
 }
 
 ######################################################################

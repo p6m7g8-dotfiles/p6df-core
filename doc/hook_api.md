@@ -30,12 +30,12 @@ Guidelines:
 
 Some files may require token substitution for secrets.
 
-## external::brew
+## external::brews
 
 - Presence: OPTIONAL
 - Purpose: install external packages.
 
-Choose intentionally between `clones()`, `deps()`, and `external::brew`.
+Choose intentionally between `clones()`, `deps()`, and `external::brews`.
 Install prerequisites needed by `langs()`. Only language-specific setup should wait for `langs()`.
 
 ## langs(module, dir)
