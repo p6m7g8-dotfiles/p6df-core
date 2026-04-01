@@ -139,6 +139,7 @@ Signature: `profile::on(profile, code)`
   that is evaluated via `p6_run_code` to inject secrets or credentials.
 
 Implementations typically:
+
 1. Evaluate `$code` to export credential env vars.
 
 MCP auth tokens and credential env vars are managed here (or in downstream
@@ -157,6 +158,7 @@ Signature: `profile::off(code)`
 - `code` — the same shell code block previously passed to `profile::on`.
 
 Implementations typically:
+
 1. Call `p6_env_unset_from_code "$code"` to unset all vars exported by that block.
 
 The default implementation (used when no module-specific hook exists) calls
