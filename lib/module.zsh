@@ -26,13 +26,19 @@ p6df::core::module::init() {
   local module="$1"
   local dir="$2"
 
+  p6df::core::bootstrap::module::init "$module" "$dir"      # Bootstrap
+
   p6df::core::internal::recurse "$module" "$dir" "init"
 
   # After 'Tail-recursion' also run api hooks
-  p6df::core::prompt::module::init "$module" "$dir"         # Prompt
-  p6df::core::aliases::module::init "$module" "$dir"        # Aliases
+  p6df::core::env::module::init "$module" "$dir"            # Env
   p6df::core::path::module::init "$module" "$dir"           # Path
+  p6df::core::cdpath::module::init "$module" "$dir"         # CDPath
+  p6df::core::fpath::module::init "$module" "$dir"          # FPath
   p6df::core::completions::module::init "$module" "$dir"    # Completions
+  p6df::core::aliases::module::init "$module" "$dir"        # Aliases
+  p6df::core::langmgr::module::init "$module" "$dir"        # LangMgr
+  p6df::core::prompt::module::init "$module" "$dir"         # Prompt
 
   p6_return_void
 }
@@ -442,12 +448,24 @@ p6df::core::module::parse() {
   repo[module]=${repo[repo]##p6df-}                   # p6df-(repo)
 #  repo[module]=${repo[module]##p6}                   # p6(repo)
   repo[prefix]=p6df::modules::$repo[module]           # p6df::modules::(repo) without p6df-
-  repo[prompt_mod]=$repo[prefix]::prompt::mod         # prompt module function
+  repo[prompt_mod_bottom]=$repo[prefix]::prompt::mod::bottom # prompt mod bottom function
+  repo[prompt_runtime]=$repo[prefix]::prompt::runtime  # prompt runtime function
+  repo[prompt_context]=$repo[prefix]::prompt::context  # prompt context function
+  repo[prompt_system]=$repo[prefix]::prompt::system    # prompt system function
   repo[prompt_env]=$repo[prefix]::prompt::env         # prompt env function
   repo[prompt_lang]=$repo[prefix]::prompt::lang       # prompt lang function
+  repo[env_init]=$repo[prefix]::env::init              # env function
   repo[alias]=$repo[prefix]::aliases::init            # alias function
+  repo[skills_init]=$repo[prefix]::skills::init       # skills function
   repo[path_init]=$repo[prefix]::path::init           # path function
+  repo[cdpath_init]=$repo[prefix]::cdpath::init       # cdpath function
+  repo[fpath_init]=$repo[prefix]::fpath::init         # fpath function
   repo[completion]=$repo[prefix]::completions::init   # completion function
+  repo[langmgr_init]=$repo[prefix]::langmgr::init     # langmgr function
+  repo[prompt_init]=$repo[prefix]::prompt::init        # prompt init function
+  repo[profile_on]=$repo[prefix]::profile::on          # profile on function
+  repo[profile_off]=$repo[prefix]::profile::off        # profile off function
+  repo[profile_mod]=$repo[prefix]::profile::mod        # profile mod function
 
   repo[sub]=${module##*:}                    # subdir file path : sep
   repo[plugin]=${repo[sub]##*/}              # subdir plugin up to first /
@@ -495,4 +513,32 @@ p6df::core::module::env::name() {
   local str=$(p6_string_sanitize_identifier "${module}-${callback}")
 
   p6_return_str "$str"
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::bootstrap::module::init(module, _dir)
+#
+#  Args:
+#	module -
+#	_dir -
+#
+#  Environment:	 P6_DFZ_SRC_DIR
+#>
+######################################################################
+p6df::core::bootstrap::module::init() {
+  local module="$1"
+  local _dir="$2"
+
+  # %repo
+  p6df::core::module::parse "$module"
+  local module_dir="$P6_DFZ_SRC_DIR/$repo[path]"
+  unset repo
+
+  if [[ -d "$module_dir/lib" ]]; then
+    p6_bootstrap "$module_dir"
+  fi
+
+  p6_return_void
 }

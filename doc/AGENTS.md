@@ -35,7 +35,7 @@ Important sibling repos:
 ## Preferred CLIs
 
 - `bin/p6df` for lifecycle/recursion:
-  `status`, `diff`, `pull`, `push`, `langs`, `brews`, `vscodes`, `symlinks`, `diag`, `fetch`, `update`
+  `status`, `diff`, `pull`, `push`, `langs`, `brews`, `mcp`, `vscodes`, `symlinks`, `diag`, `fetch`, `update`
 - `../p6df/bin/p6install` for bootstrap only
 - `../p6common/bin/p6ctl` for shared control behavior
 
