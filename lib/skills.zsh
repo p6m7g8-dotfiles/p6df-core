@@ -1,9 +1,7 @@
-# shellcheck shell=bash
-
 ######################################################################
 #<
 #
-# Function: p6df::core::completions::module::init(module, dir)
+# Function: p6df::core::skills::module::init(module, dir)
 #
 #  Args:
 #	module -
@@ -11,17 +9,17 @@
 #
 #>
 ######################################################################
-p6df::core::completions::module::init() {
+p6df::core::skills::module::init() {
   local module="$1"
   local dir="$2"
 
   # %repo
   p6df::core::module::parse "$module"
-  local completions_func=$repo[completion]
+  local skills_func=$repo[skills_init]
   unset repo
 
-  if type -f "$completions_func" >/dev/null 2>&1; then
-    p6_run_yield "$completions_func $module $dir"
+  if type -f "$skills_func" >/dev/null 2>&1; then
+    p6_run_yield "$skills_func $module $dir"
   fi
 
   p6_return_void

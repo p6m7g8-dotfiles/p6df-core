@@ -64,15 +64,17 @@ p6df::core::path::init() {
 ######################################################################
 #<
 #
-# Function: p6df::core::path::module::init(module)
+# Function: p6df::core::path::module::init(module, dir)
 #
 #  Args:
 #	module -
+#	dir -
 #
 #>
 ######################################################################
 p6df::core::path::module::init() {
   local module="$1"
+  local dir="$2"
 
   # %repo
   p6df::core::module::parse "$module"
@@ -80,7 +82,7 @@ p6df::core::path::module::init() {
   unset repo
 
   if type -f "$path_func" >/dev/null 2>&1; then
-    p6_run_yield "$path_func"
+    p6_run_yield "$path_func $module $dir"
   fi
 
   p6_return_void
@@ -107,4 +109,58 @@ p6df::core::path::cd::init() {
   p6df::core::path::cd::if $P6_DFZ_SRC_FOCUSED_DIR
   p6df::core::path::cd::if $P6_DFZ_SRC_WORK_DIR
   p6df::core::path::cd::if $P6_DFZ_SRC_WORK_ARKESTRO_DIR
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::cdpath::module::init(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::cdpath::module::init() {
+  local module="$1"
+  local dir="$2"
+
+  # %repo
+  p6df::core::module::parse "$module"
+  local cdpath_func=$repo[cdpath_init]
+  unset repo
+
+  if type -f "$cdpath_func" >/dev/null 2>&1; then
+    p6_run_yield "$cdpath_func $module $dir"
+  fi
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::fpath::module::init(module, dir)
+#
+#  Args:
+#	module -
+#	dir -
+#
+#>
+######################################################################
+p6df::core::fpath::module::init() {
+  local module="$1"
+  local dir="$2"
+
+  # %repo
+  p6df::core::module::parse "$module"
+  local fpath_func=$repo[fpath_init]
+  unset repo
+
+  if type -f "$fpath_func" >/dev/null 2>&1; then
+    p6_run_yield "$fpath_func $module $dir"
+  fi
+
+  p6_return_void
 }

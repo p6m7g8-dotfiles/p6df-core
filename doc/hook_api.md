@@ -77,6 +77,30 @@ Aliases should be namespaced and should call functions (not shell one-liners).
 - Presence: OPTIONAL
 - Purpose: add module path entries.
 
+## cdpath::init
+
+- Presence: OPTIONAL
+- Purpose: add module entries to `cdpath` (the directory search path used by `cd`).
+
+Use `p6df::core::path::cd::if <dir>` to conditionally append a directory.
+
+## fpath::init
+
+- Presence: OPTIONAL
+- Purpose: add module entries to `fpath` (the zsh function autoload search path).
+
+Use this hook to expose autoloadable functions before `compinit` runs.
+
+## env::init
+
+- Presence: OPTIONAL
+- Purpose: export module-specific environment variables.
+
+Called during module initialisation to set variables that the module or its
+tools rely on (API keys with safe defaults, feature flags, paths, etc.).
+Prefer `p6_env_export KEY "${KEY:-default}"` so an already-exported value is
+not overwritten.
+
 ## completions::init
 
 - Presence: OPTIONAL
@@ -103,9 +127,63 @@ Return valid JSON for this module and its extensions.
 
 This hook is setup-only; it does not render prompt output.
 
-## prompt::mod
+## profile::on
+
+- Presence: OPTIONAL
+- Purpose: activate a named profile for the module.
+
+Signature: `profile::on(profile, code)`
+
+- `profile` — an arbitrary name for the active context (e.g. `work`, `personal`).
+- `code` — a shell code block (typically a series of `export KEY=value` statements)
+  that is evaluated via `p6_run_code` to inject secrets or credentials.
+
+Implementations typically:
+1. Evaluate `$code` to export credential env vars.
+
+MCP auth tokens and credential env vars are managed here (or in downstream
+modules such as `p6df-1password`), not in `p6df-core`.
+
+The default implementation (used when no module-specific hook exists) calls
+`p6df::core::profile::default::on "$code"` which simply runs `p6_run_code "$code"`.
+
+## profile::off
+
+- Presence: OPTIONAL
+- Purpose: deactivate the module's active profile.
+
+Signature: `profile::off(code)`
+
+- `code` — the same shell code block previously passed to `profile::on`.
+
+Implementations typically:
+1. Call `p6_env_unset_from_code "$code"` to unset all vars exported by that block.
+
+The default implementation (used when no module-specific hook exists) calls
+`p6df::core::profile::default::off "$code"` which simply runs `p6_env_unset_from_code "$code"`.
+
+## profile::mod
 
 - Presence: OPTIONAL
 - Purpose: render the module's prompt segment.
 
-Use this hook for visible prompt content.
+This is the canonical mod-line prompt hook. It replaces `prompt::mod`.
+
+Signature: `profile::mod()` — no arguments.
+
+Return a single string. Two formats are supported:
+
+1. **Pre-formatted string** — returned as-is in the prompt.
+2. **Label + `$VAR` tokens** — `label $VAR1 $VAR2 ...`; the runtime expands each
+   variable reference and formats the result as `label:\t\t  val1 val2`.
+
+Use format 2 when the displayed values come from environment variables set by
+`profile::on`, so the prompt always reflects the live value.
+
+## prompt::mod::bottom
+
+- Presence: OPTIONAL
+- Purpose: render a module's prompt segment on the bottom prompt line.
+
+Same return format as `profile::mod`. Use for lower-priority or wide content
+that should appear below the main prompt line.

@@ -46,3 +46,4 @@ p6df::core::aliases::module::init() {
 
   p6_return_void
 }
+
