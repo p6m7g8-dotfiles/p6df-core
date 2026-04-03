@@ -101,8 +101,7 @@ p6df::core::profile::module::mod() {
     fmts=("${parts[2,-1]}")
   fi
 
-  local str
-  str=$(p6df::core::profile::default::mod "$label" "${fmts[@]}")
+  local str=$(p6df::core::profile::default::mod "$label" "${fmts[@]}")
 
   p6_return_str "$str"
 }
@@ -170,6 +169,29 @@ p6df::core::profile::module::on() {
   else
     p6df::core::profile::default::on "$code"
   fi
+
+  p6_return_void
+}
+
+######################################################################
+#<
+#
+# Function: p6df::core::profile::module::active(module, profile)
+#
+#  Args:
+#	module  - full module path (e.g. p6m7g8-dotfiles/p6df-aws)
+#	profile - profile name
+#
+#  Environment:	 OP_VAULT_NAME
+#>
+######################################################################
+p6df::core::profile::module::active() {
+  local module="$1"
+  local profile="$2"
+
+  local short="${module##*/p6df-}"
+  local env=$(op item get "P6/DFZ/${short}/env" --vault "$OP_VAULT_NAME" --field notesPlain --format json | jq -r '.value')
+  p6df::core::profile::module::on "$module" "$profile" "$env"
 
   p6_return_void
 }
