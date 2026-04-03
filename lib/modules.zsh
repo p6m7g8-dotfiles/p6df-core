@@ -90,7 +90,11 @@ p6df::core::modules::profile::on() {
 		case "$module" in
 		*1password*) continue ;;
 		esac
-		p6df::core::profile::module::active "$module" "$profile"
+		if command -v op >/dev/null 2>&1 && p6_string_blank_NOT "$OP_VAULT_NAME"; then
+			p6df::core::profile::module::active "$module" "$profile"
+		else
+			p6df::core::profile::module::on "$module" "$profile" ""
+		fi
 	done
 }
 
