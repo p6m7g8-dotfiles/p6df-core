@@ -74,6 +74,33 @@ p6df::core::modules::mcp() {
 ######################################################################
 #<
 #
+# Function: p6df::core::modules::profile::on(profile)
+#
+#  Args:
+#	profile -
+#
+#  Environment:	 P6_DFZ_MODULES
+#>
+######################################################################
+p6df::core::modules::profile::on() {
+	local profile="$1"
+
+	local module
+	for module in $(p6_vertical "$P6_DFZ_MODULES"); do
+		case "$module" in
+		*1password*) continue ;;
+		esac
+		if command -v op >/dev/null 2>&1 && p6_string_blank_NOT "$OP_VAULT_NAME"; then
+			p6df::core::profile::module::active "$module" "$profile"
+		else
+			p6df::core::profile::module::on "$module" "$profile" ""
+		fi
+	done
+}
+
+######################################################################
+#<
+#
 # Function: p6df::core::modules::init()
 #
 #>
