@@ -4,7 +4,7 @@
 
 ## Repository Layout
 
-```
+```text
 ~/.p6/p6m7g8-dotfiles/
 ├── p6df-core/          # Framework kernel — bootstrap, module lifecycle, CLI, prompt
 ├── p6df-<name>/        # 102 feature modules (tools, languages, cloud platforms)
@@ -21,7 +21,7 @@
 
 ### Directory Structure
 
-```
+```text
 p6df-<name>/
 ├── init.zsh       # REQUIRED — defines all hook functions
 ├── conf/          # Optional - config
@@ -36,14 +36,15 @@ p6df-<name>/
 
 All hooks follow: `p6df::modules::<name>::<hook>`
 
-Where `<name>` is derived from the repo name with hyphens converted to `::` separators as needed. The framework computes function names via `p6df::core::module::parse`.
+Where `<name>` is derived from the repo name with hyphens converted to `::` separators as needed.
+The framework computes function names via `p6df::core::module::parse`.
 
 ---
 
 ## Namespace Conventions
 
 | Prefix | Scope |
-|--------|-------|
+| ------ | ----- |
 | `p6df::core::` | Framework internals |
 | `p6df::modules::<name>::` | Module-specific hooks |
 | `p6df::user::` | User customization (defined in `~/.zsh-me`) |

@@ -1,6 +1,6 @@
 # Shell Load Flow
 
-```
+```text
 ~/.zshenv  (symlink → conf/zshenv-xdg)
   ├─ P6_DFZ_SRC_DIR=$HOME/.p6
   ├─ P6_DFZ_SRC_P6M7G8_DOTFILES_DIR
@@ -36,9 +36,9 @@
             │    ├─ p6df::core::modules::load
             │    │    └─ for each module in P6_DFZ_MODULES:
             │    │         p6df::core::module::init
-            │    │           ├─ p6df::core::bootstrap::module::init	# init
-            │    │           ├─ p6df::core::internal::recurse		# Tail Recurse
-            │    │           ├─ p6df::core::env::module::init		# Lifecycle hooks
+            │    │           ├─ p6df::core::bootstrap::module::init  # init
+            │    │           ├─ p6df::core::internal::recurse        # Tail Recurse
+            │    │           ├─ p6df::core::env::module::init        # Lifecycle hooks
             │    │           ├─ p6df::core::path::module::init
             │    │           ├─ p6df::core::cdpath::module::init
             │    │           ├─ p6df::core::fpath::module::init
