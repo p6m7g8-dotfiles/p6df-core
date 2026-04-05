@@ -47,7 +47,7 @@
             │    │           ├─ p6df::core::langmgr::module::init
             │    │           └─ p6df::core::prompt::module::init
             │    └─ p6df::user::modules::init::post
-            │         └─ . $HOMR/home/init.zsh
+            │         └─ . $HOME/home/init.zsh
             └─ p6df::core::theme::init
                  └─ p6df::user::theme
 ```
