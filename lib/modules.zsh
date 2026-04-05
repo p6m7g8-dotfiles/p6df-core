@@ -79,7 +79,7 @@ p6df::core::modules::mcp() {
 #  Args:
 #	profile -
 #
-#  Environment:	 P6_DFZ_MODULES
+#  Environment:	 OP_VAULT_NAME P6_DFZ_MODULES
 #>
 ######################################################################
 p6df::core::modules::profile::on() {

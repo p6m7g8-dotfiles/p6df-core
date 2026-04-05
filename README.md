@@ -82,6 +82,13 @@ TODO: Add a short summary of this module.
   - Args:
     - OPTIONAL modules - [$P6_DFZ_MODULES]
 
+##### p6df-core/lib/env.zsh
+
+- `p6df::core::env::module::init(module, dir)`
+  - Args:
+    - module
+    - dir
+
 ##### p6df-core/lib/file.zsh
 
 - `p6df::core::file::load(file)`
@@ -194,6 +201,10 @@ TODO: Add a short summary of this module.
   - Args:
     - dir
     - name
+- `p6df::core::langmgr::module::init(module, dir)`
+  - Args:
+    - module
+    - dir
 - `str label:$ver = p6df::core::lang::prompt::lang(label, mgr_cmd, sys_cmd)`
   - Args:
     - label
@@ -208,6 +219,10 @@ TODO: Add a short summary of this module.
 
 ##### p6df-core/lib/module.zsh
 
+- `p6df::core::bootstrap::module::init(module, _dir)`
+  - Args:
+    - module
+    - _dir
 - `p6df::core::module::add(module, _dir)`
   - Args:
     - module
@@ -305,11 +320,22 @@ TODO: Add a short summary of this module.
 - `p6df::core::modules::langs()`
 - `p6df::core::modules::load()`
 - `p6df::core::modules::mcp()`
+- `p6df::core::modules::profile::on(profile)`
+  - Args:
+    - profile
 - `p6df::core::modules::symlinks()`
 - `p6df::core::modules::vscodes()`
 
 ##### p6df-core/lib/path.zsh
 
+- `p6df::core::cdpath::module::init(module, dir)`
+  - Args:
+    - module
+    - dir
+- `p6df::core::fpath::module::init(module, dir)`
+  - Args:
+    - module
+    - dir
 - `p6df::core::path::cd::if(dir)`
   - Args:
     - dir
@@ -320,17 +346,49 @@ TODO: Add a short summary of this module.
 - `p6df::core::path::init(dir)`
   - Args:
     - dir
-- `p6df::core::path::module::init(module)`
+- `p6df::core::path::module::init(module, dir)`
   - Args:
     - module
+    - dir
 
 ##### p6df-core/lib/profile.zsh
 
-- `str str = p6df::core::profile::prompt::mod()`
+- `p6df::core::profile::default::off(code)`
+  - Args:
+    - code
+- `p6df::core::profile::default::on(code)`
+  - Args:
+    - code
+- `p6df::core::profile::module::active(module, profile)`
+  - Args:
+    - module
+    - profile
+- `p6df::core::profile::module::off(module, code)`
+  - Args:
+    - module
+    - code
+- `p6df::core::profile::module::on(module, profile, code)`
+  - Args:
+    - module
+    - profile
+    - code
+- `str str = p6df::core::profile::default::mod([label=], ...)`
+  - Args:
+    - OPTIONAL label - []
+    - ...
+- `str str = p6df::core::profile::module::mod(module)`
+  - Args:
+    - module
+- `str var_name = p6df::core::profile::secret::label(var_name)`
+  - Args:
+    - var_name - strip leading $
 
 ##### p6df-core/lib/prompt.zsh
 
 - `p6df::core::prompt::init()`
+- `p6df::core::prompt::line::add::context(func)`
+  - Args:
+    - func
 - `p6df::core::prompt::line::add::env(func)`
   - Args:
     - func
@@ -343,6 +401,12 @@ TODO: Add a short summary of this module.
 - `p6df::core::prompt::line::add::mod::bottom(func)`
   - Args:
     - func
+- `p6df::core::prompt::line::add::runtime(func)`
+  - Args:
+    - func
+- `p6df::core::prompt::line::add::system(func)`
+  - Args:
+    - func
 - `p6df::core::prompt::module::init(module)`
   - Args:
     - module
@@ -351,6 +415,13 @@ TODO: Add a short summary of this module.
     - func
 - `stream  = p6df::core::prompt::runtime()`
 - `stream  = p6df::core::prompt::runtime::lines()`
+
+##### p6df-core/lib/skills.zsh
+
+- `p6df::core::skills::module::init(module, dir)`
+  - Args:
+    - module
+    - dir
 
 ##### p6df-core/lib/theme.zsh
 
@@ -372,7 +443,7 @@ TODO: Add a short summary of this module.
 │   ├── zshenv-xdg
 │   └── zshrc
 ├── doc
-│   ├── AGENTS.md
+│   ├── architecture.md
 │   ├── flow.md
 │   └── hook_api.md
 ├── lib
@@ -381,6 +452,7 @@ TODO: Add a short summary of this module.
 │   ├── cli.zsh
 │   ├── completions.zsh
 │   ├── dev.zsh
+│   ├── env.zsh
 │   ├── file.zsh
 │   ├── homebrew.zsh
 │   ├── internal.zsh
@@ -391,6 +463,7 @@ TODO: Add a short summary of this module.
 │   ├── path.zsh
 │   ├── profile.zsh
 │   ├── prompt.zsh
+│   ├── skills.zsh
 │   ├── theme.zsh
 │   └── user.zsh
 ├── README.md
@@ -398,7 +471,7 @@ TODO: Add a short summary of this module.
 └── t
     └── cli.sh
 
-7 directories, 27 files
+7 directories, 29 files
 ```
 
 ## Author
