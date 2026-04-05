@@ -33,7 +33,7 @@ $PROMPT
 # Function: stream  = p6df::core::prompt::runtime()
 #
 #  Returns:
-#	stream -
+#	stream - 
 #
 #>
 ######################################################################
@@ -53,9 +53,9 @@ p6df::core::prompt::runtime() {
 # Function: stream  = p6df::core::prompt::runtime::lines()
 #
 #  Returns:
-#	stream -
+#	stream - 
 #
-#  Environment:	 EPOCHREALTIME P6_DFZ_PROMPT_IN_VSCODE _
+#  Environment:	 EPOCHREALTIME P6_DFZ_BOTTOM_DISABLE P6_DFZ_CONTEXT_DISABLE P6_DFZ_ENV_DISABLE P6_DFZ_MOD_DISABLE P6_DFZ_PROMPT_IN_VSCODE P6_DFZ_RUNTIME_DISABLE P6_DFZ_SYSTEM_DISABLE _
 #>
 ######################################################################
 p6df::core::prompt::runtime::lines() {
