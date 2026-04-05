@@ -119,7 +119,9 @@ p6df::core::profile::module::mod() {
 p6df::core::profile::default::on() {
   local code="$1"
 
-  p6_run_code "$code"
+  if p6_string_ne "$code" "null"; then
+    p6_run_code "$code"
+  fi
 
   p6_return_void
 }
