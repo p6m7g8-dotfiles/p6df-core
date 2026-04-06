@@ -4,14 +4,14 @@
 ######################################################################
 #<
 #
-# Function: str str = p6df::core::profile::default::mod([label=], ...)
+# Function: str var_name = p6df::core::profile::secret::label(var_name)
 #
 #  Args:
-#	OPTIONAL label - []
-#	... - 
+#	var_name - strip leading $
 #
 #  Returns:
-#	str - str
+#	str - var_name
+#	str - [sdk]
 #
 #>
 ######################################################################
@@ -38,7 +38,7 @@ p6df::core::profile::secret::label() {
 #
 #  Args:
 #	OPTIONAL label - []
-#	... -
+#	... - 
 #
 #  Returns:
 #	str - str
@@ -181,8 +181,8 @@ p6df::core::profile::module::on() {
 # Function: p6df::core::profile::module::active(module, profile)
 #
 #  Args:
-#	module  - full module path (e.g. p6m7g8-dotfiles/p6df-aws)
-#	profile - profile name
+#	module -
+#	profile -
 #
 #  Environment:	 OP_VAULT_NAME
 #>
